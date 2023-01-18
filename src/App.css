@@ -55,7 +55,7 @@
   bottom: 0;
   height: 72px;
   width: 100%;
-  padding: 10px 0 20px;
+  padding: 0;
   border-top: #444656 solid 1px;
 }
 
@@ -84,6 +84,12 @@
   padding: 0 20px;
 }
 
+.footer-menu-selected-link {
+  margin-top: -2px;
+  border-bottom: 2px solid #30A5D1;
+  width: 100%;
+}
+
 .footer-menu-text {
   font-family: 'Gilroy-Regular';
   font-style: normal;
@@ -91,4 +97,5 @@
   font-size: 12px;
   color: #FFF;
   flex-grow: 0;
+  height: 19px;
 }

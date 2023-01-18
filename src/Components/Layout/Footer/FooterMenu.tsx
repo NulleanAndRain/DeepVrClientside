@@ -16,7 +16,15 @@ import {
 export const FooterMenu: React.FC = () => {
   return (
     <Row justify="center" className="footer-menu-wrapper">
-      <Col xs={24} sm={24} md={20} className="footer-menu">
+      <Col
+        xs={24}
+        sm={18}
+        md={14}
+        lg={12}
+        xl={10}
+        xxl={8}
+        className="footer-menu"
+      >
         <FooterMenuButton icon={gamesIcon} text="Игры" linkTo={HOME_PATH} />
         <FooterMenuButton
           icon={bookingIcon}

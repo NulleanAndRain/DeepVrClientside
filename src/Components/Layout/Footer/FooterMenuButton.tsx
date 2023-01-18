@@ -8,21 +8,23 @@ interface FooterMenuButtonProps {
   linkTo: string;
 }
 
-export const FooterMenuButton = memo(
-  ({ icon, text, linkTo }: FooterMenuButtonProps) => {
-    return (
-      <NavLink to={linkTo}>
-        {({ isActive }) => (
-          <>
-            <Icon src={icon} text={text} />
-            <div className="footer-menu-text">{text}</div>
-            {isActive && <div className="footer-menu-selected-link" />}
-          </>
-        )}
-      </NavLink>
-    );
-  }
-);
+export const FooterMenuButton: React.FC<FooterMenuButtonProps> = ({
+  icon,
+  text,
+  linkTo,
+}) => {
+  return (
+    <NavLink to={linkTo}>
+      {({ isActive }) => (
+        <>
+          <Icon src={icon} text={text} />
+          <div className="footer-menu-text">{text}</div>
+          {isActive && <div className="footer-menu-selected-link" />}
+        </>
+      )}
+    </NavLink>
+  );
+};
 
 const Icon = memo(({ src, text }: { src: string; text: string }) => (
   <img src={src} alt={text} />

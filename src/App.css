@@ -24,6 +24,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  position: relative;
 }
 
 .App-link {
@@ -49,11 +50,14 @@
 
 /* .app-footer  */
 :where(.css-dev-only-do-not-override-1i9hnpv).ant-layout .ant-layout-footer {
+
+  --footer-heigth: 72px;
+
   background-color: #050411;
   color: #FFF;
   position: fixed;
   bottom: 0;
-  height: 72px;
+  height: var(--footer-heigth);
   width: 100%;
   padding: 0;
   border-top: #444656 solid 1px;
@@ -69,7 +73,7 @@
   position: relative;
 }
 .app-main {
-  margin-bottom: 72px;
+  margin-bottom: var(--footer-heigth);
 }
 
 .footer-menu-wrapper{

@@ -43,7 +43,7 @@ export const CitySelect: React.FC = () => {
     <>
       <div className="booking-viewport ">
         <Title fontSize={32}>Адреса</Title>
-        <Row justify="center" gutter={[20, 20]}>
+        <Row justify="start" gutter={[20, 20]}>
           {cities?.map((city) => (
             <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={8} key={city.code}>
               <CityCard

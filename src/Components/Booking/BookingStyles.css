@@ -116,11 +116,8 @@
     background-color: var(--bg-main-color);
 }
 
-.city-card-wrapper {
+.selectable-card-wrapper {
     box-sizing: border-box;
-    height: 251px;
-    padding: 0;
-    filter: drop-shadow(0px 0px 20px #250F5D);
     border-radius: 15px;
     overflow: hidden;
     cursor: pointer;
@@ -129,20 +126,26 @@
     --border-width: 2px;
     padding: var(--border-width);
 }
-.city-card-wrapper-selected {
+.selectable-card-wrapper-selected {
     background: linear-gradient(90deg, #36C0E7 6.68%, #4B51EA 84.84%, #4B51EA 87.36%);
 }
 
-.city-card-bg {
+.selectable-card-bg {
     width: 100%;
     height: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
     overflow: hidden;
     border-radius: 14px;
     position: relative;
     z-index: 10;
+}
+.city-card-wrapper {
+    height: 251px;
+    filter: drop-shadow(0px 0px 20px #250F5D);
+}
+.city-card-bg {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .city-card-text {
@@ -163,7 +166,7 @@
     background: linear-gradient(180deg, rgba(46, 54, 141, 0) 0%, #2E368D 100%);
 }
 
-.city-card-mark {
+.selected-mark {
     height: 64px;
     width: 64px;
     position: absolute;
@@ -183,7 +186,7 @@
     background: #4B51EA;
     transform: rotate(45deg);
 }
-.city-card-mark *{
+.selected-mark *{
     transform: rotate(-45deg);
 }
 
@@ -210,7 +213,7 @@
     padding: 4px;
     border-radius: 50%;
 
-    background: linear-gradient(180deg, #952EF1 -9.76%, #17C4E7 277.44%);
+    background: var(--bg-gradient);
     width: 48px;
     height: 48px;
     display: flex;
@@ -243,4 +246,48 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.room-card-wrapper {
+    height: 166px;
+    padding: 2px;
+}
+.room-card-bg {
+    background-color: #191A29;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.room-card-title {
+    font-family: 'Gilroy-Regular';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 40px;
+    margin: 0;
+    padding: 0;
+}
+.room-card-description {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.room-card-description-item {
+    font-family: 'Gilroy-Regular';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 130%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
 }

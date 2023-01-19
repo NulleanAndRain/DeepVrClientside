@@ -1,19 +1,29 @@
 import { Layout } from "antd";
-import { Content, Footer, Header } from "antd/es/layout/layout";
-import React from "react";
-import "../../App.css";
+import { Content, Footer } from "antd/es/layout/layout";
 import { FooterMenu } from "./Footer/FooterMenu";
+import "../../App.css";
+import {
+  Root as ScrollRoot,
+  Scrollbar,
+  Thumb,
+  Viewport,
+} from "@radix-ui/react-scroll-area";
 
 interface Props {
   children?: React.ReactNode;
-  titleElem?: React.ReactNode;
 }
 
-export const DefaultLayout: React.FC<Props> = ({ children, titleElem }) => {
+export const DefaultLayout: React.FC<Props> = ({ children }) => {
   return (
     <Layout className="app-bg">
-      {titleElem && <Header className="app-header">{titleElem}</Header>}
-      <Content className="app-main">{children}</Content>
+      <Content className="app-main">
+        <ScrollRoot type="auto" className="ScrollAreaRoot">
+          <Viewport className="ScrollAreaViewport">{children}</Viewport>
+          <Scrollbar className="ScrollAreaScrollbar" orientation="vertical">
+            <Thumb className="ScrollAreaThumb" />
+          </Scrollbar>
+        </ScrollRoot>
+      </Content>
       <Footer className="app-footer">
         <FooterMenu />
       </Footer>

@@ -18,7 +18,9 @@ export const DefaultLayout: React.FC<Props> = ({ children }) => {
     <Layout className="app-bg">
       <Content className="app-main">
         <ScrollRoot type="auto" className="ScrollAreaRoot">
-          <Viewport className="ScrollAreaViewport">{children}</Viewport>
+          <Viewport className="ScrollAreaViewport">
+            <div className="full-height-wrapper">{children}</div>
+          </Viewport>
           <Scrollbar className="ScrollAreaScrollbar" orientation="vertical">
             <Thumb className="ScrollAreaThumb" />
           </Scrollbar>

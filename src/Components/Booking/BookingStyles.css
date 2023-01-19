@@ -1,0 +1,141 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url(../../Assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf);
+}
+@import url('https://fonts.cdnfonts.com/css/bebas-neue');
+
+.booking-wrapper {
+    --fixed-panel-height: 84px;
+    padding: 0 16px;
+}
+
+.fixed-panel {
+    background-color: var(--bg-main-color);
+    position: sticky;
+    bottom: 0;
+    padding: 10px 16px;
+    height: var(--fixed-panel-height);
+    box-sizing: border-box;
+}
+
+.booking-viewport {
+    min-height: calc(100vh - var(--fixed-panel-height) - var(--footer-height));
+}
+
+.booking-header-wrapper {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+.booking-header {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 120%;
+
+    margin: 0;
+    padding: 0;
+}
+
+.next-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    height: 64px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: #FFFFFF;
+
+    background: linear-gradient(90deg, #36C0E7 6.68%, #4B51EA 84.84%, #4B51EA 87.36%);
+    box-shadow: 0px 15px 60px rgba(66, 130, 233, 0.45);
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.next-btn-inactive {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.city-card-wrapper {
+    box-sizing: border-box;
+    height: 251px;
+    padding: 0;
+    filter: drop-shadow(0px 0px 20px #250F5D);
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: transparent;
+
+    --border-width: 2px;
+    padding: var(--border-width);
+}
+.city-card-wrapper-selected {
+    background: linear-gradient(90deg, #36C0E7 6.68%, #4B51EA 84.84%, #4B51EA 87.36%);
+}
+
+.city-card-bg {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    border-radius: 14px;
+    position: relative;
+    z-index: 10;
+}
+
+.city-card-text {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    font-family: 'Gilroy-Regular';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 120%;
+    color: #FFFFFF;
+    background: linear-gradient(180deg, rgba(46, 54, 141, 0) 0%, #2E368D 100%);
+}
+
+.city-card-mark {
+    height: 64px;
+    width: 64px;
+    position: absolute;
+    top: -32px;
+    right: -32px;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 7px;
+    box-sizing: border-box;
+
+    border-width: 45px 0 0 24px;
+    border-color: transparent transparent transparent transparent;
+    z-index: 20;
+    background: #4B51EA;
+    transform: rotate(45deg);
+}
+.city-card-mark *{
+    transform: rotate(-45deg);
+}

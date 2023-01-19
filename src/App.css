@@ -112,11 +112,11 @@
 
 /* .app-footer  */
 :where(.css-dev-only-do-not-override-1i9hnpv).ant-layout .ant-layout-footer {
-  background-color: #050411;
+  background-color: var(--bg-main--color);
   color: #FFF;
   position: fixed;
   bottom: 0;
-  height: var(--footer-heigth);
+  height: var(--footer-height);
   width: 100%;
   padding: 0;
   border-top: #444656 solid 1px;
@@ -129,14 +129,14 @@
 /* ------------ */
 
 .app-bg {
-  --footer-heigth: 72px;
+  --footer-height: 72px;
 
   color: #FFF;
-  background-color: #050411;
+  background-color: var(--bg-main--color);
   min-height: 100vh;
-  height: calc(100vh - var(--footer-heigth));
+  height: calc(100vh - var(--footer-height));
   position: relative;
-  padding-bottom: var(--footer-heigth);
+  padding-bottom: var(--footer-height);
 }
 
 .footer-menu-wrapper{
@@ -165,4 +165,9 @@
   color: #FFF;
   flex-grow: 0;
   height: 19px;
+}
+
+.full-height-wrapper {
+  min-height: calc(100vh - var(--footer-height));
+  height: auto;
 }

@@ -1,11 +1,14 @@
 interface Props {
   children: React.ReactNode;
-  fontSize?: number;
+  fontSize: number;
 }
 
-export const Title: React.FC<Props> = ({ children, fontSize = 32 }) => {
+export const Title: React.FC<Props> = ({ children, fontSize }) => {
   return (
-    <div style={{ fontSize }} className="booking-header-wrapper">
+    <div
+      style={{ fontSize: `${fontSize}px` }}
+      className="booking-header-wrapper"
+    >
       <h1 className="booking-header">{children}</h1>
     </div>
   );

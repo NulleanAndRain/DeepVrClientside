@@ -22,7 +22,8 @@ export const Booking: React.FC = () => {
   return (
     <DefaultLayout>
       <div className="booking-wrapper">
-        <CurrentPanel />
+        {/* <CurrentPanel /> */}
+        <RoomSelect />
       </div>
     </DefaultLayout>
   );

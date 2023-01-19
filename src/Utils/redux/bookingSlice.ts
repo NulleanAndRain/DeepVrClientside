@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Api } from "../api";
-import { ICity, IGame, IRoom } from "../types";
+import { IBookingCredentials, ICity, IGame, IRoom } from "../types";
 import { RootState } from "./store";
 
 interface BookingState {
@@ -11,6 +11,7 @@ interface BookingState {
     playersCount?: number,
     date?: string,
     time?: string,
+    credentials?: IBookingCredentials,
 }
 
 const initialState : BookingState = {
@@ -49,10 +50,12 @@ const bookingSlice = createSlice({
             state.time = action.payload;
         },
 
-        rollbackStep(state) {
-            const step = state.currentStep;
-            state.currentStep--;
-            switch (step) {
+        setCredentials(state, action) {
+            state.credentials = action.payload
+        },
+
+        decreaseStep(state) {
+            switch (state.currentStep) {
                 case 1: { 
                     state.city = undefined; 
                     Api.setInstanceUrl(undefined);
@@ -61,10 +64,12 @@ const bookingSlice = createSlice({
                 case 2: state.room = undefined; break;
                 default: break;
             }
+            state.currentStep--;
+            if (state.currentStep < 0) state.currentStep = 0;
         },
 
-        clearState(state) {
-            state = { currentStep: 0 };
+        clearState() {
+            return { currentStep: 0 };
         } 
     }
 });
@@ -72,6 +77,10 @@ const bookingSlice = createSlice({
 export const getCurrentStep = (state: RootState) => state.bookingReducer.currentStep;
 export const getCity = (state: RootState) => state.bookingReducer.city;
 export const getRoom = (state: RootState) => state.bookingReducer.room;
+export const getPlayersCount = (state: RootState) => state.bookingReducer.playersCount;
+export const getDate = (state: RootState) => state.bookingReducer.date;
+export const getTime = (state: RootState) => state.bookingReducer.time;
+export const getCredentials = (state: RootState) => state.bookingReducer.credentials;
 
-export const { increaseStep, setCity, rollbackStep } = bookingSlice.actions;
+export const { increaseStep, setCity, decreaseStep } = bookingSlice.actions;
 export default bookingSlice.reducer;

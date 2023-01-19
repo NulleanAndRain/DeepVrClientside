@@ -7,7 +7,7 @@ interface Props {
 
 export const FixedPanel: React.FC<Props> = ({ children }) => {
   return (
-    <Row className="fixed-panel" justify="center">
+    <Row className="fixed-panel" justify="center" gutter={[20, 20]}>
       {children}
     </Row>
   );

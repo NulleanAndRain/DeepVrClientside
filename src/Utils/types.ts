@@ -66,7 +66,7 @@ export interface IGetGamesResponse {
   games: Array<IGame>,
 }
 
-interface IBookingCredentials {
+export interface IBookingCredentials {
   name: string,
   phone: string,
   token: string,

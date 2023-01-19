@@ -112,7 +112,7 @@
 
 /* .app-footer  */
 :where(.css-dev-only-do-not-override-1i9hnpv).ant-layout .ant-layout-footer {
-  background-color: var(--bg-main--color);
+  background-color: var(--bg-main-color);
   color: #FFF;
   position: fixed;
   bottom: 0;
@@ -132,7 +132,7 @@
   --footer-height: 72px;
 
   color: #FFF;
-  background-color: var(--bg-main--color);
+  background-color: var(--bg-main-color);
   min-height: 100vh;
   height: calc(100vh - var(--footer-height));
   position: relative;

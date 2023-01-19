@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { NavLink } from "react-router-dom";
 import "../../../App.css";
 
@@ -17,7 +16,7 @@ export const FooterMenuButton: React.FC<FooterMenuButtonProps> = ({
     <NavLink to={linkTo}>
       {({ isActive }) => (
         <>
-          <Icon src={icon} text={text} />
+          <img src={icon} alt={text} />
           <div className="footer-menu-text">{text}</div>
           {isActive && <div className="footer-menu-selected-link" />}
         </>
@@ -25,7 +24,3 @@ export const FooterMenuButton: React.FC<FooterMenuButtonProps> = ({
     </NavLink>
   );
 };
-
-const Icon = memo(({ src, text }: { src: string; text: string }) => (
-  <img src={src} alt={text} />
-));

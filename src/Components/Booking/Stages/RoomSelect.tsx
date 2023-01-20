@@ -2,40 +2,16 @@ import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import {
   decreaseStep,
-  getCurrentStep,
   increaseStep,
   setRoom,
 } from "../../../Utils/redux/bookingSlice";
-import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
-import { FixedPanel } from "../Components/FixedPanel";
-import { NextButton } from "../Components/NextButton";
-import { StepDisplay } from "../Components/StepDisplay";
-import { Title } from "../Components/Title";
+import { useAppDispatch } from "../../../Utils/redux/store";
 
 import "../BookingStyles.css";
-import { BackButton } from "../Components/BackButton";
 import { IRoom } from "../../../Utils/types";
 import { Api } from "../../../Utils/api";
 import { RoomCard } from "../Components/RoomCard";
 import { StageLayout } from "./StageLayout";
-
-const mockRooms = [
-  { id: 1, title: "Full Bodey", guest_max: 4 },
-  { id: 2, title: "Freeroam", guest_max: 4 },
-  { id: 3, title: "Classic", guest_max: 6 },
-  {
-    id: 5,
-    title:
-      "\u041b\u0430\u0443\u043d\u0436 \u0437\u043e\u043d\u0430 \u0412\u0445\u043e\u0434",
-    guest_max: 10,
-  },
-  {
-    id: 6,
-    title:
-      "\u041b\u0430\u0443\u043d\u0436 \u0437\u043e\u043d\u0430 \u0417\u043e\u043c\u0431\u0438",
-    guest_max: 10,
-  },
-];
 
 export const RoomSelect: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -69,7 +45,7 @@ export const RoomSelect: React.FC = () => {
 
   return (
     <StageLayout
-      title="StageLayout"
+      title="Выберите VR Комнату"
       onNextClick={onNextClick}
       onBackClick={onBackClick}
       isNextBtnActive={!!selected}

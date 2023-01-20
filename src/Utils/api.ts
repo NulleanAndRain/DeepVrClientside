@@ -33,7 +33,7 @@ export const Api = {
     },
 
     async getGamesOfRoom(roomId: number) {
-        return axios.get<Array<IGetGamesResponse>>(
+        return axios.get<IGetGamesResponse>(
             `${instanceUrl}/room/${roomId}`
         );
     },

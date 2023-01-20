@@ -44,7 +44,7 @@ export interface IGame {
   deleted_at: string,
   created_at: string,
   updated_at: string
-  logo: "games\/July2021\/VAM76vJLqPJTTEkaZcIW.jpeg",
+  logo: string,
   guest_min: number,
   guest_max: number,
   description: string,

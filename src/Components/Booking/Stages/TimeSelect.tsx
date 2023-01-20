@@ -15,7 +15,7 @@ import { TimeCard } from "../Components/TimeCard";
 
 export const TimeSelect: React.FC = () => {
   const dispatch = useAppDispatch();
-  const date = useAppSelector(getDate) as Date;
+  const date = new Date(useAppSelector(getDate) as string);
 
   const [selected, setSelected] = useState<Date | undefined>();
 
@@ -49,7 +49,7 @@ export const TimeSelect: React.FC = () => {
 
   const onNextClick = () => {
     if (!!selected) {
-      dispatch(setTime(selected));
+      dispatch(setTime(selected.toLocaleTimeString()));
       dispatch(increaseStep());
     }
   };

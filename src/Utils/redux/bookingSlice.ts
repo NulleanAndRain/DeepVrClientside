@@ -9,8 +9,8 @@ interface BookingState {
   room?: IRoom;
   game?: IGame;
   playersCount?: number;
-  date?: Date;
-  time?: Date;
+  date?: string;
+  time?: string;
   credentials?: IBookingCredentials;
 }
 

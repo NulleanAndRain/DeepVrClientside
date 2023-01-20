@@ -22,7 +22,7 @@ export const DateSelect: React.FC = () => {
 
   const onNextClick = () => {
     if (!!selected) {
-      dispatch(setDate(selected));
+      dispatch(setDate(selected.toISOString()));
       dispatch(increaseStep());
     }
   };
@@ -31,7 +31,6 @@ export const DateSelect: React.FC = () => {
   };
 
   const onChangeDate = (d: Date) => {
-    console.log("selecred date:", d);
     setSelected(d);
   };
   registerLocale("ru", ru);

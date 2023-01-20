@@ -1,7 +1,6 @@
 import { Col, Row } from "antd";
 import { FixedPanel } from "../Components/FixedPanel";
 import { NextButton } from "../Components/NextButton";
-import "../BookingStyles.css";
 import { Title } from "../Components/Title";
 import { useEffect, useState } from "react";
 import { ICity } from "../../../Utils/types";
@@ -9,6 +8,8 @@ import { Api } from "../../../Utils/api";
 import { CityCard } from "../Components/CityCard";
 import { useAppDispatch } from "../../../Utils/redux/store";
 import { increaseStep, setCity } from "../../../Utils/redux/bookingSlice";
+
+import "../BookingStyles.css";
 
 export const CitySelect: React.FC = () => {
   const [cities, setCities] = useState<Array<ICity>>();

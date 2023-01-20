@@ -12,6 +12,8 @@ import { IGame } from "../../../Utils/types";
 import { GameCard } from "../Components/GameCard";
 import { StageLayout } from "./StageLayout";
 
+import "../BookingStyles.css";
+
 export const GameSelect: React.FC = () => {
   const dispatch = useAppDispatch();
   const room = useAppSelector(getRoom);

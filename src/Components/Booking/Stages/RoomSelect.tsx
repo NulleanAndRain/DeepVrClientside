@@ -6,12 +6,12 @@ import {
   setRoom,
 } from "../../../Utils/redux/bookingSlice";
 import { useAppDispatch } from "../../../Utils/redux/store";
-
-import "../BookingStyles.css";
 import { IRoom } from "../../../Utils/types";
 import { Api } from "../../../Utils/api";
 import { RoomCard } from "../Components/RoomCard";
 import { StageLayout } from "./StageLayout";
+
+import "../BookingStyles.css";
 
 export const RoomSelect: React.FC = () => {
   const dispatch = useAppDispatch();

@@ -7,6 +7,8 @@ import { NextButton } from "../Components/NextButton";
 import { StepDisplay } from "../Components/StepDisplay";
 import { Title } from "../Components/Title";
 
+import "../BookingStyles.css";
+
 interface Props {
   children: React.ReactElement;
   title: string;

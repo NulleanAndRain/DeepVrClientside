@@ -3,6 +3,7 @@
     src: url(../../Assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf);
 }
 @import url('https://fonts.cdnfonts.com/css/bebas-neue');
+/* @import 'react-datepicker/dist/react-datepicker.css'; */
 
 .booking-wrapper {
     --fixed-panel-height: 84px;
@@ -397,4 +398,179 @@
     color: #FFF;
     cursor: pointer;
     padding: 0;
+}
+
+/* datepicker overrides */ 
+.react-datepicker__header {
+    font-family: 'Gilroy-Regular';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+}
+.react-datepicker__current-month {
+    height: 25px;
+    margin-bottom: 35px;
+    text-transform: capitalize;
+}
+.react-datepicker__navigation {
+    align-items: center;
+    background: none;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 2px;
+    padding: 0;
+    border: none;
+    z-index: 1;
+    height: 32px;
+    width: 32px;
+    text-indent: -999em;
+    overflow: hidden;
+}
+.react-datepicker__navigation--next {
+    right: 2px;
+}
+.react-datepicker__navigation-icon--next::before {
+    transform: rotate(45deg);
+    left: -7px;
+}
+
+.react-datepicker__navigation--previous {
+    left: 2px;
+}
+.react-datepicker__navigation-icon--previous::before {
+    transform: rotate(225deg);
+    right: -7px;
+}
+
+.react-datepicker__navigation-icon {
+    position: relative;
+    top: -1px;
+    font-size: 20px;
+    width: 0;
+}
+.react-datepicker__year-read-view--down-arrow, .react-datepicker__month-read-view--down-arrow, .react-datepicker__month-year-read-view--down-arrow, .react-datepicker__navigation-icon::before {
+    border-color: #ccc;
+    border-style: solid;
+    border-width: 3px 3px 0 0;
+    content: "";
+    display: block;
+    height: 9px;
+    position: absolute;
+    top: -2px;
+    width: 9px;
+}
+
+.react-datepicker__navigation {
+    align-items: center;
+    background: none;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 2px;
+    padding: 0;
+    border: none;
+    z-index: 1;
+    height: 32px;
+    width: 32px;
+    text-indent: -999em;
+    overflow: hidden;
+}
+
+.react-datepicker__month {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.react-datepicker__week, .react-datepicker__day-names {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+}
+.react-datepicker__day-names {
+    margin-bottom: 44px;
+}
+
+.react-datepicker__day, .react-datepicker__day-name {
+    width: 43px;
+    height: 43px;
+    border-radius: 7px;
+    overflow: hidden;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.react-datepicker__day-name {
+    height: auto;
+    color: #ABAFE5;
+    cursor: default;
+    text-transform: uppercase;
+}
+
+
+.datepicker-customDay {
+    width: 100%;
+    height: 100%;
+    background-color: #1F2032;
+    padding: 6px 6px;
+    box-sizing: border-box;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.datepicker-window {
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    border: none;
+}
+.datepicker-customDay-selected {
+    background-color: #ABAFE5;
+}
+.datepicker-customDay-unselectable {
+    background-color: #0F0F1D;;
+}
+
+.datepicker-customDay-day {
+    font-family: 'Bebas Neue';
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-align: left;
+    color: #FFF;
+    height: min-content;
+}
+.datepicker-customDay-places {
+    font-family: 'Gilroy-Regular';
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: -0.30px;
+    text-align: left;
+    color: #ABAFE5;
+    height: min-content;
+}
+
+.datepicker-customDay-selected .datepicker-customDay-day,
+.datepicker-customDay-selected .datepicker-customDay-places {
+    color: #191A29;
+}
+
+.datepicker-customDay-unselectable .datepicker-customDay-day{
+    color: #828188;
+}
+.datepicker-customDay-unselectable .datepicker-customDay-places {
+    color: #58597B;
 }

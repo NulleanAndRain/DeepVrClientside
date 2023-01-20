@@ -9,6 +9,8 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { StageLayout } from "./StageLayout";
 
+import "../BookingStyles.css";
+
 import vrGlasses from "../../../Assets/Очки 3.png";
 import { IGame } from "../../../Utils/types";
 

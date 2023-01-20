@@ -5,6 +5,7 @@ import {
   decreaseStep,
   getRoom,
   increaseStep,
+  setGame,
 } from "../../../Utils/redux/bookingSlice";
 import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { IGame } from "../../../Utils/types";
@@ -33,6 +34,7 @@ export const GameSelect: React.FC = () => {
 
   const onNextClick = () => {
     if (!!selected) {
+      dispatch(setGame(selected));
       dispatch(increaseStep());
     }
   };

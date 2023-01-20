@@ -4,6 +4,7 @@ import { DefaultLayout } from "../Layout/DefaultLayout";
 import "./BookingStyles.css";
 import { CitySelect } from "./Stages/CitySelect.";
 import { GameSelect } from "./Stages/GameSelect";
+import { PlayersCountSelect } from "./Stages/PlayersCountSelect";
 import { RoomSelect } from "./Stages/RoomSelect";
 
 export const Booking: React.FC = () => {
@@ -17,6 +18,8 @@ export const Booking: React.FC = () => {
         return <RoomSelect />;
       case 2:
         return <GameSelect />;
+      case 3:
+        return <PlayersCountSelect />;
       default:
         return null;
     }

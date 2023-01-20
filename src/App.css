@@ -60,15 +60,13 @@
 
 .ScrollAreaScrollbar {
   display: flex;
-  /* ensures no selection */
   user-select: none;
-  /* disable browser handling of all panning and zooming gestures on touch devices */
   touch-action: none;
   padding: 2px;
-  /* background: #FFF; */
   background: var(--scrollbar-bg);
   transition: background 160ms ease-out;
   height: 100%;
+  z-index: 120;
 }
 .ScrollAreaScrollbar:hover {
   background: var(--scrollbar-bg-bright);

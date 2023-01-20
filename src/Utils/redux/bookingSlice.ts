@@ -81,6 +81,7 @@ export const getCurrentStep = (state: RootState) =>
   state.bookingReducer.currentStep;
 export const getCity = (state: RootState) => state.bookingReducer.city;
 export const getRoom = (state: RootState) => state.bookingReducer.room;
+export const getGame = (state: RootState) => state.bookingReducer.game;
 export const getPlayersCount = (state: RootState) =>
   state.bookingReducer.playersCount;
 export const getDate = (state: RootState) => state.bookingReducer.date;

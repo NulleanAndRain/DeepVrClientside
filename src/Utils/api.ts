@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ICity, IGetGamesResponse, IRoom } from "./types"
+import { ICity, IGetGamesResponse, IGetWorktimeResponse, IRoom } from "./types"
 
 export interface ErrorResponse {
     error: number,
@@ -35,6 +35,12 @@ export const Api = {
     async getGamesOfRoom(roomId: number) {
         return axios.get<IGetGamesResponse>(
             `${instanceUrl}/room/${roomId}`
+        );
+    },
+
+    async getTimesOfDay(date: Date) {
+        return axios.get<IGetWorktimeResponse>(
+            `${instanceUrl}/v2/worktime?date=${date.toISOString().substring(0, 10)}`
         );
     },
 

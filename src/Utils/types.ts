@@ -75,3 +75,10 @@ export interface IBookingCredentials {
   time: string,
   comment?: string,
 }
+
+export interface IGetWorktimeResponse {
+  start_at: string, 
+  end_at: string, 
+  interval: string,
+  glasses: string
+}

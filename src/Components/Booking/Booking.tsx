@@ -7,6 +7,7 @@ import { DateSelect } from "./Stages/DateSelect";
 import { GameSelect } from "./Stages/GameSelect";
 import { PlayersCountSelect } from "./Stages/PlayersCountSelect";
 import { RoomSelect } from "./Stages/RoomSelect";
+import { TimeSelect } from "./Stages/TimeSelect";
 
 export const Booking: React.FC = () => {
   const currentStep = useAppSelector(getCurrentStep);
@@ -23,6 +24,8 @@ export const Booking: React.FC = () => {
         return <PlayersCountSelect />;
       case 4:
         return <DateSelect />;
+      case 5:
+        return <TimeSelect />;
       default:
         return null;
     }

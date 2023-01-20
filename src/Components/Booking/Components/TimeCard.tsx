@@ -1,5 +1,4 @@
 import "../BookingStyles.css";
-import { SelectedMark } from "./SelectedMark";
 
 import timeIcon from "../../../Assets/Vector.svg";
 import timeIconAlt from "../../../Assets/VectorDark.svg";
@@ -13,7 +12,7 @@ interface Props {
 export const TimeCard: React.FC<Props> = ({ time, isSelected, onClick }) => {
   return (
     <div
-      className={`selectable-card-wrappertime-card-wrapper`}
+      className={`selectable-card-wrapper time-card-wrapper`}
       onClick={() => onClick(time)}
     >
       <div

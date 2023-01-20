@@ -64,6 +64,21 @@ const bookingSlice = createSlice({
         case 2:
           state.room = undefined;
           break;
+        case 3:
+          state.game = undefined;
+          break;
+        case 4:
+          state.playersCount = undefined;
+          break;
+        case 5:
+          state.date = undefined;
+          break;
+        case 6:
+          state.time = undefined;
+          break;
+        case 7:
+          state.credentials = undefined;
+          break;
         default:
           break;
       }

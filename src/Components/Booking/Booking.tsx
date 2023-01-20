@@ -3,6 +3,7 @@ import { useAppSelector } from "../../Utils/redux/store";
 import { DefaultLayout } from "../Layout/DefaultLayout";
 import "./BookingStyles.css";
 import { CitySelect } from "./Stages/CitySelect.";
+import { CredentialsForm } from "./Stages/CredentialsForm";
 import { DateSelect } from "./Stages/DateSelect";
 import { GameSelect } from "./Stages/GameSelect";
 import { PlayersCountSelect } from "./Stages/PlayersCountSelect";
@@ -26,6 +27,8 @@ export const Booking: React.FC = () => {
         return <DateSelect />;
       case 5:
         return <TimeSelect />;
+      case 6:
+        return <CredentialsForm />;
       default:
         return null;
     }

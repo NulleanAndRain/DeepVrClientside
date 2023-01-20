@@ -15,13 +15,14 @@ import { TimeCard } from "../Components/TimeCard";
 
 export const TimeSelect: React.FC = () => {
   const dispatch = useAppDispatch();
-  const date = new Date(useAppSelector(getDate) as string);
+  const dateString = useAppSelector(getDate) as string;
 
   const [selected, setSelected] = useState<Date | undefined>();
 
   const [times, setTimes] = useState<Array<Date> | undefined>();
 
   useEffect(() => {
+    const date = new Date(dateString);
     Api.getTimesOfDay(date).then((res) => {
       if (res.status >= 200 && res.status < 300) {
         const dates: Array<Date> = [];
@@ -45,7 +46,7 @@ export const TimeSelect: React.FC = () => {
         setTimes(dates);
       }
     });
-  }, []);
+  }, [dateString]);
 
   const onNextClick = () => {
     if (!!selected) {

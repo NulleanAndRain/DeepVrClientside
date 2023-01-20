@@ -22,6 +22,7 @@ export const DateSelect: React.FC = () => {
 
   const onNextClick = () => {
     if (!!selected) {
+      selected.setMinutes(-selected.getTimezoneOffset());
       dispatch(setDate(selected.toISOString()));
       dispatch(increaseStep());
     }

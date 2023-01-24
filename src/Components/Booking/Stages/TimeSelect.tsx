@@ -40,7 +40,7 @@ export const TimeSelect: React.FC = () => {
         let minutesIncrement = Number.parseInt(res.data.interval);
         while (minutesIncrement && tempDate < endDate) {
           tempDate.setMinutes(tempDate.getMinutes() + minutesIncrement);
-          dates.push(new Date(tempDate));
+          if (tempDate < endDate) dates.push(new Date(tempDate));
         }
 
         setTimes(dates);

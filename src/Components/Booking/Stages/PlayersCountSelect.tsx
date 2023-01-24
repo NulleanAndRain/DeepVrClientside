@@ -46,14 +46,14 @@ export const PlayersCountSelect: React.FC = () => {
   };
 
   const incr = () => {
-    const c = count as number;
+    const c = Number.parseInt(count as string);
     if (game?.guest_max && c < game.guest_max) {
       setCount(c + 1);
     }
   };
 
   const decr = () => {
-    const c = count as number;
+    const c = Number.parseInt(count as string);
     if (game?.guest_min && c > game.guest_min) {
       setCount(c - 1);
     }

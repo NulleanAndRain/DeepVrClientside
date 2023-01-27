@@ -3,16 +3,25 @@ import "../BookingStyles.css";
 
 import closeIcon from "../../../Assets/closeIcon.svg";
 import loadIcon from "../../../Assets/load.svg";
+import { useRef } from "react";
 
 interface Props {
   isOpen: boolean;
   onSubmit: (result: string) => void;
   onCancel: () => void;
+  value?: string;
 }
 
-export const PromoModal: React.FC<Props> = ({ isOpen, onCancel, onSubmit }) => {
+export const PromoModal: React.FC<Props> = ({
+  isOpen,
+  onCancel,
+  onSubmit,
+  value,
+}) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const submit = () => {
-    onSubmit("123");
+    onSubmit(inputRef.current?.value ?? "");
   };
 
   const Footer = () => (
@@ -39,6 +48,8 @@ export const PromoModal: React.FC<Props> = ({ isOpen, onCancel, onSubmit }) => {
                 type="text"
                 className="credentials-input-field"
                 placeholder="Промокод"
+                defaultValue={value}
+                ref={inputRef}
               />
               <img
                 src={loadIcon}

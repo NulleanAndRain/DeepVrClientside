@@ -6,14 +6,20 @@ import { useEffect, useState } from "react";
 import { ICity } from "../../../Utils/types";
 import { Api } from "../../../Utils/api";
 import { CityCard } from "../Components/CityCard";
-import { useAppDispatch } from "../../../Utils/redux/store";
-import { increaseStep, setCity } from "../../../Utils/redux/bookingSlice";
+import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
+import {
+  getCity,
+  increaseStep,
+  setCity,
+} from "../../../Utils/redux/bookingSlice";
 
 import "../BookingStyles.css";
 
 export const CitySelect: React.FC = () => {
   const [cities, setCities] = useState<Array<ICity>>();
-  const [selected, setSelected] = useState<ICity>();
+  const [selected, setSelected] = useState<ICity>(
+    useAppSelector(getCity) as ICity
+  );
 
   const dispatch = useAppDispatch();
 

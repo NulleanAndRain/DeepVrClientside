@@ -2,10 +2,11 @@ import { Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import {
   decreaseStep,
+  getRoom,
   increaseStep,
   setRoom,
 } from "../../../Utils/redux/bookingSlice";
-import { useAppDispatch } from "../../../Utils/redux/store";
+import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { IRoom } from "../../../Utils/types";
 import { Api } from "../../../Utils/api";
 import { RoomCard } from "../Components/RoomCard";
@@ -18,7 +19,9 @@ export const RoomSelect: React.FC = () => {
 
   const [rooms, setRooms] = useState<Array<IRoom>>();
 
-  const [selected, setSelected] = useState<IRoom>();
+  const [selected, setSelected] = useState<IRoom>(
+    useAppSelector(getRoom) as IRoom
+  );
 
   useEffect(() => {
     Api.getAllRooms()

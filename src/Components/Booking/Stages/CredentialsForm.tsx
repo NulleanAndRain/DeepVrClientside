@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { Col, Row } from "antd";
-import { decreaseStep, increaseStep } from "../../../Utils/redux/bookingSlice";
-import { useAppDispatch } from "../../../Utils/redux/store";
+import {
+  decreaseStep,
+  getCredentials,
+  increaseStep,
+  setCredentials,
+} from "../../../Utils/redux/bookingSlice";
+import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { StageLayout } from "./StageLayout";
 import { PromoModal } from "../Components/PromoModal";
 
@@ -28,6 +33,7 @@ export const CredentialsForm: React.FC = () => {
     formState: { errors },
   } = useForm({
     mode: "onTouched",
+    defaultValues: useAppSelector(getCredentials),
   });
 
   const values = getValues();
@@ -43,8 +49,11 @@ export const CredentialsForm: React.FC = () => {
     setIsPromoModalOpen(false);
   };
 
+  const hasNoErrors = !errors.name && !errors.phone && !errors.licenseAgree;
+
   const onNextClick = () => {
-    if (!errors) {
+    if (hasNoErrors) {
+      dispatch(setCredentials(values));
       dispatch(increaseStep());
     }
   };
@@ -57,7 +66,7 @@ export const CredentialsForm: React.FC = () => {
       title="Напишите ваши контакты"
       onNextClick={onNextClick}
       onBackClick={onBackClick}
-      isNextBtnActive={!errors}
+      isNextBtnActive={hasNoErrors}
     >
       <Row justify="center" gutter={[20, 20]}>
         <Col xs={24} sm={20} md={14} lg={12} xl={10} xxl={8}>
@@ -66,28 +75,71 @@ export const CredentialsForm: React.FC = () => {
               isOpen={isPromoModalOpen}
               onCancel={closeModal}
               onSubmit={submitModalRes}
-              value={values["promo"]}
+              value={values.promo}
             />
+
+            {errors.name && (
+              <div className="credentials-error">{errors.name.message}</div>
+            )}
             <div className="credentials-input">
               <img src={userIcon} alt="" className="credentials-input-icon" />
               <input
-                {...register("name")}
+                {...register("name", {
+                  required: "Введите имя",
+                  minLength: 2,
+                })}
                 type="text"
                 className="credentials-input-field"
                 placeholder="Введите ваше имя"
               />
             </div>
+
+            {errors.phone && (
+              <div className="credentials-error">{errors.phone.message}</div>
+            )}
             <div className="credentials-input">
               <img src={phoneIcon} alt="" className="credentials-input-icon" />
               <input
-                {...register("phone")}
+                {...register("phone", {
+                  required: "Введите телефон",
+                  /* regex :
+                    '+' or without '+'
+                    1 to 3 numbers
+                    any count of ' ' or '-'
+                    '(' or without '('
+                    3 numbers
+                    ')' or without ')'
+                    any count of ' ' or '-'
+                    3 numbers
+                    any count of ' ' or '-'
+                    2 numbers
+                    any count of ' ' or '-'
+                    2 numbers
+                  */
+                  pattern: {
+                    value:
+                      /^[+]{0,1}\d{1,3}[ -]*[(]{0,1}\d{3}[)]{0,1}[ -]*\d{3}[ -]*\d{2}[ -]*\d{2}$/,
+                    message: "Введите правильный номер телефона",
+                  },
+                })}
                 type="tel"
                 className="credentials-input-field"
                 placeholder="+7 (___) ___-__-__"
               />
             </div>
+
+            {errors.licenseAgree && (
+              <div className="credentials-error">
+                {errors.licenseAgree.message}
+              </div>
+            )}
             <label className="credentials-label">
-              <input {...register("agreement")} type="checkbox" />
+              <input
+                {...register("licenseAgree", {
+                  required: "Необходимо принять пользовательское соглашение",
+                })}
+                type="checkbox"
+              />
               <span className="credentials-checkbox">
                 <img
                   src={mark}
@@ -102,6 +154,7 @@ export const CredentialsForm: React.FC = () => {
                 </a>
               </span>
             </label>
+
             <div className="credentials-input">
               <textarea
                 {...register("comment")}
@@ -111,6 +164,7 @@ export const CredentialsForm: React.FC = () => {
                 rows={5}
               />
             </div>
+
             <div
               className="credentials-promo-btn credentials-description "
               onClick={openModal}
@@ -119,6 +173,7 @@ export const CredentialsForm: React.FC = () => {
               <span>Промокод или сертификат</span>
               <img src={arrowRight} alt="" />
             </div>
+
             <div className="credentials-bonuses-container">
               <div className="credentials-description">
                 <span>Баллы и бонусы</span>
@@ -130,6 +185,7 @@ export const CredentialsForm: React.FC = () => {
                   />
                 </a>
               </div>
+
               <label className="credentials-label">
                 <input {...register("useDiscount")} type="checkbox" />
                 <span className="credentials-checkbox">

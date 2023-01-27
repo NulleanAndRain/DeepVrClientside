@@ -3,21 +3,28 @@ import { useEffect, useState } from "react";
 import {
   decreaseStep,
   getDate,
+  getTime,
   increaseStep,
   setTime,
 } from "../../../Utils/redux/bookingSlice";
 import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { StageLayout } from "./StageLayout";
-
-import "../BookingStyles.css";
 import { Api } from "../../../Utils/api";
 import { TimeCard } from "../Components/TimeCard";
+
+import "../BookingStyles.css";
 
 export const TimeSelect: React.FC = () => {
   const dispatch = useAppDispatch();
   const dateString = useAppSelector(getDate) as string;
 
-  const [selected, setSelected] = useState<Date | undefined>();
+  const preselectedDate = useAppSelector(getDate);
+  const preselectedTime = useAppSelector(getTime);
+  const [selected, setSelected] = useState<Date | undefined>(
+    preselectedDate && preselectedTime
+      ? new Date(`${preselectedDate.slice(0, 10)} ${preselectedTime}`)
+      : undefined
+  );
 
   const [times, setTimes] = useState<Array<Date> | undefined>();
 
@@ -83,7 +90,9 @@ export const TimeSelect: React.FC = () => {
             >
               <TimeCard
                 time={time}
-                isSelected={time === selected}
+                isSelected={
+                  time.toLocaleTimeString() === selected?.toLocaleTimeString()
+                }
                 onClick={onTimeClick}
               />
             </Col>

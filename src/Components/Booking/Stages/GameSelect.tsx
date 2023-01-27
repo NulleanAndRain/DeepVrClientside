@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Api } from "../../../Utils/api";
 import {
   decreaseStep,
+  getGame,
   getRoom,
   increaseStep,
   setGame,
@@ -20,7 +21,9 @@ export const GameSelect: React.FC = () => {
 
   const [games, setGames] = useState<Array<IGame>>();
 
-  const [selected, setSelected] = useState<IGame>();
+  const [selected, setSelected] = useState<IGame>(
+    useAppSelector(getGame) as IGame
+  );
 
   useEffect(() => {
     Api.getGamesOfRoom(room?.id as number)

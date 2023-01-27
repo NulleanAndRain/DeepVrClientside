@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
 import {
   decreaseStep,
+  getDate,
   increaseStep,
   setDate,
 } from "../../../Utils/redux/bookingSlice";
-import { useAppDispatch } from "../../../Utils/redux/store";
+import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { StageLayout } from "./StageLayout";
 import ru from "date-fns/locale/ru";
+
+import "../BookingStyles.css";
 
 export const DateSelect: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +21,10 @@ export const DateSelect: React.FC = () => {
   const maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 1);
 
-  const [selected, setSelected] = useState<Date>();
+  const preselectedDate = useAppSelector(getDate);
+  const [selected, setSelected] = useState<Date | undefined>(
+    preselectedDate ? new Date(preselectedDate) : undefined
+  );
 
   const onNextClick = () => {
     if (!!selected) {

@@ -74,6 +74,8 @@ export interface IBookingCredentials {
   date: string,
   time: string,
   comment?: string,
+  promo?: string;
+  useDiscount: boolean;
 }
 
 export interface IGetWorktimeResponse {

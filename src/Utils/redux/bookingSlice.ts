@@ -55,33 +55,6 @@ const bookingSlice = createSlice({
     },
 
     decreaseStep(state) {
-      switch (state.currentStep) {
-        case 1: {
-          state.city = undefined;
-          Api.setInstanceUrl(undefined);
-          break;
-        }
-        case 2:
-          state.room = undefined;
-          break;
-        case 3:
-          state.game = undefined;
-          break;
-        case 4:
-          state.playersCount = undefined;
-          break;
-        case 5:
-          state.date = undefined;
-          break;
-        case 6:
-          state.time = undefined;
-          break;
-        case 7:
-          state.credentials = undefined;
-          break;
-        default:
-          break;
-      }
       state.currentStep--;
       if (state.currentStep < 0) state.currentStep = 0;
     },

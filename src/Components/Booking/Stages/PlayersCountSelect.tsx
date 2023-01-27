@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import {
   decreaseStep,
   getGame,
+  getPlayersCount,
   increaseStep,
   setPlayersCount,
 } from "../../../Utils/redux/bookingSlice";
@@ -19,7 +20,7 @@ export const PlayersCountSelect: React.FC = () => {
   const game = useAppSelector(getGame) as IGame;
 
   const [count, setCount] = useState<string | number | undefined>(
-    game?.guest_min ?? 1
+    useAppSelector(getPlayersCount) ?? game?.guest_min ?? 1
   );
 
   const inputRef = useRef<HTMLInputElement>(null);

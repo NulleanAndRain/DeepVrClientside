@@ -20,6 +20,7 @@ const bookingSlice = createSlice({
 });
 
 export const getToken = (state: RootState) => state.authReducer.token;
+export const getIsAuthorised = (state: RootState) => !!state.authReducer.token;
 
 export const { setToken } = bookingSlice.actions;
 export default bookingSlice.reducer;

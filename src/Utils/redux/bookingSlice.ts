@@ -26,6 +26,10 @@ const bookingSlice = createSlice({
       state.currentStep++;
     },
 
+    setStep(state, action) {
+      state.currentStep = action.payload;
+    },
+
     setCity(state, action) {
       state.city = action.payload;
       Api.setInstanceUrl(
@@ -77,6 +81,26 @@ export const getTime = (state: RootState) => state.bookingReducer.time;
 export const getCredentials = (state: RootState) =>
   state.bookingReducer.credentials;
 
+export const getMaxStep = (state: RootState) => {
+  const r = state.bookingReducer;
+  return ( 
+    r.city ?
+      r.room?
+        r.game?
+          r.playersCount ?
+            r.date ? 
+              r.time ? 
+                r.credentials ? 
+                7 :
+                6
+              : 5
+            : 4
+          : 3
+        : 2
+      :1
+    : 0);
+};
+
 export const {
   increaseStep,
   setCity,
@@ -88,5 +112,6 @@ export const {
   setCredentials,
   clearState,
   decreaseStep,
+  setStep,
 } = bookingSlice.actions;
 export default bookingSlice.reducer;

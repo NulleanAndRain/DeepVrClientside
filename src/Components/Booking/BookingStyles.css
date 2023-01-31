@@ -234,6 +234,12 @@
 .step-circle-unselected {
     opacity: 0.4;
 }
+.step-circle-clickable {
+    cursor: pointer;
+}
+.step-circle-not-clickable {
+    cursor: default;
+}
 
 .step-circle-dash {
     width: 16px;
@@ -693,11 +699,11 @@
     text-decoration-line: underline;
 }
 .credentials-label input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
 }
 
 .credentials-checkbox {
@@ -716,6 +722,9 @@
 }
 .credentials-label input:checked ~ .credentials-checkbox img {
     display: block;
+}
+.credentials-label input:focus ~ .credentials-checkbox   {
+    outline: 1px solid #FFF;
 }
 
 .credentials-input-textarea {
@@ -742,6 +751,11 @@
     cursor: pointer;
 }
 
+.credentials-not-usable {
+    cursor: unset;
+    opacity: 0.4;
+}
+
 .credentials-description-img {
     height: auto;
     width: 12px;
@@ -766,6 +780,24 @@
     text-align: left;
     margin-bottom: -8px;
     padding-left: 12px;
+}
+
+.credentials-need-login {
+    font-family: 'Gilroy-Regular';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 140%;
+    padding: 20px 10px;
+    color: #FFF;
+    text-align: left;
+    cursor: pointer;
+}
+.credentials-need-login:hover{
+    color: #FFF;
+}
+.credentials-need-login span{
+    text-decoration: underline;
 }
 
 /* promo modal */

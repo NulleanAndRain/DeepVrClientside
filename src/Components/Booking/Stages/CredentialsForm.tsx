@@ -18,6 +18,9 @@ import mark from "../../../Assets/checkboxMark.svg";
 import arrowRight from "../../../Assets/arrow-right.svg";
 import infoIcon from "../../../Assets/infoIcon.svg";
 import { useForm } from "react-hook-form";
+import { getIsAuthorised } from "../../../Utils/redux/authSlice";
+import { NavLink } from "react-router-dom";
+import { ACCOUNT_PATH } from "../../../Utils/routeConstants";
 
 const agreementHref = "/";
 const bonusesInfoHref = "/";
@@ -25,6 +28,8 @@ const bonusesInfoHref = "/";
 export const CredentialsForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
+
+  const isAuthorised = useAppSelector(getIsAuthorised);
 
   const {
     register,
@@ -36,6 +41,9 @@ export const CredentialsForm: React.FC = () => {
     defaultValues: useAppSelector(getCredentials),
   });
 
+  const [isPromoActive, setIsPromoActive] = useState(true);
+  const [areBonusesActive, setAreBonusesActive] = useState(true);
+
   const values = getValues();
 
   const openModal = () => {
@@ -46,6 +54,7 @@ export const CredentialsForm: React.FC = () => {
   };
   const submitModalRes = (result: string) => {
     setValue("promo", result);
+    setAreBonusesActive(!result);
     setIsPromoModalOpen(false);
   };
 
@@ -124,7 +133,7 @@ export const CredentialsForm: React.FC = () => {
                 })}
                 type="tel"
                 className="credentials-input-field"
-                placeholder="+7 (___) ___-__-__"
+                placeholder="Введите телефон"
               />
             </div>
 
@@ -165,39 +174,74 @@ export const CredentialsForm: React.FC = () => {
               />
             </div>
 
-            <div
-              className="credentials-promo-btn credentials-description "
-              onClick={openModal}
-            >
-              <input {...register("promo")} type="hidden" className="hidden" />
-              <span>Промокод или сертификат</span>
-              <img src={arrowRight} alt="" />
-            </div>
-
-            <div className="credentials-bonuses-container">
-              <div className="credentials-description">
-                <span>Баллы и бонусы</span>
-                <a href={bonusesInfoHref} target="_blank" rel="noreferrer">
-                  <img
-                    src={infoIcon}
-                    alt=""
-                    className="credentials-description-img"
+            {isAuthorised ? (
+              <>
+                <div
+                  className={`credentials-promo-btn credentials-description${
+                    values.useDiscount ? " credentials-not-usable" : " "
+                  }`}
+                  onClick={values.useDiscount ? undefined : openModal}
+                >
+                  <input
+                    {...register("promo")}
+                    type="hidden"
+                    className="hidden"
                   />
-                </a>
-              </div>
+                  <span>Промокод или сертификат</span>
+                  <img src={arrowRight} alt="" />
+                </div>
 
-              <label className="credentials-label">
-                <input {...register("useDiscount")} type="checkbox" />
-                <span className="credentials-checkbox">
-                  <img
-                    src={mark}
-                    alt=""
-                    className="credentials-description-img"
-                  />
-                </span>
-                <span>Списать до 20% баллами</span>
-              </label>
-            </div>
+                <div
+                  className={`credentials-bonuses-container${
+                    areBonusesActive ? "" : " credentials-not-usable"
+                  }`}
+                >
+                  <div className="credentials-description">
+                    <span>Баллы и бонусы</span>
+                    <a href={bonusesInfoHref} target="_blank" rel="noreferrer">
+                      <img
+                        src={infoIcon}
+                        alt=""
+                        className="credentials-description-img"
+                      />
+                    </a>
+                  </div>
+
+                  <label className="credentials-label">
+                    <input
+                      {...register("useDiscount", {
+                        onChange: (e) => {
+                          console.log(e);
+                          setIsPromoActive(!e.target.checked);
+                          setValue("useDiscount", e.target.checked);
+                        },
+                      })}
+                      type="checkbox"
+                      disabled={!areBonusesActive}
+                    />
+                    <span className="credentials-checkbox">
+                      <img
+                        src={mark}
+                        alt=""
+                        className="credentials-description-img"
+                      />
+                    </span>
+                    <span>Списать до 20% баллами</span>
+                  </label>
+                </div>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  to={ACCOUNT_PATH}
+                  className="credentials-need-login"
+                  onClick={openModal}
+                >
+                  Чтобы использовать бонусы или промокод необходимо{" "}
+                  <span>войти</span>
+                </NavLink>
+              </>
+            )}
           </form>
         </Col>
       </Row>

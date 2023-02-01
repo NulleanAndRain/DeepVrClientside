@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ICity, IGetGamesResponse, IGetWorktimeResponse, IRoom } from "./types"
+import { ICity, IGetGamesResponse, IGetWorktimeResponse, IRoom, ISummaryResponse, IValidatePromo } from "./types"
 
 export interface ErrorResponse {
     error: number,
@@ -43,8 +43,38 @@ export const Api = {
             `${instanceUrl}/v2/worktime?date=${date.toISOString().substring(0, 10)}`
         );
     },
+    
+    async getSummary(data : IGetSummaryRequestData){
+        return axios.post<ISummaryResponse>(
+            `${instanceUrl}/v2/orders/precalculate`,
+            data
+        )
+    },
+
+    async validatePromo(data: IValidatePromoRequestData) {
+        return axios.post<IValidatePromo>(
+            `${instanceUrl}/v2/promo/accept-discount`,
+            data
+        )
+    },
 
     getImageUrl(url: string) {
         return `${instanceStorageUrl}/${url}`;
-    }
+    },
+
+}
+
+export interface IValidatePromoRequestData {
+    token: string,
+    promo_code: string,
+    price: number,
+    game: number
+}
+
+export interface IGetSummaryRequestData {
+    game_id: number,
+    guest_count: number,
+    user_id?: number,
+    use_bonus?: boolean,
+    promocode?: string
 }

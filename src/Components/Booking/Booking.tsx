@@ -6,6 +6,7 @@ import { CitySelect } from "./Stages/CitySelect.";
 import { ConfirmBooking } from "./Stages/ConfirmBooking";
 import { CredentialsForm } from "./Stages/CredentialsForm";
 import { DateSelect } from "./Stages/DateSelect";
+import { Done } from "./Stages/Done";
 import { GameSelect } from "./Stages/GameSelect";
 import { PlayersCountSelect } from "./Stages/PlayersCountSelect";
 import { RoomSelect } from "./Stages/RoomSelect";
@@ -32,6 +33,8 @@ export const Booking: React.FC = () => {
         return <CredentialsForm />;
       case 7:
         return <ConfirmBooking />;
+      case 8:
+        return <Done />;
       default:
         return null;
     }

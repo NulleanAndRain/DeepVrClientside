@@ -84,3 +84,24 @@ export interface IGetWorktimeResponse {
   interval: string,
   glasses: string
 }
+
+export interface ISummaryResponse {
+  price: number,
+  bonus_discount?: number,
+  promo_discount?: number,
+  total: number,
+}
+
+export interface IValidatePromo {
+  promo_type: string,
+  promo_info: {
+    type: string,
+    amount: number,
+    amount_from: number,
+    game: boolean,
+    game_type: boolean
+  },
+  price: number,
+  discount: number,
+  discount_price: number
+}

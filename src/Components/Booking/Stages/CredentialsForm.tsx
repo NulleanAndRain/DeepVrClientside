@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Row } from "antd";
 import {
   decreaseStep,
   getCredentials,
+  getCurrentStep,
   increaseStep,
   setCredentials,
 } from "../../../Utils/redux/bookingSlice";
 import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { StageLayout } from "./StageLayout";
 import { PromoModal } from "../Components/PromoModal";
+import infoIcon from "../../../Assets/infoIcon.svg";
+import { useForm } from "react-hook-form";
+import { getIsAuthorised } from "../../../Utils/redux/authSlice";
+import { NavLink } from "react-router-dom";
+import { ACCOUNT_PATH } from "../../../Utils/routeConstants";
 
 import "../BookingStyles.css";
 
@@ -16,11 +22,6 @@ import userIcon from "../../../Assets/user-icon-liliac.svg";
 import phoneIcon from "../../../Assets/phone.svg";
 import mark from "../../../Assets/checkboxMark.svg";
 import arrowRight from "../../../Assets/arrow-right.svg";
-import infoIcon from "../../../Assets/infoIcon.svg";
-import { useForm } from "react-hook-form";
-import { getIsAuthorised } from "../../../Utils/redux/authSlice";
-import { NavLink } from "react-router-dom";
-import { ACCOUNT_PATH } from "../../../Utils/routeConstants";
 
 const agreementHref = "/";
 const bonusesInfoHref = "/";
@@ -35,11 +36,14 @@ export const CredentialsForm: React.FC = () => {
     register,
     setValue,
     getValues,
+    // clearErrors,
+    watch,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
     defaultValues: useAppSelector(getCredentials),
   });
+  // useEffect(() => clearErrors(), []);
 
   const [isPromoActive, setIsPromoActive] = useState(true);
   const [areBonusesActive, setAreBonusesActive] = useState(true);
@@ -58,7 +62,11 @@ export const CredentialsForm: React.FC = () => {
     setIsPromoModalOpen(false);
   };
 
-  const hasNoErrors = !errors.name && !errors.phone && !errors.licenseAgree;
+  const hasNoErrors =
+    !errors.name &&
+    !errors.phone &&
+    !errors.licenseAgree &&
+    watch("licenseAgree");
 
   const onNextClick = () => {
     if (hasNoErrors) {
@@ -178,9 +186,9 @@ export const CredentialsForm: React.FC = () => {
               <>
                 <div
                   className={`credentials-promo-btn credentials-description${
-                    values.useDiscount ? " credentials-not-usable" : " "
+                    isPromoActive ? "" : " credentials-not-usable"
                   }`}
-                  onClick={values.useDiscount ? undefined : openModal}
+                  onClick={isPromoActive ? openModal : undefined}
                 >
                   <input
                     {...register("promo")}
@@ -211,7 +219,6 @@ export const CredentialsForm: React.FC = () => {
                     <input
                       {...register("useDiscount", {
                         onChange: (e) => {
-                          console.log(e);
                           setIsPromoActive(!e.target.checked);
                           setValue("useDiscount", e.target.checked);
                         },

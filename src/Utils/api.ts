@@ -14,6 +14,9 @@ export const Api = {
     get globalUrl() { 
         return globalUrl;
     },
+    get instanceUrl() {
+        return instanceUrl;
+    },
     async getAllCities() {
         return axios.get<Array<ICity>>(
             `${globalUrl}/v2/instances/list`

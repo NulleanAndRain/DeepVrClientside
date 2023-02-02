@@ -3,12 +3,14 @@ import { FixedPanel } from "../Components/FixedPanel";
 import { NextButton } from "../Components/NextButton";
 import { Title } from "../Components/Title";
 import { useAppDispatch } from "../../../Utils/redux/store";
-import { clearState, setStep } from "../../../Utils/redux/bookingSlice";
+import { setIsFinished } from "../../../Utils/redux/bookingSlice";
+import { HOME_PATH } from "../../../Utils/routeConstants";
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router";
 
 import "../BookingStyles.css";
-import { HOME_PATH } from "../../../Utils/routeConstants";
-import { useState } from "react";
-import { Navigate } from "react-router";
+
+import doneImg from "../../../Assets/mirage-done.png";
 
 export const Done: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,20 +18,32 @@ export const Done: React.FC = () => {
   const [useRedirect, setUseRedirect] = useState(false);
 
   const onNextClick = () => {
-    dispatch(setStep(0));
-    dispatch(clearState());
     setUseRedirect(true);
   };
+
+  useEffect(() => {
+    if (useRedirect) {
+      dispatch(setIsFinished(true));
+    }
+  });
 
   return (
     <>
       {useRedirect ? (
-        <Navigate to={HOME_PATH} />
+        <Navigate to={HOME_PATH} relative={"route"} />
       ) : (
         <>
           <div className="booking-viewport ">
-            <Title fontSize={32}>Ваша бронь принята!</Title>
-            <Row justify="start" gutter={[20, 20]}></Row>
+            <img src={doneImg} alt="Готово" className="done-img" />
+            <Title fontSize={46}>Ваша бронь принята!</Title>
+            <Row justify="center" gutter={[20, 20]}>
+              <Col xs={24} sm={20} md={18} lg={16} xl={14} xxl={12}>
+                <p className="done-text">
+                  В ближайшее время с вами свяжется менеджер для подтверждения
+                  бронирования.
+                </p>
+              </Col>
+            </Row>
           </div>
           <FixedPanel>
             <Col xs={24} sm={20} md={18} lg={16} xl={14} xxl={12}>

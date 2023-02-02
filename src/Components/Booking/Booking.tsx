@@ -1,7 +1,11 @@
-import { getCurrentStep } from "../../Utils/redux/bookingSlice";
-import { useAppSelector } from "../../Utils/redux/store";
+import {
+  clearState,
+  getCurrentStep,
+  getIsFinished,
+  setStep,
+} from "../../Utils/redux/bookingSlice";
+import { useAppDispatch, useAppSelector } from "../../Utils/redux/store";
 import { DefaultLayout } from "../Layout/DefaultLayout";
-import "./BookingStyles.css";
 import { CitySelect } from "./Stages/CitySelect.";
 import { ConfirmBooking } from "./Stages/ConfirmBooking";
 import { CredentialsForm } from "./Stages/CredentialsForm";
@@ -12,8 +16,22 @@ import { PlayersCountSelect } from "./Stages/PlayersCountSelect";
 import { RoomSelect } from "./Stages/RoomSelect";
 import { TimeSelect } from "./Stages/TimeSelect";
 
+import "./BookingStyles.css";
+import { useEffect } from "react";
+
 export const Booking: React.FC = () => {
   const currentStep = useAppSelector(getCurrentStep);
+  const isFinished = useAppSelector(getIsFinished);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    return function checkState() {
+      if (isFinished) {
+        dispatch(setStep(0));
+        dispatch(clearState());
+      }
+    };
+  }, [dispatch, isFinished]);
 
   const CurrentPanel = () => {
     switch (currentStep) {

@@ -66,7 +66,6 @@ export const ConfirmBooking: React.FC = () => {
     })
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
-          console.log(res);
           setSummary(res.data);
         }
       })
@@ -157,7 +156,7 @@ export const ConfirmBooking: React.FC = () => {
                   {summary && numberFormat.format(summary.price)}
                 </span>
               </div>
-              {summary && summary.promo_discount && (
+              {!!summary && !!summary.promo_discount && (
                 <div className="summary-row">
                   <span>Промокод:</span>
                   <span className="summary-row-price">
@@ -165,7 +164,7 @@ export const ConfirmBooking: React.FC = () => {
                   </span>
                 </div>
               )}
-              {summary && summary.bonus_discount && (
+              {!!summary && !!summary.bonus_discount && (
                 <div className="summary-row">
                   <span>Бонусы:</span>
                   <span className="summary-row-price">

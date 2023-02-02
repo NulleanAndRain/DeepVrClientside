@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Col, Row } from "antd";
 import {
   decreaseStep,
   getCredentials,
-  getCurrentStep,
   increaseStep,
   setCredentials,
 } from "../../../Utils/redux/bookingSlice";
@@ -36,14 +35,12 @@ export const CredentialsForm: React.FC = () => {
     register,
     setValue,
     getValues,
-    // clearErrors,
     watch,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
     defaultValues: useAppSelector(getCredentials),
   });
-  // useEffect(() => clearErrors(), []);
 
   const [isPromoActive, setIsPromoActive] = useState(true);
   const [areBonusesActive, setAreBonusesActive] = useState(true);

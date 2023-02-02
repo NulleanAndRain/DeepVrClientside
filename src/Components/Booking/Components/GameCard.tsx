@@ -20,7 +20,7 @@ export const GameCard: React.FC<Props> = ({ game, isSelected, onClick }) => {
     >
       <div
         className="selectable-card-bg game-card-bg"
-        style={{ backgroundImage: `url(${imgUrl})` }}
+        style={game.logo ? { backgroundImage: `url(${imgUrl})` } : undefined}
       >
         <h2 className="game-card-title"> {game.title} </h2>
         <SelectedMark isSelected={!!isSelected} />

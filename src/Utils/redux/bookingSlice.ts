@@ -12,10 +12,12 @@ interface BookingState {
   date?: string;
   time?: string;
   credentials?: IBookingCredentials;
+  isFinished: boolean;
 }
 
 const initialState: BookingState = {
   currentStep: 0,
+  isFinished: false,
 };
 
 const bookingSlice = createSlice({
@@ -63,9 +65,16 @@ const bookingSlice = createSlice({
       if (state.currentStep < 0) state.currentStep = 0;
     },
 
-    clearState() {
-      return { currentStep: 0 };
+    clearState(state) {
+      return { 
+        currentStep: state.currentStep, 
+        isFinished: false, 
+      };
     },
+
+    setIsFinished(state, action) {
+      state.isFinished = action.payload;
+    }
   },
 });
 
@@ -79,7 +88,8 @@ export const getPlayersCount = (state: RootState) =>
 export const getDate = (state: RootState) => state.bookingReducer.date;
 export const getTime = (state: RootState) => state.bookingReducer.time;
 export const getCredentials = (state: RootState) =>
-  state.bookingReducer.credentials;
+state.bookingReducer.credentials;
+export const getIsFinished = (state: RootState) => state.bookingReducer.isFinished;
 
 export const getMaxStep = (state: RootState) => {
   const r = state.bookingReducer;
@@ -113,5 +123,6 @@ export const {
   clearState,
   decreaseStep,
   setStep,
+  setIsFinished
 } = bookingSlice.actions;
 export default bookingSlice.reducer;

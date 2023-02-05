@@ -764,6 +764,10 @@
     border: none;
     border-radius: 15px;
 }
+.modal-promo-btn-inactive {
+    cursor: default;
+    opacity: 0.4;
+}
 
 .summary-params-table{
     width: 100%;

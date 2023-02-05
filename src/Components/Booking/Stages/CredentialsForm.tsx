@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Col, Row } from "antd";
+import { Row } from "antd";
 import {
   decreaseStep,
   getCredentials,
@@ -10,9 +10,18 @@ import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { StageLayout } from "./StageLayout";
 import { PromoModal } from "../Components/PromoModal";
 import { useForm } from "react-hook-form";
-import { getIsAuthorised } from "../../../Utils/redux/authSlice";
+import {
+  getIsAuthorised,
+  getToken,
+  getUser,
+} from "../../../Utils/redux/authSlice";
 import { NavLink } from "react-router-dom";
 import { ACCOUNT_PATH } from "../../../Utils/routeConstants";
+import { ColLg } from "../../Common/ColLg";
+import { FormField } from "../../Common/FormField";
+import { PhoneInput } from "../../Common/PhoneInput";
+import { FormCheckbox } from "../../Common/FormCheckbox";
+import { TextAreaInput } from "../../Common/TextAreaInput";
 
 import "../BookingStyles.css";
 import "../../Common/CommonStyles.css";
@@ -21,11 +30,6 @@ import infoIcon from "../../../Assets/infoIcon.svg";
 import userIcon from "../../../Assets/user-icon-liliac.svg";
 import mark from "../../../Assets/checkboxMark.svg";
 import arrowRight from "../../../Assets/arrow-right.svg";
-import { ColLg } from "../../Common/ColLg";
-import { FormField } from "../../Common/FormField";
-import { PhoneInput } from "../../Common/PhoneInput";
-import { FormCheckbox } from "../../Common/FormCheckbox";
-import { TextAreaInput } from "../../Common/TextAreaInput";
 
 const agreementHref = "/";
 const bonusesInfoHref = "/";
@@ -35,17 +39,24 @@ export const CredentialsForm: React.FC = () => {
   const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
 
   const isAuthorised = useAppSelector(getIsAuthorised);
+  const token = useAppSelector(getToken);
+  const user = useAppSelector(getUser);
+
+  const credentials = useAppSelector(getCredentials);
 
   const {
     register,
     setValue,
     getValues,
-    watch,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: "onTouched",
-    defaultValues: useAppSelector(getCredentials),
+    defaultValues: {
+      ...credentials,
+      name: credentials?.name ?? user?.name,
+      phone: credentials?.phone ?? user?.phone,
+    },
   });
 
   const [isPromoActive, setIsPromoActive] = useState(true);
@@ -65,14 +76,8 @@ export const CredentialsForm: React.FC = () => {
     setIsPromoModalOpen(false);
   };
 
-  const hasNoErrors =
-    !errors.name &&
-    !errors.phone &&
-    !errors.licenseAgree &&
-    watch("licenseAgree");
-
   const onNextClick = () => {
-    if (hasNoErrors) {
+    if (isValid) {
       dispatch(setCredentials(values));
       dispatch(increaseStep());
     }
@@ -86,7 +91,7 @@ export const CredentialsForm: React.FC = () => {
       title="Напишите ваши контакты"
       onNextClick={onNextClick}
       onBackClick={onBackClick}
-      isNextBtnActive={hasNoErrors}
+      isNextBtnActive={isValid}
     >
       <Row justify="center" gutter={[20, 20]}>
         <ColLg>
@@ -167,26 +172,15 @@ export const CredentialsForm: React.FC = () => {
                     </a>
                   </div>
 
-                  <label className="credentials-label">
-                    <input
-                      {...register("useDiscount", {
-                        onChange: (e) => {
-                          setIsPromoActive(!e.target.checked);
-                          setValue("useDiscount", e.target.checked);
-                        },
-                      })}
-                      type="checkbox"
-                      disabled={!areBonusesActive}
-                    />
-                    <span className="credentials-checkbox">
-                      <img
-                        src={mark}
-                        alt=""
-                        className="credentials-description-img"
-                      />
-                    </span>
-                    <span>Списать до 20% баллами</span>
-                  </label>
+                  <FormCheckbox
+                    control={control}
+                    name="useDiscount"
+                    children={<span>Списать до 20% баллами</span>}
+                    onChange={(e) => {
+                      setIsPromoActive(!e.target.checked);
+                      setValue("useDiscount", e.target.checked);
+                    }}
+                  />
                 </div>
               </>
             ) : (

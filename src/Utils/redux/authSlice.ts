@@ -18,7 +18,7 @@ const bookingSlice = createSlice({
         setToken: (state, action) => {
             state.token = action.payload;
         },
-        setUser: (state, action) => {
+        setUser: (state, action : {payload: IUser}) => {
             state.user = action.payload;
         }
     }

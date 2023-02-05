@@ -9,6 +9,7 @@ interface Props {
   error?: FieldError;
   required?: string | ValidationRule<boolean>;
   children: React.ReactElement | Array<React.ReactElement>;
+  onChange?: (event: any) => void;
 }
 
 export const FormCheckbox: React.FC<Props> = ({
@@ -17,6 +18,7 @@ export const FormCheckbox: React.FC<Props> = ({
   error,
   required,
   children,
+  onChange,
 }) => {
   return (
     <>
@@ -25,6 +27,7 @@ export const FormCheckbox: React.FC<Props> = ({
         <input
           {...control.register(name, {
             required,
+            onChange,
           })}
           type="checkbox"
         />

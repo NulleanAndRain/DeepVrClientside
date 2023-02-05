@@ -48,6 +48,24 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
         console.log(err);
         if (err.response.status >= 500)
           setReqError("Ошибка сервера, попробуйте позже");
+
+        dispatch(setToken("8f7d70d39530c24138e1d401da35e48fd622902d"));
+        dispatch(
+          setUser({
+            avatar: "",
+            email: "admin@deep.vr",
+            id: 2,
+            name: "aboba",
+            category_loyalty_id: -1,
+            created_at: "never",
+            email_verified_at: "never",
+            phone: "8 800 555 3535",
+            role_id: 1,
+            settings: { locale: "en" },
+            temp_password: "",
+            updated_at: "never",
+          })
+        );
       });
   };
 

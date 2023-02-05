@@ -8,7 +8,7 @@ export interface IUser {
     name: string;
     phone: string;
     role_id: number;
-    settings: Array<object>;
+    settings: any;
     temp_password: string|null;
     updated_at: string;
 }

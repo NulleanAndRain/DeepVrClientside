@@ -1,4 +1,4 @@
-import { Control, FieldError, ValidationRule } from "react-hook-form";
+import { Control, FieldError, Validate, ValidationRule } from "react-hook-form";
 
 import "./CommonStyles.css";
 import { FormError } from "./FormError";
@@ -12,8 +12,9 @@ interface Props {
   error?: FieldError;
   required?: string | ValidationRule<boolean>;
   pattern?: ValidationRule<RegExp>;
-  minLength?: number;
+  minLength?: ValidationRule<number>;
   afterElem?: React.ReactElement;
+  validate?: Validate<any, any> | Record<string, Validate<any, any>>;
 }
 
 export const FormField: React.FC<Props> = ({
@@ -27,6 +28,7 @@ export const FormField: React.FC<Props> = ({
   name,
   minLength,
   afterElem,
+  validate,
 }) => {
   return (
     <>
@@ -38,6 +40,7 @@ export const FormField: React.FC<Props> = ({
             required,
             pattern: pattern,
             minLength,
+            validate,
           })}
           type={type}
           className="form-field-input"

@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios"
+import axios from "axios"
 import { ICity, IGetGamesResponse, IGetWorktimeResponse, ILoginForm, ILoginResponse, IRoom, ISummaryResponse, IValidatePromo } from "./types"
 
 export interface ErrorResponse {

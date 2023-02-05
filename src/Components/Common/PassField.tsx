@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Control, FieldError } from "react-hook-form";
+import { Control, FieldError, Validate } from "react-hook-form";
 import { FormField } from "./FormField";
 
 import "./CommonStyles.css";
@@ -12,6 +12,8 @@ interface Props {
   name: string;
   placeholder?: string;
   error?: FieldError;
+  validate?: Validate<any, any> | Record<string, Validate<any, any>>;
+  requred?: string;
 }
 
 export const PassField: React.FC<Props> = ({
@@ -19,6 +21,8 @@ export const PassField: React.FC<Props> = ({
   name,
   error,
   placeholder = "Введите пароль",
+  validate,
+  requred = "Введите пароль",
 }) => {
   const [typeState, setTypeState] = useState<"password" | "text">("password");
   const ToggleVisibility = () => {
@@ -42,8 +46,17 @@ export const PassField: React.FC<Props> = ({
       icon={passIcon}
       error={error}
       placeholder={placeholder}
-      required="Введите пароль"
+      required={requred}
       afterElem={<ToggleVisibility />}
+      validate={validate}
+      minLength={
+        !validate
+          ? {
+              value: 8,
+              message: "Пароль должен содержать 8 или больше символов",
+            }
+          : undefined
+      }
     />
   );
 };

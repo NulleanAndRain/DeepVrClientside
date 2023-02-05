@@ -1,5 +1,5 @@
-import axios from "axios"
-import { ICity, IGetGamesResponse, IGetWorktimeResponse, IRoom, ISummaryResponse, IValidatePromo } from "./types"
+import axios, { AxiosResponse } from "axios"
+import { ICity, IGetGamesResponse, IGetWorktimeResponse, ILoginForm, ILoginResponse, IRoom, ISummaryResponse, IValidatePromo } from "./types"
 
 export interface ErrorResponse {
     error: number,
@@ -11,6 +11,7 @@ let instanceStorageUrl : string|undefined = '';
 const globalUrl = process.env.REACT_APP_API_GLOBAL_URL;
 
 export const Api = {
+    // utils
     get globalUrl() { 
         return globalUrl;
     },
@@ -28,7 +29,16 @@ export const Api = {
         if (url) instanceStorageUrl = url.replace('/api', '/storage');
         else instanceStorageUrl = undefined;
     },
+    
+    getImageUrl(url: string) {
+        return url? `${instanceStorageUrl}/${url}` : null;
+    },
 
+    checkStatus(status: number) {
+        return status >= 200 && status < 300;
+    },
+    
+    // booking
     async getAllRooms() {
         return axios.get<Array<IRoom>>(
             `${instanceUrl}/rooms`
@@ -60,11 +70,15 @@ export const Api = {
             data
         )
     },
+    // end booking
 
-    getImageUrl(url: string) {
-        return `${instanceStorageUrl}/${url}`;
-    },
-
+    // account
+    async LogIn(data: ILoginForm) {
+        return axios.post<ILoginResponse>(
+            `${globalUrl}/v2/auth/login`,
+            data
+        )
+    }
 }
 
 export interface IValidatePromoRequestData {

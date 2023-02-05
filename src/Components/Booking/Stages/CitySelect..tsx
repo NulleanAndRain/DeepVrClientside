@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import { FixedPanel } from "../Components/FixedPanel";
-import { NextButton } from "../Components/NextButton";
+import { NextButton } from "../../Common/NextButton";
 import { Title } from "../Components/Title";
 import { useEffect, useState } from "react";
 import { ICity } from "../../../Utils/types";

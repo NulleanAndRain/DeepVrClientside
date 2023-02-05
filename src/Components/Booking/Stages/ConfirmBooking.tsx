@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { Title } from "../Components/Title";
 import { FixedPanel } from "../Components/FixedPanel";
 import { BackButton } from "../Components/BackButton";
-import { NextButton } from "../Components/NextButton";
+import { NextButton } from "../../Common/NextButton";
 import { IBookingCredentials, ISummaryResponse } from "../../../Utils/types";
 import { Api } from "../../../Utils/api";
 import { getUser } from "../../../Utils/redux/authSlice";

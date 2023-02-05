@@ -3,7 +3,7 @@ import { getCurrentStep } from "../../../Utils/redux/bookingSlice";
 import { useAppSelector } from "../../../Utils/redux/store";
 import { BackButton } from "../Components/BackButton";
 import { FixedPanel } from "../Components/FixedPanel";
-import { NextButton } from "../Components/NextButton";
+import { NextButton } from "../../Common/NextButton";
 import { StepDisplay } from "../Components/StepDisplay";
 import { Title } from "../Components/Title";
 

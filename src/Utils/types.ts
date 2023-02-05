@@ -105,3 +105,14 @@ export interface IValidatePromo {
   discount: number,
   discount_price: number
 }
+
+export interface ILoginForm {
+  phone: string;
+  password: string;
+}
+
+export interface ILoginResponse {
+  error: number|string;
+  token: string;
+  user: IUser;
+}

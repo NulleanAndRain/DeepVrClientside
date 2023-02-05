@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url(../../Assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf);
+}
+@import url('https://fonts.cdnfonts.com/css/bebas-neue');
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - var(--footer-height));
+  gap: 24px;
+}
+
+.login-title {
+  height: 50px;
+  width: 100%;
+  text-align: center;
+
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 46px;
+  line-height: 50px;
+  /* identical to box height, or 109% */
+
+  text-align: center;
+  letter-spacing: 1px;
+
+  color: #FFFFFF;
+}
+
+.login-form {
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-description {
+  width: 100%;
+  font-family: 'Gilroy-Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+
+  text-align: center;
+  color: #ABAFE5;
+}
+.login-description-link {
+  color: #ABAFE5;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.login-description-link:hover {
+  color: #ABAFE5;
+}

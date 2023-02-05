@@ -8,6 +8,8 @@ body {
 
   --bg-main-color: #050411;
   --bg-gradient: linear-gradient(180deg, #952EF1 -9.76%, #17C4E7 277.44%);
+  
+  --footer-height: 72px;
 }
 
 code {

@@ -17,6 +17,9 @@ const bookingSlice = createSlice({
     reducers: {
         setToken: (state, action) => {
             state.token = action.payload;
+        },
+        setUser: (state, action) => {
+            state.user = action.payload;
         }
     }
 });
@@ -25,5 +28,5 @@ export const getToken = (state: RootState) => state.authReducer.token;
 export const getIsAuthorised = (state: RootState) => !!state.authReducer.token;
 export const getUser = (state: RootState) => state.authReducer.user;
 
-export const { setToken } = bookingSlice.actions;
+export const { setToken, setUser } = bookingSlice.actions;
 export default bookingSlice.reducer;

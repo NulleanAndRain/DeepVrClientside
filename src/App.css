@@ -127,8 +127,6 @@
 /* ------------ */
 
 .app-bg {
-  --footer-height: 72px;
-
   color: #FFF;
   background-color: var(--bg-main-color);
   min-height: 100vh;

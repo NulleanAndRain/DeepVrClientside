@@ -10,11 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { StageLayout } from "./StageLayout";
 import { PromoModal } from "../Components/PromoModal";
 import { useForm } from "react-hook-form";
-import {
-  getIsAuthorised,
-  getToken,
-  getUser,
-} from "../../../Utils/redux/authSlice";
+import { getIsAuthorised, getUser } from "../../../Utils/redux/authSlice";
 import { NavLink } from "react-router-dom";
 import { ACCOUNT_PATH } from "../../../Utils/routeConstants";
 import { ColLg } from "../../Common/ColLg";
@@ -28,7 +24,6 @@ import "../../Common/CommonStyles.css";
 
 import infoIcon from "../../../Assets/infoIcon.svg";
 import userIcon from "../../../Assets/user-icon-liliac.svg";
-import mark from "../../../Assets/checkboxMark.svg";
 import arrowRight from "../../../Assets/arrow-right.svg";
 
 const agreementHref = "/";
@@ -39,7 +34,6 @@ export const CredentialsForm: React.FC = () => {
   const [isPromoModalOpen, setIsPromoModalOpen] = useState(false);
 
   const isAuthorised = useAppSelector(getIsAuthorised);
-  const token = useAppSelector(getToken);
   const user = useAppSelector(getUser);
 
   const credentials = useAppSelector(getCredentials);

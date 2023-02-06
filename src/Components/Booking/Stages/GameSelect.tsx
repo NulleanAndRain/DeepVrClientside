@@ -18,17 +18,26 @@ import "../BookingStyles.css";
 export const GameSelect: React.FC = () => {
   const dispatch = useAppDispatch();
   const room = useAppSelector(getRoom);
+  const selectedGame = useAppSelector(getGame);
 
   const [games, setGames] = useState<Array<IGame>>();
 
-  const [selected, setSelected] = useState<IGame>(
+  const [selected, setSelected] = useState<IGame | undefined>(
     useAppSelector(getGame) as IGame
   );
 
   useEffect(() => {
     Api.getGamesOfRoom(room?.id as number)
       .then((res) => {
-        if (res.status >= 200 && res.status < 300) setGames(res.data.games);
+        if (res.status >= 200 && res.status < 300) {
+          setGames(res.data.games);
+          if (selectedGame) {
+            if (!res.data.games.find((game) => game.id === selectedGame.id)) {
+              dispatch(setGame(undefined));
+              setSelected(undefined);
+            }
+          }
+        }
       })
       .catch((err) => console.log(err));
   }, [room?.id]);

@@ -9,11 +9,7 @@ import { TextInputNonForm } from "../../Common/TextInputNonForm";
 import { ISummaryResponse } from "../../../Utils/types";
 import { useAppSelector } from "../../../Utils/redux/store";
 import { getToken, getUser } from "../../../Utils/redux/authSlice";
-import {
-  getGame,
-  getPlayersCount,
-  getRoom,
-} from "../../../Utils/redux/bookingSlice";
+import { getGame, getPlayersCount } from "../../../Utils/redux/bookingSlice";
 import { Api } from "../../../Utils/api";
 
 interface Props {

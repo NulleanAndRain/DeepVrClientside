@@ -29,6 +29,8 @@ export const TimeSelect: React.FC = () => {
   const [times, setTimes] = useState<Array<Date> | undefined>();
 
   useEffect(() => {
+    const tempPreselect = selected;
+    setSelected(undefined);
     const date = new Date(dateString);
     Api.getTimesOfDay(date).then((res) => {
       if (res.status >= 200 && res.status < 300) {
@@ -51,8 +53,19 @@ export const TimeSelect: React.FC = () => {
         }
 
         setTimes(dates);
+        if (
+          !dates.find(
+            (d) =>
+              d.toLocaleTimeString() === tempPreselect?.toLocaleTimeString()
+          )
+        ) {
+          dispatch(setTime(undefined));
+        } else {
+          setSelected(tempPreselect);
+        }
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateString]);
 
   const onNextClick = () => {

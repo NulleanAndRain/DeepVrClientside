@@ -27,6 +27,7 @@ export const GameSelect: React.FC = () => {
   );
 
   useEffect(() => {
+    setSelected(undefined);
     Api.getGamesOfRoom(room?.id as number)
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
@@ -34,12 +35,14 @@ export const GameSelect: React.FC = () => {
           if (selectedGame) {
             if (!res.data.games.find((game) => game.id === selectedGame.id)) {
               dispatch(setGame(undefined));
-              setSelected(undefined);
+            } else {
+              setSelected(selectedGame);
             }
           }
         }
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room?.id]);
 
   const onCardClick = (game: IGame) => {

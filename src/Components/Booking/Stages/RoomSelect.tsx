@@ -19,14 +19,21 @@ export const RoomSelect: React.FC = () => {
 
   const [rooms, setRooms] = useState<Array<IRoom>>();
 
-  const [selected, setSelected] = useState<IRoom>(
-    useAppSelector(getRoom) as IRoom
-  );
+  const selectedRoom = useAppSelector(getRoom) as IRoom;
+  const [selected, setSelected] = useState<IRoom>();
 
   useEffect(() => {
+    setSelected(undefined);
     Api.getAllRooms()
       .then((res) => {
-        if (res.status >= 200 && res.status < 300) setRooms(res.data);
+        if (res.status >= 200 && res.status < 300) {
+          setRooms(res.data);
+          if (!res.data.find((r) => r.id === selectedRoom.id)) {
+            dispatch(setRoom(undefined));
+          } else {
+            setSelected(selectedRoom);
+          }
+        }
       })
       .catch((err) => console.log(err));
     // setRooms(mockRooms);

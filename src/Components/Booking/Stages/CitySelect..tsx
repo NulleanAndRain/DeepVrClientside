@@ -17,22 +17,28 @@ import "../BookingStyles.css";
 
 export const CitySelect: React.FC = () => {
   const [cities, setCities] = useState<Array<ICity>>();
-  const [selected, setSelected] = useState<ICity>(
-    useAppSelector(getCity) as ICity
-  );
+  const selectedCity = useAppSelector(getCity) as ICity;
+  const [selected, setSelected] = useState<ICity>();
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    setSelected(undefined);
     Api.getAllCities()
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           setCities(res.data);
+          if (!res.data.find((c) => c.id === selectedCity?.id)) {
+            dispatch(setCity(undefined));
+          } else {
+            setSelected(selectedCity);
+          }
         }
       })
       .catch((err) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const selectCity = (city: ICity) => {

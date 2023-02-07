@@ -57,6 +57,17 @@ export interface IGame {
     room_id: number,
     game_id: number
   }
+  rooms?: [
+    {
+      id: number,
+      title: string,
+      guest_max: number,
+      pivot: {
+        game_id: number,
+        room_id: number,
+      }
+    }
+  ]
 }
 
 export interface IGetGamesResponse {

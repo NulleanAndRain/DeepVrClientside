@@ -4,6 +4,11 @@
 }
 @import url('https://fonts.cdnfonts.com/css/bebas-neue');
 
+.home-wrapper {
+  padding: 10px 16px;
+  position: relative;
+}
+
 .home-title {
   font-family: 'Bebas Neue';
   font-style: normal;
@@ -26,4 +31,151 @@
 
   padding-top: 40px;
   gap: 24px;
+}
+
+.home-header {
+  padding: 40px 10px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.header-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg-main-color);
+}
+.home-subtitle {
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 120%;
+  color: #FFFFFF;
+  width: auto;
+
+  margin: 0;
+  padding: 0;
+}
+
+.home-title-img {
+  width: 24px;
+  height: 24px;
+}
+
+.game-modal-viewport {
+  height: auto;
+  max-height: calc(100vh - 132px - 180px - 16px);
+  margin: 16px 0;
+  box-sizing: border-box;
+}
+
+.game-modal-container {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.game-modal-header {
+  width: 100%;  
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 32px;
+  letter-spacing: 0.34px;
+  text-align: left;
+  color: #FFFFFF;
+}
+
+.game-modal-footer{
+  box-sizing: border-box;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.game-modal-params-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.game-modal-param {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+
+  font-family: 'Gilroy-Regular';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 130%;
+  letter-spacing: 0.2px;
+  color: #FFFFFF;
+}
+.game-modal-param-img {
+  width: 32px;
+  height: 32px;
+}
+.game-modal-image-wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.game-modal-image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 240px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.game-modal-description {
+  width: 100%;
+  word-wrap: normal;
+
+  font-family: 'Gilroy-Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+
+  letter-spacing: -0.41px;
+
+  color: #ABAFE5;
+}
+
+.game-modal-stat-row {
+  font-family: 'Gilroy-Regular';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.24px;
+  color: #F5F5F5;
+
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.game-modal-stat-row-value {
+  color: #ABAFE5;
+}
+.game-modal-stat-row-several-values {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 8px;
 }

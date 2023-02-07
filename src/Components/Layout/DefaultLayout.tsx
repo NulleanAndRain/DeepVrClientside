@@ -1,13 +1,14 @@
 import { Layout } from "antd";
 import { Content, Footer } from "antd/es/layout/layout";
 import { FooterMenu } from "./Footer/FooterMenu";
-import "../../App.css";
 import {
   Root as ScrollRoot,
   Scrollbar,
   Thumb,
   Viewport,
 } from "@radix-ui/react-scroll-area";
+
+import "../../App.css";
 
 interface Props {
   children?: React.ReactNode;

@@ -4,20 +4,29 @@ import {
   decreaseStep,
   getGame,
   getPlayersCount,
+  getRoom,
   increaseStep,
   setPlayersCount,
 } from "../../../Utils/redux/bookingSlice";
 import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { StageLayout } from "./StageLayout";
+import { IGame, IRoom } from "../../../Utils/types";
 
 import "../BookingStyles.css";
 
 import vrGlasses from "../../../Assets/Очки 3.png";
-import { IGame } from "../../../Utils/types";
 
 export const PlayersCountSelect: React.FC = () => {
   const dispatch = useAppDispatch();
   const game = useAppSelector(getGame) as IGame;
+  const room = useAppSelector(getRoom) as IRoom;
+
+  const min = game.guest_min ?? 1;
+  const max = game.guest_max
+    ? game.guest_max < room.guest_max
+      ? game.guest_max
+      : room.guest_max
+    : room.guest_max;
 
   const [count, setCount] = useState<string | number | undefined>(
     useAppSelector(getPlayersCount) ?? game?.guest_min ?? 1
@@ -42,28 +51,26 @@ export const PlayersCountSelect: React.FC = () => {
     if (!inputRef.current?.value.trim()) setCount(game?.guest_min as number);
     const c = Number.parseInt(count as string);
     if (!c) return;
-    if (c < game.guest_min) setCount(game.guest_min);
-    if (c > game.guest_max) setCount(game.guest_max);
+    if (c < min) setCount(min);
+    if (c > max) setCount(max);
   };
 
   const incr = () => {
     const c = Number.parseInt(count as string);
-    if (game?.guest_max && c < game.guest_max) {
+    if (c < max) {
       setCount(c + 1);
     }
   };
 
   const decr = () => {
     const c = Number.parseInt(count as string);
-    if (game?.guest_min && c > game.guest_min) {
+    if (c > min) {
       setCount(c - 1);
     }
   };
 
   const isActive =
-    !!count &&
-    (count as number) >= game.guest_min &&
-    (count as number) <= game.guest_max;
+    !!count && (count as number) >= min && (count as number) <= max;
 
   return (
     <StageLayout
@@ -90,8 +97,8 @@ export const PlayersCountSelect: React.FC = () => {
             <div className="count-select-input-wrapper">
               <input
                 type="number"
-                min={game?.guest_min}
-                max={game?.guest_max}
+                min={min}
+                max={max}
                 value={count}
                 onChange={onChange}
                 className="count-select-input"

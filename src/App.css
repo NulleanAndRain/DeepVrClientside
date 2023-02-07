@@ -167,3 +167,11 @@
   min-height: calc(100vh - var(--footer-height));
   height: auto;
 }
+
+/* modal style override */
+.antd-modal-content, :where(.css-dev-only-do-not-override-1i9hnpv).ant-modal .ant-modal-content {
+    background-color: #050411;
+    color: #fff;
+    border-top: 1px solid #444656;
+    box-sizing: border-box;
+}

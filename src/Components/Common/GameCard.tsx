@@ -7,7 +7,7 @@ import "./CommonStyles.css";
 interface Props {
   game: IGame;
   isSelected?: boolean;
-  onClick: (game: IGame) => void;
+  onClick?: (game: IGame) => void;
 }
 
 export const GameCard: React.FC<Props> = ({ game, isSelected, onClick }) => {
@@ -18,7 +18,7 @@ export const GameCard: React.FC<Props> = ({ game, isSelected, onClick }) => {
         className={`game-card-wrapper selectable-card-wrapper${
           isSelected ? " selectable-card-wrapper-selected" : ""
         }`}
-        onClick={() => onClick(game)}
+        onClick={onClick ? () => onClick(game) : undefined}
       >
         <div
           className="selectable-card-bg game-card-bg"

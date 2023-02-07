@@ -34,9 +34,7 @@ const bookingSlice = createSlice({
 
     setCity(state, action) {
       state.city = action.payload;
-      Api.setInstanceUrl(
-        `https://${state.city?.code}.${Api.globalUrl?.replace("https://", "")}`
-      );
+      Api.setInstanceUrl(state.city?.code);
     },
 
     setRoom(state, action) {

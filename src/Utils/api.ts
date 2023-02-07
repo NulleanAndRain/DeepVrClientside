@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ICity, IGetGamesResponse, IGetWorktimeResponse, ILoginForm, ILoginResponse, IRoom, ISummaryResponse, IValidatePromo } from "./types"
+import { ICity, IGame, IGetGamesResponse, IGetWorktimeResponse, ILoginForm, ILoginResponse, IRoom, ISummaryResponse, IValidatePromo } from "./types"
 
 export interface ErrorResponse {
     error: number,
@@ -24,7 +24,8 @@ export const Api = {
         );
     },
 
-    setInstanceUrl(url : string | undefined) {
+    setInstanceUrl(prefix : string | undefined) {
+        const url = `https://${prefix}.${Api.globalUrl?.replace("https://", "")}`
         instanceUrl = url;
         if (url) instanceStorageUrl = url.replace('/api', '/storage');
         else instanceStorageUrl = undefined;
@@ -40,7 +41,9 @@ export const Api = {
 
     // home
     async getAllGames() {
-        return 'блять'
+        return axios.get<Array<IGame>>(
+            `${instanceUrl}/games`
+        );
     },
     
     // booking

@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url(../../Assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf);
+}
+@import url('https://fonts.cdnfonts.com/css/bebas-neue');
+
+.home-title {
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 120%;
+  color: #FFFFFF;
+  text-align: center;
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+.home-city-select-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-top: 40px;
+  gap: 24px;
+}

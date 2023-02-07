@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url(../../Assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf);
+}
+@import url('https://fonts.cdnfonts.com/css/bebas-neue');
+
 .next-btn {
     display: flex;
     flex-direction: row;
@@ -141,4 +147,75 @@
 
 .form-input-textarea {
     resize: vertical;
+}
+
+
+.game-card-wrapper {
+    height: 216px;
+}
+
+.game-card-bg {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #191A29; 
+
+}
+.game-card-title {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(46, 54, 141, 0) 0%, #2E368D 100%);
+
+    font-family: 'Gilroy-Regular';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 120%;
+    word-wrap: normal;
+    color: #FFF;
+
+    padding: 12px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    text-align: left;
+    margin: 0;
+}
+
+.city-select-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.city-select-row {
+    font-family: 'Gilroy-Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    word-wrap: normal;
+    text-align: center;
+    color: #ABAFE5;
+    cursor: pointer;
+}
+
+.city-select-row-selected {
+    cursor: default;
+    color: #FFF;
+}
+
+.city-select-no-available {
+    font-family: 'Gilroy-Regular';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    word-wrap: normal;
+    text-align: center;
+    color: #444656;
 }

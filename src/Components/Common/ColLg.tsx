@@ -2,7 +2,7 @@ import { Col } from "antd";
 import React from "react";
 
 interface Props {
-  children: React.ReactElement | Array<React.ReactElement>;
+  children: React.ReactElement | Array<React.ReactElement> | string | null;
   className?: string;
 }
 

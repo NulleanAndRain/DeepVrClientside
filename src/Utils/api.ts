@@ -37,6 +37,11 @@ export const Api = {
     checkStatus(status: number) {
         return status >= 200 && status < 300;
     },
+
+    // home
+    async getAllGames() {
+        return 'блять'
+    },
     
     // booking
     async getAllRooms() {

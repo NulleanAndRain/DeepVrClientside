@@ -14,10 +14,13 @@ import {
 } from "../../../Utils/redux/bookingSlice";
 
 import "../BookingStyles.css";
+import { getSelectedCity } from "../../../Utils/redux/authSlice";
 
 export const CitySelect: React.FC = () => {
   const [cities, setCities] = useState<Array<ICity>>();
-  const selectedCity = useAppSelector(getCity) as ICity;
+  const selectedCityProfile = useAppSelector(getSelectedCity) as ICity;
+  const selectedCity =
+    (useAppSelector(getCity) as ICity) ?? selectedCityProfile;
   const [selected, setSelected] = useState<ICity>();
 
   const dispatch = useAppDispatch();

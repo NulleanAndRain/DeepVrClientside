@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 import { ICity, IGame, IGetGamesResponse, IGetWorktimeResponse, ILoginForm, ILoginResponse, IRoom, ISummaryResponse, IValidatePromo } from "./types"
 
 export interface ErrorResponse {
@@ -35,8 +35,8 @@ export const Api = {
         return url? `${instanceStorageUrl}/${url}` : null;
     },
 
-    checkStatus(status: number) {
-        return status >= 200 && status < 300;
+    checkStatus(response: AxiosResponse<any>) {
+        return response.status >= 200 && response.status < 300;
     },
 
     // home

@@ -67,6 +67,11 @@ const bookingSlice = createSlice({
       return { 
         currentStep: state.currentStep, 
         isFinished: false, 
+        credentials: { 
+          name: state.credentials?.name ?? '',
+          phone: state.credentials?.phone ?? '',
+          licenseAgree: false,
+        },
       };
     },
 

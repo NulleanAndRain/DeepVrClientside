@@ -7,13 +7,25 @@ import {
   Thumb,
   Viewport,
 } from "@radix-ui/react-scroll-area";
+import { Api } from "../../../Utils/api";
+import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
+import {
+  clearState,
+  setCity,
+  setGame,
+  setRoom,
+  setStep,
+} from "../../../Utils/redux/bookingSlice";
+import { getSelectedCity } from "../../../Utils/redux/authSlice";
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router";
+import { BOOKING_PATH } from "../../../Utils/routeConstants";
 
 import playersIcon from "../../../Assets/console 1.svg";
 import timeIcon from "../../../Assets/clock 1.svg";
 import ageIcon from "../../../Assets/vr-glasses 2.svg";
 
 import "../GamesStyles.css";
-import { Api } from "../../../Utils/api";
 
 interface Props {
   game?: IGame;
@@ -22,16 +34,42 @@ interface Props {
 }
 
 export const GameModal: React.FC<Props> = ({ game, isOpen, onClose }) => {
+  const dispatch = useAppDispatch();
+  const city = useAppSelector(getSelectedCity);
+  const [useRedirect, setUseRedirect] = useState(false);
+
   const bookGame = () => {
-    console.log(`book game id`, game?.id);
+    if (game && game.rooms && game.rooms.length > 0) {
+      const room = game.rooms?.[0];
+      dispatch(clearState());
+      dispatch(setCity(city));
+      dispatch(setRoom(room));
+      dispatch(setGame(game));
+      dispatch(setStep(3)); // players count select
+      setUseRedirect(true);
+    }
   };
+
+  useEffect(() => {
+    setUseRedirect(false);
+  }, [game, isOpen]);
+
   const Footer = () => {
     return (
-      <div className="game-modal-footer">
-        <NextButton onClick={bookGame} isActive>
-          Забронировать
-        </NextButton>
-      </div>
+      <>
+        {useRedirect ? (
+          <Navigate to={BOOKING_PATH} />
+        ) : (
+          <div className="game-modal-footer">
+            <NextButton
+              onClick={bookGame}
+              isActive={(game?.rooms?.length ?? 0) > 0}
+            >
+              Забронировать
+            </NextButton>
+          </div>
+        )}
+      </>
     );
   };
   return (
@@ -83,16 +121,18 @@ export const GameModal: React.FC<Props> = ({ game, isOpen, onClose }) => {
                   </div>
                 </div>
                 <div className="game-modal-image-wrapper">
-                  <img
-                    src={Api.getImageUrl(game.logo) as string}
-                    alt={game.title}
-                    className="game-modal-image"
-                  />
+                  {game.logo && (
+                    <img
+                      src={Api.getImageUrl(game.logo) as string}
+                      alt={game.title}
+                      className="game-modal-image"
+                    />
+                  )}
                 </div>
                 <div className="game-modal-stat-row">
                   <span>Жанр:</span>
                   <span className="game-modal-stat-row-value">
-                    {game.genre}
+                    {game.genre ?? "Не указан"}
                   </span>
                 </div>
                 <div className="game-modal-stat-row">

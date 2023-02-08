@@ -31,6 +31,10 @@ export interface IRoom {
   id: number, 
   title: string,
   guest_max: number,
+  pivot?: {
+    game_id: number,
+    room_id: number,
+  }
 }
 
 export interface IGame {
@@ -57,17 +61,7 @@ export interface IGame {
     room_id: number,
     game_id: number
   }
-  rooms?: [
-    {
-      id: number,
-      title: string,
-      guest_max: number,
-      pivot: {
-        game_id: number,
-        room_id: number,
-      }
-    }
-  ]
+  rooms?: Array<IRoom>
 }
 
 export interface IGetGamesResponse {
@@ -80,13 +74,13 @@ export interface IGetGamesResponse {
 export interface IBookingCredentials {
   name: string,
   phone: string,
-  token: string,
+  token?: string,
   licenseAgree: boolean,
-  date: string,
-  time: string,
+  date?: string,
+  time?: string,
   comment?: string,
   promo?: string;
-  useDiscount: boolean;
+  useDiscount?: boolean;
 }
 
 export interface IGetWorktimeResponse {

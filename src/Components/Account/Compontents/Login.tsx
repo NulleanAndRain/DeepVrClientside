@@ -37,7 +37,7 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
     setReqError("");
     Api.LogIn(getValues())
       .then((res) => {
-        if (Api.checkStatus(res.status)) {
+        if (Api.checkStatus(res)) {
           dispatch(setToken(res.data.token));
           dispatch(setUser(res.data.user));
         } else {

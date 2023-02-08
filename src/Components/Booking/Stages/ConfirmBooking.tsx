@@ -188,7 +188,7 @@ export const ConfirmBooking: React.FC = () => {
           <BackButton onClick={onBackClick}>Назад</BackButton>
         </Col>
         <Col xs={12} sm={10} md={9} lg={8} xl={7} xxl={6}>
-          <NextButton onClick={onNextClick} isActive={true}>
+          <NextButton onClick={onNextClick} isActive={!!summary}>
             Далее
           </NextButton>
         </Col>

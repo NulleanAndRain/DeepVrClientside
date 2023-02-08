@@ -67,7 +67,7 @@ export const PromoModal: React.FC<Props> = ({
       promo_code: inputRef.current?.value ?? "",
     })
       .then((res) => {
-        if (Api.checkStatus(res.status)) {
+        if (Api.checkStatus(res)) {
           if (res.data) {
             setIsSuccess(true);
             setIsValid(true);

@@ -5,7 +5,10 @@ interface Props {
   children?:
     | React.ReactElement
     | Array<React.ReactElement>
+    | React.ReactFragment
+    | Array<React.ReactFragment>
     | string
+    | boolean
     | null
     | undefined;
   className?: string;

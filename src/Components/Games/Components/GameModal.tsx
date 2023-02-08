@@ -101,7 +101,7 @@ export const GameModal: React.FC<Props> = ({ game, isOpen, onClose }) => {
                   </span>
                   <div className="game-modal-stat-row-several-values">
                     {game.rooms?.map((r) => (
-                      <span className="game-modal-stat-row-value">
+                      <span className="game-modal-stat-row-value" key={r.id}>
                         {r.title}
                       </span>
                     ))}

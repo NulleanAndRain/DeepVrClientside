@@ -1,16 +1,8 @@
 import { Col } from "antd";
-import React from "react";
+import { IChildren } from "../../Utils/types";
 
 interface Props {
-  children?:
-    | React.ReactElement
-    | Array<React.ReactElement>
-    | React.ReactFragment
-    | Array<React.ReactFragment>
-    | string
-    | boolean
-    | null
-    | undefined;
+  children?: IChildren;
   className?: string;
 }
 

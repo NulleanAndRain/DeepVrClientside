@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { IGame } from "../../../Utils/types";
 import { GameCard } from "../../Common/GameCard";
 import { StageLayout } from "./StageLayout";
+import { LoadWrapper } from "../../Common/LoadWrapper";
 
 import "../BookingStyles.css";
 
@@ -26,7 +27,10 @@ export const GameSelect: React.FC = () => {
     useAppSelector(getGame) as IGame
   );
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
+    setIsLoading(true);
     setSelected(undefined);
     Api.getGamesOfRoom(room?.id as number)
       .then((res) => {
@@ -41,7 +45,8 @@ export const GameSelect: React.FC = () => {
           }
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room?.id]);
 
@@ -66,17 +71,19 @@ export const GameSelect: React.FC = () => {
       onBackClick={onBackClick}
       isNextBtnActive={!!selected}
     >
-      <Row justify="start" gutter={[20, 20]}>
-        {games &&
-          games.map((game) => (
-            <GameCard
-              game={game}
-              isSelected={selected?.id === game.id}
-              onClick={onCardClick}
-              key={game.id}
-            />
-          ))}
-      </Row>
+      <LoadWrapper isLoading={isLoading}>
+        <Row justify="start" gutter={[20, 20]}>
+          {games &&
+            games.map((game) => (
+              <GameCard
+                game={game}
+                isSelected={selected?.id === game.id}
+                onClick={onCardClick}
+                key={game.id}
+              />
+            ))}
+        </Row>
+      </LoadWrapper>
     </StageLayout>
   );
 };

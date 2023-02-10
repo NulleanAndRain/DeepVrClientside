@@ -7,6 +7,7 @@ import { useAppSelector } from "../../../Utils/redux/store";
 import { getSelectedCity } from "../../../Utils/redux/authSlice";
 import { GameCard } from "../../Common/GameCard";
 import { GameModal } from "./GameModal";
+import { LoadWrapper } from "../../Common/LoadWrapper";
 
 import "../GamesStyles.css";
 
@@ -22,9 +23,12 @@ export const GamesList: React.FC = () => {
 
   const [searchString, setSearchString] = useState<string>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const searchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    setIsLoading(true);
     Api.setInstanceUrl(city?.code);
     Api.getAllGames()
       .then((res) => {
@@ -33,7 +37,10 @@ export const GamesList: React.FC = () => {
           setGamesFiltered(res.data);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setIsLoading(false);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -122,17 +129,19 @@ export const GamesList: React.FC = () => {
           />
         </ColLg>
       </Row>
-      <Row justify="start" gutter={[20, 20]}>
-        {gamesFiltered &&
-          gamesFiltered.map((game) => (
-            <GameCard
-              game={game}
-              isSelected={false}
-              key={game.id}
-              onClick={openModal}
-            />
-          ))}
-      </Row>
+      <LoadWrapper isLoading={isLoading}>
+        <Row justify="start" gutter={[20, 20]}>
+          {gamesFiltered &&
+            gamesFiltered.map((game) => (
+              <GameCard
+                game={game}
+                isSelected={false}
+                key={game.id}
+                onClick={openModal}
+              />
+            ))}
+        </Row>
+      </LoadWrapper>
     </div>
   );
 };

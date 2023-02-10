@@ -25,6 +25,7 @@ import userIcon from "../../../Assets/user-icon-liliac.svg";
 import gameIcon from "../../../Assets/console.svg";
 import dateIcon from "../../../Assets/calendar.svg";
 import timeIcon from "../../../Assets/time.svg";
+import { LoadIcon } from "../../Common/LoadIcon";
 
 export const ConfirmBooking: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -42,6 +43,8 @@ export const ConfirmBooking: React.FC = () => {
 
   const [summary, setSummary] = useState<ISummaryResponse>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onNextClick = () => {
     dispatch(increaseStep());
   };
@@ -57,6 +60,7 @@ export const ConfirmBooking: React.FC = () => {
   });
 
   useEffect(() => {
+    setIsLoading(true);
     Api.getSummary({
       game_id: game?.id ?? -1,
       guest_count: count ?? -1,
@@ -69,7 +73,8 @@ export const ConfirmBooking: React.FC = () => {
           setSummary(res.data);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
   }, [game, count, user, promo, useDiscount]);
 
   return (
@@ -176,7 +181,11 @@ export const ConfirmBooking: React.FC = () => {
               <div className="summary-total">
                 <span>Итого:</span>
                 <span className="summary-total-price">
-                  {summary && numberFormat.format(summary.total)}
+                  {isLoading ? (
+                    <LoadIcon />
+                  ) : (
+                    <>{summary && numberFormat.format(summary.total)}</>
+                  )}
                 </span>
               </div>
             </Col>

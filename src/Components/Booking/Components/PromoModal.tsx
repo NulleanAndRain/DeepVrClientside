@@ -1,8 +1,6 @@
 import { Modal } from "antd";
 import "../BookingStyles.css";
 
-import closeIcon from "../../../Assets/closeIcon.svg";
-import loadIcon from "../../../Assets/load.svg";
 import { useEffect, useRef, useState } from "react";
 import { FormError } from "../../Common/FormError";
 import { TextInputNonForm } from "../../Common/TextInputNonForm";
@@ -11,6 +9,9 @@ import { useAppSelector } from "../../../Utils/redux/store";
 import { getToken, getUser } from "../../../Utils/redux/authSlice";
 import { getGame, getPlayersCount } from "../../../Utils/redux/bookingSlice";
 import { Api } from "../../../Utils/api";
+
+import closeIcon from "../../../Assets/closeIcon.svg";
+import { LoadIcon } from "../../Common/LoadIcon";
 
 interface Props {
   isOpen: boolean;
@@ -120,17 +121,7 @@ export const PromoModal: React.FC<Props> = ({
               placeholder="Промокод"
               inputRef={inputRef}
               defaultValue={value}
-              afterElem={
-                <>
-                  {isLoading && (
-                    <img
-                      src={loadIcon}
-                      alt="load"
-                      className="modal-promo-load-image"
-                    />
-                  )}
-                </>
-              }
+              afterElem={<>{isLoading && <LoadIcon />}</>}
               statusClassName={
                 !isValid
                   ? "modal-promo-error-input"

@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { StageLayout } from "./StageLayout";
 import { Api } from "../../../Utils/api";
 import { TimeCard } from "../Components/TimeCard";
+import { LoadWrapper } from "../../Common/LoadWrapper";
 
 import "../BookingStyles.css";
 
@@ -28,43 +29,50 @@ export const TimeSelect: React.FC = () => {
 
   const [times, setTimes] = useState<Array<Date> | undefined>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
+    setIsLoading(true);
     const tempPreselect = selected;
     setSelected(undefined);
     const date = new Date(dateString);
-    Api.getTimesOfDay(date).then((res) => {
-      if (res.status >= 200 && res.status < 300) {
-        const dates: Array<Date> = [];
+    Api.getTimesOfDay(date)
+      .then((res) => {
+        if (res.status >= 200 && res.status < 300) {
+          const dates: Array<Date> = [];
 
-        const start = `${date.toISOString().substring(0, 10)} ${
-          res.data.start_at
-        }`;
-        const end = `${date.toISOString().substring(0, 10)} ${res.data.end_at}`;
-        const startDate = new Date(start);
-        const endDate = new Date(end);
+          const start = `${date.toISOString().substring(0, 10)} ${
+            res.data.start_at
+          }`;
+          const end = `${date.toISOString().substring(0, 10)} ${
+            res.data.end_at
+          }`;
+          const startDate = new Date(start);
+          const endDate = new Date(end);
 
-        const tempDate = new Date(startDate);
-        dates.push(new Date(tempDate));
+          const tempDate = new Date(startDate);
+          dates.push(new Date(tempDate));
 
-        let minutesIncrement = Number.parseInt(res.data.interval);
-        while (minutesIncrement && tempDate < endDate) {
-          tempDate.setMinutes(tempDate.getMinutes() + minutesIncrement);
-          if (tempDate < endDate) dates.push(new Date(tempDate));
+          let minutesIncrement = Number.parseInt(res.data.interval);
+          while (minutesIncrement && tempDate < endDate) {
+            tempDate.setMinutes(tempDate.getMinutes() + minutesIncrement);
+            if (tempDate < endDate) dates.push(new Date(tempDate));
+          }
+
+          setTimes(dates);
+          if (
+            !dates.find(
+              (d) =>
+                d.toLocaleTimeString() === tempPreselect?.toLocaleTimeString()
+            )
+          ) {
+            dispatch(setTime(undefined));
+          } else {
+            setSelected(tempPreselect);
+          }
         }
-
-        setTimes(dates);
-        if (
-          !dates.find(
-            (d) =>
-              d.toLocaleTimeString() === tempPreselect?.toLocaleTimeString()
-          )
-        ) {
-          dispatch(setTime(undefined));
-        } else {
-          setSelected(tempPreselect);
-        }
-      }
-    });
+      })
+      .finally(() => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateString]);
 
@@ -89,28 +97,30 @@ export const TimeSelect: React.FC = () => {
       onBackClick={onBackClick}
       isNextBtnActive={!!selected}
     >
-      <Row justify="start" gutter={[20, 20]}>
-        {times &&
-          times.map((time) => (
-            <Col
-              xs={12}
-              sm={8}
-              md={6}
-              lg={6}
-              xl={4}
-              xxl={4}
-              key={time.toISOString()}
-            >
-              <TimeCard
-                time={time}
-                isSelected={
-                  time.toLocaleTimeString() === selected?.toLocaleTimeString()
-                }
-                onClick={onTimeClick}
-              />
-            </Col>
-          ))}
-      </Row>
+      <LoadWrapper isLoading={isLoading}>
+        <Row justify="start" gutter={[20, 20]}>
+          {times &&
+            times.map((time) => (
+              <Col
+                xs={12}
+                sm={8}
+                md={6}
+                lg={6}
+                xl={4}
+                xxl={4}
+                key={time.toISOString()}
+              >
+                <TimeCard
+                  time={time}
+                  isSelected={
+                    time.toLocaleTimeString() === selected?.toLocaleTimeString()
+                  }
+                  onClick={onTimeClick}
+                />
+              </Col>
+            ))}
+        </Row>
+      </LoadWrapper>
     </StageLayout>
   );
 };

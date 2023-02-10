@@ -3,6 +3,7 @@ import { Api } from "../../Utils/api";
 import { setSelectedCity } from "../../Utils/redux/authSlice";
 import { useAppDispatch } from "../../Utils/redux/store";
 import { ICity } from "../../Utils/types";
+import { LoadWrapper } from "./LoadWrapper";
 
 import "./CommonStyles.css";
 
@@ -15,7 +16,10 @@ export const SelectCityList: React.FC<Props> = ({ selected, onSelect }) => {
   const [cities, setCities] = useState<Array<ICity>>();
   const dispatch = useAppDispatch();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
+    setIsLoading(true);
     const tempSelected = selected;
     onSelect(undefined);
     Api.getAllCities()
@@ -31,29 +35,32 @@ export const SelectCityList: React.FC<Props> = ({ selected, onSelect }) => {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="city-select-wrapper">
-      {!!cities ? (
-        cities.map((c) => {
-          return (
-            <div
-              className={`city-select-row${
-                c.id === selected?.id ? " city-select-row-selected" : ""
-              }`}
-              key={c.code}
-              onClick={() => onSelect(c)}
-            >
-              {c.name}
-            </div>
-          );
-        })
-      ) : (
-        <div className="city-select-no-available">Нет доступных городов</div>
-      )}
-    </div>
+    <LoadWrapper isLoading={isLoading}>
+      <div className="city-select-wrapper">
+        {!!cities ? (
+          cities.map((c) => {
+            return (
+              <div
+                className={`city-select-row${
+                  c.id === selected?.id ? " city-select-row-selected" : ""
+                }`}
+                key={c.code}
+                onClick={() => onSelect(c)}
+              >
+                {c.name}
+              </div>
+            );
+          })
+        ) : (
+          <div className="city-select-no-available">Нет доступных городов</div>
+        )}
+      </div>
+    </LoadWrapper>
   );
 };

@@ -1,3 +1,13 @@
+export type IChildren  = 
+    | React.ReactElement
+    | Array<React.ReactElement>
+    | React.ReactFragment
+    | Array<React.ReactFragment>
+    | string
+    | boolean
+    | null
+    | undefined;
+
 export interface IUser {
     avatar: string;
     category_loyalty_id: number|null;

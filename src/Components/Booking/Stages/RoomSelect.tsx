@@ -11,6 +11,7 @@ import { IRoom } from "../../../Utils/types";
 import { Api } from "../../../Utils/api";
 import { RoomCard } from "../Components/RoomCard";
 import { StageLayout } from "./StageLayout";
+import { LoadWrapper } from "../../Common/LoadWrapper";
 
 import "../BookingStyles.css";
 
@@ -22,8 +23,11 @@ export const RoomSelect: React.FC = () => {
   const selectedRoom = useAppSelector(getRoom) as IRoom;
   const [selected, setSelected] = useState<IRoom>();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     setSelected(undefined);
+    setIsLoading(true);
     Api.getAllRooms()
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
@@ -35,8 +39,9 @@ export const RoomSelect: React.FC = () => {
           }
         }
       })
-      .catch((err) => console.log(err));
-    // setRooms(mockRooms);
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onCardClick = (room: IRoom) => {
@@ -60,18 +65,20 @@ export const RoomSelect: React.FC = () => {
       onBackClick={onBackClick}
       isNextBtnActive={!!selected}
     >
-      <Row justify="start" gutter={[20, 20]}>
-        {rooms &&
-          rooms.map((room) => (
-            <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={8} key={room.id}>
-              <RoomCard
-                room={room}
-                isSelected={selected?.id === room.id}
-                onClick={onCardClick}
-              />
-            </Col>
-          ))}
-      </Row>
+      <LoadWrapper isLoading={isLoading}>
+        <Row justify="start" gutter={[20, 20]}>
+          {rooms &&
+            rooms.map((room) => (
+              <Col xs={24} sm={24} md={12} lg={12} xl={8} xxl={8} key={room.id}>
+                <RoomCard
+                  room={room}
+                  isSelected={selected?.id === room.id}
+                  onClick={onCardClick}
+                />
+              </Col>
+            ))}
+        </Row>
+      </LoadWrapper>
     </StageLayout>
   );
 };

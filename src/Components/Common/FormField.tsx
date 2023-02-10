@@ -15,6 +15,7 @@ interface Props {
   minLength?: ValidationRule<number>;
   afterElem?: React.ReactElement;
   validate?: Validate<any, any> | Record<string, Validate<any, any>>;
+  autocomplete?: string;
 }
 
 export const FormField: React.FC<Props> = ({
@@ -29,6 +30,7 @@ export const FormField: React.FC<Props> = ({
   minLength,
   afterElem,
   validate,
+  autocomplete,
 }) => {
   return (
     <>
@@ -45,6 +47,7 @@ export const FormField: React.FC<Props> = ({
           type={type}
           className="form-field-input"
           placeholder={placeholder}
+          autoComplete={autocomplete}
         />
         {afterElem}
       </label>

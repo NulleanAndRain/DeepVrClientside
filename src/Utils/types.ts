@@ -131,3 +131,35 @@ export interface ILoginResponse {
   token: string;
   user: IUser;
 }
+
+export interface IValidatePromoRequestData {
+    token: string,
+    promo_code: string,
+    price: number,
+    game: number
+}
+
+export interface IGetSummaryRequestData {
+    game_id: number,
+    guest_count: number,
+    user_id?: number,
+    use_bonus?: boolean,
+    promocode?: string
+}
+
+export interface IBookingFields {
+  certificates?: Array<string>,
+  date: string,
+  phone: string,
+  token?: string,
+  promo_code: string,
+  comment?: string,
+  bonus?: number,
+  name: string,
+  booking: {
+    time: string,
+    guest_quantity: number,
+    room_id: number,
+    game_id: number
+  }
+}

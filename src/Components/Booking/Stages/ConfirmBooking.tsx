@@ -17,7 +17,10 @@ import { BackButton } from "../Components/BackButton";
 import { NextButton } from "../../Common/NextButton";
 import { IBookingCredentials, ISummaryResponse } from "../../../Utils/types";
 import { Api } from "../../../Utils/api";
-import { getUser } from "../../../Utils/redux/authSlice";
+import { getToken, getUser } from "../../../Utils/redux/authSlice";
+import { LoadIcon } from "../../Common/LoadIcon";
+import { FormError } from "../../Common/FormError";
+import { LoadWrapper } from "../../Common/LoadWrapper";
 
 import "../BookingStyles.css";
 
@@ -25,17 +28,18 @@ import userIcon from "../../../Assets/user-icon-liliac.svg";
 import gameIcon from "../../../Assets/console.svg";
 import dateIcon from "../../../Assets/calendar.svg";
 import timeIcon from "../../../Assets/time.svg";
-import { LoadIcon } from "../../Common/LoadIcon";
 
 export const ConfirmBooking: React.FC = () => {
   const dispatch = useAppDispatch();
 
+  const token = useAppSelector(getToken);
   const user = useAppSelector(getUser);
   const room = useAppSelector(getRoom);
   const game = useAppSelector(getGame);
   const count = useAppSelector(getPlayersCount);
   const date = useAppSelector(getDate)?.substring(0, 10);
   const time = useAppSelector(getTime)?.substring(0, 5);
+  const credentials = useAppSelector(getCredentials);
 
   const { promo, useDiscount } = useAppSelector(
     getCredentials
@@ -44,9 +48,50 @@ export const ConfirmBooking: React.FC = () => {
   const [summary, setSummary] = useState<ISummaryResponse>();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | undefined>();
+
+  const [isPostingForm, setIsPostingForm] = useState(false);
 
   const onNextClick = () => {
-    dispatch(increaseStep());
+    if (
+      !!summary &&
+      !!credentials &&
+      !!game &&
+      !!room &&
+      !!date &&
+      !!time &&
+      typeof count === "number"
+    ) {
+      setIsPostingForm(true);
+      Api.createBooing({
+        name: credentials.name,
+        date,
+        phone: credentials.phone,
+        booking: {
+          game_id: game.id,
+          room_id: room.id,
+          guest_quantity: count,
+          time,
+        },
+        comment: credentials.comment,
+        bonus: summary.bonus_discount,
+        certificates: [],
+        promo_code: credentials.promo ?? "",
+        token,
+      })
+        .then((res) => {
+          console.log(res);
+          if (Api.checkStatus(res)) {
+            dispatch(increaseStep());
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+
+          setError("Ошибка сервера, попробуйте позже");
+        })
+        .finally(() => setIsPostingForm(false));
+    }
   };
   const onBackClick = () => {
     dispatch(decreaseStep());
@@ -65,7 +110,7 @@ export const ConfirmBooking: React.FC = () => {
       game_id: game?.id ?? -1,
       guest_count: count ?? -1,
       user_id: user?.id,
-      promocode: promo,
+      promocode: promo ?? "",
       use_bonus: useDiscount,
     })
       .then((res) => {
@@ -153,19 +198,29 @@ export const ConfirmBooking: React.FC = () => {
               <Col className="summary-params-table-cell" span={18}>
                 {time}
               </Col>
+
+              <FormError errorMsg={error} />
             </Row>
             <Col span={24} className="summary-bg">
               <div className="summary-row">
                 <span>Стоимость заказа:</span>
                 <span className="summary-row-price">
-                  {summary && numberFormat.format(summary.price)}
+                  {isLoading ? (
+                    <LoadIcon />
+                  ) : (
+                    <>{summary && numberFormat.format(summary.price)}</>
+                  )}
                 </span>
               </div>
               {!!summary && !!summary.promo_discount && (
                 <div className="summary-row">
                   <span>Промокод:</span>
                   <span className="summary-row-price">
-                    {numberFormat.format(summary.promo_discount)}
+                    {isLoading ? (
+                      <LoadIcon />
+                    ) : (
+                      <>{numberFormat.format(summary.promo_discount)}</>
+                    )}
                   </span>
                 </div>
               )}
@@ -173,7 +228,11 @@ export const ConfirmBooking: React.FC = () => {
                 <div className="summary-row">
                   <span>Бонусы:</span>
                   <span className="summary-row-price">
-                    {numberFormat.format(summary.bonus_discount)}
+                    {isLoading ? (
+                      <LoadIcon />
+                    ) : (
+                      <>{numberFormat.format(summary.bonus_discount)}</>
+                    )}
                   </span>
                 </div>
               )}
@@ -191,13 +250,17 @@ export const ConfirmBooking: React.FC = () => {
             </Col>
           </Col>
         </Row>
+        <LoadWrapper isLoading={isPostingForm} />
       </div>
       <FixedPanel>
         <Col xs={12} sm={10} md={9} lg={8} xl={7} xxl={6}>
           <BackButton onClick={onBackClick}>Назад</BackButton>
         </Col>
         <Col xs={12} sm={10} md={9} lg={8} xl={7} xxl={6}>
-          <NextButton onClick={onNextClick} isActive={!!summary}>
+          <NextButton
+            onClick={onNextClick}
+            isActive={!!summary && !isPostingForm}
+          >
             Далее
           </NextButton>
         </Col>

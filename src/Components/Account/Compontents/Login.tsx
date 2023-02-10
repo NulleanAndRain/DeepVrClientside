@@ -75,11 +75,16 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
         <div className="login-title">Вход</div>
         <form className="login-form">
           <FormError errorMsg={reqError} />
-          <PhoneInput control={control} error={errors.phone} />
+          <PhoneInput
+            control={control}
+            error={errors.phone}
+            autocomplete="tel"
+          />
           <PassField
             control={control}
             name="password"
             error={errors.password}
+            autocomplete="password"
           />
         </form>
         <NextButton onClick={onLoginClick} isActive={isValid}>

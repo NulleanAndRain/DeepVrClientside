@@ -8,9 +8,14 @@ import { FormField } from "./FormField";
 interface Props {
   control: Control<any, any>;
   error?: FieldError;
+  autocomplete?: string;
 }
 
-export const PhoneInput: React.FC<Props> = ({ control, error }) => {
+export const PhoneInput: React.FC<Props> = ({
+  control,
+  error,
+  autocomplete,
+}) => {
   const pattern = {
     /* regex :
       '+' or without '+'
@@ -40,6 +45,7 @@ export const PhoneInput: React.FC<Props> = ({ control, error }) => {
       error={error}
       icon={phoneIcon}
       required="Введите телефон"
+      autocomplete={autocomplete}
     />
   );
 };

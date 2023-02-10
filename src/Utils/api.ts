@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios"
-import { ICity, IGame, IGetGamesResponse, IGetWorktimeResponse, ILoginForm, ILoginResponse, IRoom, ISummaryResponse, IValidatePromo } from "./types"
+import { IBookingFields, ICity, IGame, IGetGamesResponse, IGetSummaryRequestData, IGetWorktimeResponse, ILoginForm, ILoginResponse, IRoom, ISummaryResponse, IValidatePromo, IValidatePromoRequestData } from "./types"
 
 export interface ErrorResponse {
     error: number,
@@ -69,14 +69,21 @@ export const Api = {
         return axios.post<ISummaryResponse>(
             `${instanceUrl}/v2/orders/precalculate`,
             data
-        )
+        );
     },
 
     async validatePromo(data: IValidatePromoRequestData) {
         return axios.post<IValidatePromo>(
             `${instanceUrl}/v2/promo/accept-discount`,
             data
-        )
+        );
+    },
+
+    async createBooing(data: IBookingFields) {
+        return axios.post(
+            `${instanceUrl}/v2/booking/user`,
+            data
+        );
     },
     // end booking
 
@@ -85,21 +92,6 @@ export const Api = {
         return axios.post<ILoginResponse>(
             `${globalUrl}/v2/auth/login`,
             data
-        )
+        );
     }
-}
-
-export interface IValidatePromoRequestData {
-    token: string,
-    promo_code: string,
-    price: number,
-    game: number
-}
-
-export interface IGetSummaryRequestData {
-    game_id: number,
-    guest_count: number,
-    user_id?: number,
-    use_bonus?: boolean,
-    promocode?: string
 }

@@ -32,14 +32,16 @@ export const RoomSelect: React.FC = () => {
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           setRooms(res.data);
-          if (!res.data.find((r) => r.id === selectedRoom.id)) {
+          if (!res.data.find((r) => r.id === selectedRoom?.id)) {
             dispatch(setRoom(undefined));
           } else {
             setSelected(selectedRoom);
           }
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err);
+      })
       .finally(() => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

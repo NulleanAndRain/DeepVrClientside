@@ -15,7 +15,8 @@ export const Achievements: React.FC = () => {
           </div>
           <img src={img} alt="" className="achievments-image" />
           <div className="achievments-text">
-            Данный раздел не готов и находится в разработке, возвращатесь позже
+            Данный раздел еще не готов и находится в разработке, возвращатесь
+            позже
           </div>
         </ColLg>
       </Row>

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios"
-import { IBookingFields, ICity, IGame, IGetGamesResponse, IGetSummaryRequestData, IGetWorktimeResponse, ILoginForm, ILoginResponse, IRoom, ISummaryResponse, IValidatePromo, IValidatePromoRequestData } from "./types"
+import { IBookingFields, ICity, IGame, IGetGamesResponse, IGetSummaryRequestData, IGetWorktimeResponse, ILoginForm, ILoginResponse, IRegisterForm, IRegisterResponse, IRoom, ISummaryResponse, IValidatePromo, IValidatePromoRequestData } from "./types"
 
 export interface ErrorResponse {
     error: number,
@@ -91,6 +91,13 @@ export const Api = {
     async LogIn(data: ILoginForm) {
         return axios.post<ILoginResponse>(
             `${globalUrl}/v2/auth/login`,
+            data
+        );
+    },
+
+    async register(data: IRegisterForm) {
+        return axios.post<IRegisterResponse>(
+            `${globalUrl}/v2/auth/registration`,
             data
         );
     }

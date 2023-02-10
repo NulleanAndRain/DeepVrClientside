@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import { Api } from "../../../Utils/api";
 import { setToken, setUser } from "../../../Utils/redux/authSlice";
 import { useAppDispatch } from "../../../Utils/redux/store";
-import { ColLg } from "../../Common/ColLg";
-import { FormError } from "../../Common/FormError";
-import { NextButton } from "../../Common/NextButton";
-import { PassField } from "../../Common/PassField";
-import { PhoneInput } from "../../Common/PhoneInput";
+import { ColLg } from "../../Common/Markup/ColLg";
+import { FormError } from "../../Common/FormFields/FormError";
+import { NextButton } from "../../Common/Markup/NextButton";
+import { PassField } from "../../Common/FormFields/PassField";
+import { PhoneInput } from "../../Common/FormFields/PhoneField";
 
 import "../AccountStyles.css";
 
@@ -49,23 +49,23 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
         if (err.response.status >= 500)
           setReqError("Ошибка сервера, попробуйте позже");
 
-        dispatch(setToken("8f7d70d39530c24138e1d401da35e48fd622902d"));
-        dispatch(
-          setUser({
-            avatar: "",
-            email: "admin@deep.vr",
-            id: 2,
-            name: "aboba",
-            category_loyalty_id: -1,
-            created_at: "never",
-            email_verified_at: "never",
-            phone: "8 800 555 3535",
-            role_id: 1,
-            settings: { locale: "en" },
-            temp_password: "",
-            updated_at: "never",
-          })
-        );
+        // dispatch(setToken("8f7d70d39530c24138e1d401da35e48fd622902d"));
+        // dispatch(
+        //   setUser({
+        //     avatar: "",
+        //     email: "admin@deep.vr",
+        //     id: 2,
+        //     name: "aboba",
+        //     category_loyalty_id: -1,
+        //     created_at: "never",
+        //     email_verified_at: "never",
+        //     phone: "8 800 555 3535",
+        //     role_id: 1,
+        //     settings: { locale: "en" },
+        //     temp_password: "",
+        //     updated_at: "never",
+        //   })
+        // );
       });
   };
 
@@ -78,13 +78,13 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
           <PhoneInput
             control={control}
             error={errors.phone}
-            autocomplete="tel"
+            autocomplete="username"
           />
           <PassField
             control={control}
             name="password"
             error={errors.password}
-            autocomplete="password"
+            autocomplete="current-password"
           />
         </form>
         <NextButton onClick={onLoginClick} isActive={isValid}>

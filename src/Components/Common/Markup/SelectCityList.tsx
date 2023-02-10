@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Api } from "../../Utils/api";
-import { setSelectedCity } from "../../Utils/redux/authSlice";
-import { useAppDispatch } from "../../Utils/redux/store";
-import { ICity } from "../../Utils/types";
+import { Api } from "../../../Utils/api";
+import { setSelectedCity } from "../../../Utils/redux/authSlice";
+import { useAppDispatch } from "../../../Utils/redux/store";
+import { ICity } from "../../../Utils/types";
 import { LoadWrapper } from "./LoadWrapper";
 
-import "./CommonStyles.css";
+import "../CommonStyles.css";
 
 interface Props {
   selected: ICity | undefined;

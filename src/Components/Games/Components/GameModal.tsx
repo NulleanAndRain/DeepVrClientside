@@ -1,6 +1,6 @@
 import { Modal } from "antd";
 import { IGame } from "../../../Utils/types";
-import { NextButton } from "../../Common/NextButton";
+import { NextButton } from "../../Common/Markup/NextButton";
 import {
   Root as ScrollRoot,
   Scrollbar,

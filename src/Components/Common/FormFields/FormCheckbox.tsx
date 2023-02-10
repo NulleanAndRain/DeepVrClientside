@@ -1,7 +1,7 @@
 import { Control, FieldError, ValidationRule } from "react-hook-form";
 
-import mark from "../../Assets/checkboxMark.svg";
-import "./CommonStyles.css";
+import mark from "../../../Assets/checkboxMark.svg";
+import "../CommonStyles.css";
 
 interface Props {
   control: Control<any, any>;

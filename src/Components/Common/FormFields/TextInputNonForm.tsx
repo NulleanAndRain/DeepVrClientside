@@ -1,4 +1,4 @@
-import "./CommonStyles.css";
+import "../CommonStyles.css";
 
 interface Props {
   statusClassName?: string;

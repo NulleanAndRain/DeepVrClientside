@@ -10,9 +10,9 @@ import {
 } from "../../../Utils/redux/bookingSlice";
 import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { IGame } from "../../../Utils/types";
-import { GameCard } from "../../Common/GameCard";
+import { GameCard } from "../../Common/Markup/GameCard";
 import { StageLayout } from "./StageLayout";
-import { LoadWrapper } from "../../Common/LoadWrapper";
+import { LoadWrapper } from "../../Common/Markup/LoadWrapper";
 
 import "../BookingStyles.css";
 

@@ -1,7 +1,7 @@
 import { Control, FieldError, Validate, ValidationRule } from "react-hook-form";
-
-import "./CommonStyles.css";
 import { FormError } from "./FormError";
+
+import "../CommonStyles.css";
 
 interface Props {
   control: Control<any, any>;
@@ -36,11 +36,11 @@ export const FormField: React.FC<Props> = ({
     <>
       <FormError error={error} />
       <label className="form-field">
-        <img src={icon} alt="" className="form-input-icon" />
+        <img src={icon} alt="" className="form-field-icon" />
         <input
           {...control.register(name, {
             required,
-            pattern: pattern,
+            pattern,
             minLength,
             validate,
           })}

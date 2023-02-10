@@ -1,9 +1,9 @@
 import { Control, FieldError } from "react-hook-form";
-
-import phoneIcon from "../../Assets/phone.svg";
-
-import "./CommonStyles.css";
 import { FormField } from "./FormField";
+
+import "../CommonStyles.css";
+
+import phoneIcon from "../../../Assets/phone.svg";
 
 interface Props {
   control: Control<any, any>;

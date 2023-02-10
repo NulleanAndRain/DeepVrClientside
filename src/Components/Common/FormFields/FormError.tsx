@@ -1,5 +1,7 @@
 import { FieldError } from "react-hook-form";
 
+import "../CommonStyles.css";
+
 interface Props {
   error?: FieldError;
   errorMsg?: string;

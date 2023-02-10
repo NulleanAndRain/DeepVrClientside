@@ -1,5 +1,5 @@
 import { Row } from "antd";
-import { ColLg } from "../Common/ColLg";
+import { ColLg } from "../Common/Markup/ColLg";
 import { DefaultLayout } from "../Layout/DefaultLayout";
 import "./AchievementsStyles.css";
 

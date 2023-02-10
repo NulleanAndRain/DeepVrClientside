@@ -11,7 +11,7 @@ import { IRoom } from "../../../Utils/types";
 import { Api } from "../../../Utils/api";
 import { RoomCard } from "../Components/RoomCard";
 import { StageLayout } from "./StageLayout";
-import { LoadWrapper } from "../../Common/LoadWrapper";
+import { LoadWrapper } from "../../Common/Markup/LoadWrapper";
 
 import "../BookingStyles.css";
 

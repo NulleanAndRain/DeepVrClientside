@@ -14,13 +14,13 @@ import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { Title } from "../Components/Title";
 import { FixedPanel } from "../Components/FixedPanel";
 import { BackButton } from "../Components/BackButton";
-import { NextButton } from "../../Common/NextButton";
+import { NextButton } from "../../Common/Markup/NextButton";
 import { IBookingCredentials, ISummaryResponse } from "../../../Utils/types";
 import { Api } from "../../../Utils/api";
 import { getToken, getUser } from "../../../Utils/redux/authSlice";
-import { LoadIcon } from "../../Common/LoadIcon";
-import { FormError } from "../../Common/FormError";
-import { LoadWrapper } from "../../Common/LoadWrapper";
+import { LoadIcon } from "../../Common/Markup/LoadIcon";
+import { FormError } from "../../Common/FormFields/FormError";
+import { LoadWrapper } from "../../Common/Markup/LoadWrapper";
 
 import "../BookingStyles.css";
 

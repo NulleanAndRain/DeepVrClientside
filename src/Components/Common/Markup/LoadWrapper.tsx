@@ -1,5 +1,8 @@
-import loadIcon from "../../Assets/load.svg";
-import { IChildren } from "../../Utils/types";
+import { IChildren } from "../../../Utils/types";
+
+import loadIcon from "../../../Assets/load.svg";
+
+import "../CommonStyles.css";
 
 interface Props {
   children?: IChildren;

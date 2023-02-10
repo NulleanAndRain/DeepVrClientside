@@ -1,5 +1,5 @@
 import { Col } from "antd";
-import { IChildren } from "../../Utils/types";
+import { IChildren } from "../../../Utils/types";
 
 interface Props {
   children?: IChildren;

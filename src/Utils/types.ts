@@ -163,3 +163,12 @@ export interface IBookingFields {
     game_id: number
   }
 }
+
+export interface IRegisterForm {
+  phone: string,
+  password: string,
+  'password-repeat': string,
+  email: string,
+}
+
+export type IRegisterResponse = any;

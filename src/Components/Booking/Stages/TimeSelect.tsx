@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { StageLayout } from "./StageLayout";
 import { Api } from "../../../Utils/api";
 import { TimeCard } from "../Components/TimeCard";
-import { LoadWrapper } from "../../Common/LoadWrapper";
+import { LoadWrapper } from "../../Common/Markup/LoadWrapper";
 
 import "../BookingStyles.css";
 

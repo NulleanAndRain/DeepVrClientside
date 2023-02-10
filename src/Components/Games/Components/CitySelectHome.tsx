@@ -6,9 +6,9 @@ import {
 } from "../../../Utils/redux/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import { ICity } from "../../../Utils/types";
-import { ColLg } from "../../Common/ColLg";
-import { NextButton } from "../../Common/NextButton";
-import { SelectCityList } from "../../Common/SelectCityList";
+import { ColLg } from "../../Common/Markup/ColLg";
+import { NextButton } from "../../Common/Markup/NextButton";
+import { SelectCityList } from "../../Common/Markup/SelectCityList";
 
 import "../GamesStyles.css";
 

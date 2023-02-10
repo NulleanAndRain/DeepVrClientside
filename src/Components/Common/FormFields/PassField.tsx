@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Control, FieldError, Validate } from "react-hook-form";
 import { FormField } from "./FormField";
 
-import "./CommonStyles.css";
-import passIcon from "../../Assets/passIcon.svg";
-import passVisible from "../../Assets/passVisible.svg";
-import passHidden from "../../Assets/passHidden.svg";
+import "../CommonStyles.css";
+
+import passIcon from "../../../Assets/passIcon.svg";
+import passVisible from "../../../Assets/passVisible.svg";
+import passHidden from "../../../Assets/passHidden.svg";
 
 interface Props {
   control: Control<any, any>;

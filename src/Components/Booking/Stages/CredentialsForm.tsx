@@ -13,11 +13,11 @@ import { useForm } from "react-hook-form";
 import { getIsAuthorised, getUser } from "../../../Utils/redux/authSlice";
 import { NavLink } from "react-router-dom";
 import { ACCOUNT_PATH } from "../../../Utils/routeConstants";
-import { ColLg } from "../../Common/ColLg";
-import { FormField } from "../../Common/FormField";
-import { PhoneInput } from "../../Common/PhoneInput";
-import { FormCheckbox } from "../../Common/FormCheckbox";
-import { TextAreaInput } from "../../Common/TextAreaInput";
+import { ColLg } from "../../Common/Markup/ColLg";
+import { FormField } from "../../Common/FormFields/FormField";
+import { PhoneInput } from "../../Common/FormFields/PhoneField";
+import { FormCheckbox } from "../../Common/FormFields/FormCheckbox";
+import { TextAreaInput } from "../../Common/FormFields/TextAreaInput";
 
 import "../BookingStyles.css";
 import "../../Common/CommonStyles.css";

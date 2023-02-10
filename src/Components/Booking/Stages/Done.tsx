@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import { FixedPanel } from "../Components/FixedPanel";
-import { NextButton } from "../../Common/NextButton";
+import { NextButton } from "../../Common/Markup/NextButton";
 import { Title } from "../Components/Title";
 import { useAppDispatch } from "../../../Utils/redux/store";
 import { setIsFinished } from "../../../Utils/redux/bookingSlice";

@@ -4,13 +4,18 @@ import { useForm } from "react-hook-form";
 import { Api } from "../../../Utils/api";
 import { setToken, setUser } from "../../../Utils/redux/authSlice";
 import { useAppDispatch } from "../../../Utils/redux/store";
-import { ColLg } from "../../Common/ColLg";
-import { FormError } from "../../Common/FormError";
-import { NextButton } from "../../Common/NextButton";
-import { PassField } from "../../Common/PassField";
-import { PhoneInput } from "../../Common/PhoneInput";
+import { ColLg } from "../../Common/Markup/ColLg";
+import { FormError } from "../../Common/FormFields/FormError";
+import { FormField } from "../../Common/FormFields/FormField";
+import { NextButton } from "../../Common/Markup/NextButton";
+import { PassField } from "../../Common/FormFields/PassField";
+import { PhoneInput as PhoneField } from "../../Common/FormFields/PhoneField";
+
+import userIcon from "../../../Assets/user-icon-liliac.svg";
 
 import "../AccountStyles.css";
+import { LoadWrapper } from "../../Common/Markup/LoadWrapper";
+import { EmailField } from "../../Common/FormFields/EmailField";
 
 interface Props {
   onLoginClick: () => void;
@@ -26,7 +31,8 @@ export const Register: React.FC<Props> = ({ onLoginClick }) => {
     defaultValues: {
       phone: "",
       password: "",
-      passwordRepeat: "",
+      "password-repeat": "",
+      email: "",
     },
   });
 
@@ -34,40 +40,30 @@ export const Register: React.FC<Props> = ({ onLoginClick }) => {
 
   const [reqError, setReqError] = useState<string>();
 
+  const [error, setError] = useState<string | undefined>();
+  const [isLoading, setIsLoading] = useState(false);
+
   const onRegisterClick = () => {
     setReqError("");
-    // Api.LogIn(getValues())
-    //   .then((res) => {
-    //     if (Api.checkStatus(res.status)) {
-    //       dispatch(setToken(res.data.token));
-    //       dispatch(setUser(res.data.user));
-    //     } else {
-    //       setReqError(res.data.error as string);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     if (err.response.status >= 500)
-    //       setReqError("Ошибка сервера, попробуйте позже");
-    //   });
-    dispatch(setToken("123"));
-    dispatch(
-      setUser({
-        avatar: "",
-        email: "aboba@aboba.com",
-        id: -1,
-        name: "aboba",
-        category_loyalty_id: -1,
-        created_at: "never",
-        email_verified_at: "never",
-        phone: "8 800 555 3535",
-        role_id: -1,
-        settings: [],
-        temp_password: "",
-        updated_at: "never",
+    console.log("register, fields:", getValues());
+
+    setIsLoading(true);
+    Api.register(getValues())
+      .then((res) => {
+        console.log(res);
+        if (Api.checkStatus(res)) {
+          if (!res.data.error) {
+            // dispatch
+          } else {
+            setError(res.data.error);
+          }
+        }
       })
-    );
-    console.log("reg");
+      .catch((err) => {
+        console.log(err);
+        setError("Ошибка сервера, попробуйте позже");
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -76,24 +72,47 @@ export const Register: React.FC<Props> = ({ onLoginClick }) => {
         <div className="login-title">Регистрация</div>
         <form className="login-form">
           <FormError errorMsg={reqError} />
-          <PhoneInput control={control} error={errors.phone} />
+          <FormField
+            control={control}
+            icon={userIcon}
+            name="name"
+            type="text"
+            required="Введите ваше имя"
+            placeholder="Имя"
+            autocomplete="name"
+          />
+          <PhoneField
+            control={control}
+            error={errors.phone}
+            autocomplete="username"
+          />
+          <EmailField
+            control={control}
+            error={errors.email}
+            name="email"
+            autocomplete="email"
+            required
+          />
           <PassField
             control={control}
             name="password"
             error={errors.password}
+            autocomplete="current-password"
           />
           <PassField
             control={control}
-            name="passwordRepeat"
-            error={errors.passwordRepeat}
+            name="password-repeat"
+            error={errors["password-repeat"]}
             placeholder="Повторите пароль"
             requred="Введите подтверждение пароля"
             validate={{
               matchPass: (value) =>
                 value === getValues().password || "Пароли должны совпадать",
             }}
+            autocomplete="new-password"
           />
         </form>
+        <FormError errorMsg={error} />
         <NextButton onClick={onRegisterClick} isActive={isValid}>
           Зарегистрироваться
         </NextButton>
@@ -103,6 +122,7 @@ export const Register: React.FC<Props> = ({ onLoginClick }) => {
             Войти.
           </span>
         </div>
+        <LoadWrapper isLoading={isLoading} />
       </ColLg>
     </Row>
   );

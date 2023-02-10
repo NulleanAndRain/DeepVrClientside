@@ -1,6 +1,6 @@
 import { Control } from "react-hook-form";
 
-import "./CommonStyles.css";
+import "../CommonStyles.css";
 
 interface Props {
   control: Control<any, any>;

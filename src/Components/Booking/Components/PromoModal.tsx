@@ -2,8 +2,8 @@ import { Modal } from "antd";
 import "../BookingStyles.css";
 
 import { useEffect, useRef, useState } from "react";
-import { FormError } from "../../Common/FormError";
-import { TextInputNonForm } from "../../Common/TextInputNonForm";
+import { FormError } from "../../Common/FormFields/FormError";
+import { TextInputNonForm } from "../../Common/FormFields/TextInputNonForm";
 import { ISummaryResponse } from "../../../Utils/types";
 import { useAppSelector } from "../../../Utils/redux/store";
 import { getToken, getUser } from "../../../Utils/redux/authSlice";
@@ -11,7 +11,7 @@ import { getGame, getPlayersCount } from "../../../Utils/redux/bookingSlice";
 import { Api } from "../../../Utils/api";
 
 import closeIcon from "../../../Assets/closeIcon.svg";
-import { LoadIcon } from "../../Common/LoadIcon";
+import { LoadIcon } from "../../Common/Markup/LoadIcon";
 
 interface Props {
   isOpen: boolean;

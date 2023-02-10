@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import { FixedPanel } from "../Components/FixedPanel";
-import { NextButton } from "../../Common/NextButton";
+import { NextButton } from "../../Common/Markup/NextButton";
 import { Title } from "../Components/Title";
 import { useEffect, useState } from "react";
 import { ICity } from "../../../Utils/types";
@@ -13,7 +13,7 @@ import {
   setCity,
 } from "../../../Utils/redux/bookingSlice";
 import { getSelectedCity } from "../../../Utils/redux/authSlice";
-import { LoadWrapper } from "../../Common/LoadWrapper";
+import { LoadWrapper } from "../../Common/Markup/LoadWrapper";
 
 import "../BookingStyles.css";
 

@@ -1,13 +1,13 @@
 import { Row } from "antd";
-import { ColLg } from "../../Common/ColLg";
+import { ColLg } from "../../Common/Markup/ColLg";
 import { useEffect, useRef, useState } from "react";
 import { IGame } from "../../../Utils/types";
 import { Api } from "../../../Utils/api";
 import { useAppSelector } from "../../../Utils/redux/store";
 import { getSelectedCity } from "../../../Utils/redux/authSlice";
-import { GameCard } from "../../Common/GameCard";
+import { GameCard } from "../../Common/Markup/GameCard";
 import { GameModal } from "./GameModal";
-import { LoadWrapper } from "../../Common/LoadWrapper";
+import { LoadWrapper } from "../../Common/Markup/LoadWrapper";
 
 import "../GamesStyles.css";
 

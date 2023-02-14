@@ -19,7 +19,7 @@ const bookingSlice = createSlice({
         setToken: (state, action) => {
             state.token = action.payload;
         },
-        setUser: (state, action : {payload: IUser}) => {
+        setUser: (state, action : {payload: IUser|undefined}) => {
             state.user = action.payload;
         },
         setSelectedCity(state, action : {payload: ICity|undefined}) {

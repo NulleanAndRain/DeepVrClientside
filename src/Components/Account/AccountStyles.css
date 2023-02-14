@@ -151,6 +151,11 @@
   width: 100%;
   text-align: left;
   margin-bottom: 16px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bonus-card-scroll-root {
@@ -181,4 +186,21 @@
   color: #1F2653;
   background: #F0F8FE;
   border-radius: 15px;
+}
+
+.divide-line {
+  height: 1px;
+  width: 100%;
+  background-color: #444656;
+  margin: 12px 0;
+}
+
+.profile-divide-header-btn-full {
+  cursor: pointer;
+  margin: 0;
+}
+
+.profile-divide-header-img {
+  width: 24px;
+  height: 24px;
 }

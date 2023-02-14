@@ -121,5 +121,12 @@ export const Api = {
             `${globalUrl}/v2/booking/history`, 
             data
         );
-    }
+    },
+
+    async logout(data: ITokenDTO) {
+        return axios.post<any>(
+            `${globalUrl}/v2/auth/logout`, 
+            data
+        );
+    },
 }

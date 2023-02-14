@@ -61,3 +61,124 @@
 .login-description-link:hover {
   color: #ABAFE5;
 }
+
+.login-variants-header {
+  width: 100%;
+  font-family: 'Gilroy-Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+
+  text-align: center;
+  color: #ABAFE5;
+}
+
+.login-variant {
+  background: none;
+  border-radius: 15px;
+  padding: 10px 15px;
+  
+  width: 100%;
+  height: 100%;
+  font-family: 'Gilroy-Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+
+  text-align: center;
+  color: #ABAFE5;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-variant-selected {
+  color: #FFF;
+  background-color: #191A29; 
+  cursor: default;
+}
+
+.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  
+  max-width: 100vw;
+}
+.profile-header {
+  width: 100%;
+  position: relative;
+  text-align: center;
+  
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  color: #FFFFFF;
+}
+.profile-open-settings-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: 0;
+  top: 2px;
+  cursor: pointer;
+}
+
+.profile-divide {
+  background: #1F2032;
+  border-radius: 15px;
+  overflow: hidden;
+  padding: 16px;
+  width: 100%;
+  height: max-content;
+  box-sizing: content-box;
+}
+.profile-divide-header {
+  font-family: 'Gilroy-Regular';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%;
+
+  color: #FFFFFF;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.bonus-card-scroll-root {
+  position: relative;
+  margin: 0 -16px;
+  height: auto;
+  overflow: hidden;
+  box-sizing: content-box;
+}
+.bonus-card-wrapper {
+  height: 133px;
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+}
+.bonus-card-wrapper :first-child{
+  margin-left: 16px;
+}
+.bonus-card-wrapper :last-child{
+  margin-right: 16px;
+}
+.bonus-card {
+  height: 133px;
+  width: 230px;
+  color: #1F2653;
+  background: #F0F8FE;
+  border-radius: 15px;
+}

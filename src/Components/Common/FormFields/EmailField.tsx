@@ -7,20 +7,21 @@ import "../CommonStyles.css";
 
 interface Props {
   control: Control<any, any>;
-  name: string;
   required?: boolean;
   autocomplete?: string;
   error?: FieldError;
+  unregister?: boolean;
 }
 
 export const EmailField: React.FC<Props> = ({
   control,
-  name,
   required,
   autocomplete,
   error,
+  unregister,
 }) => {
   const pattern = {
+    // eslint-disable-next-line no-useless-escape
     value: /^[-\w\.]+@[\w-]+\.+[\w-]{2,}$/i,
     message: "Введите правильный E-Mail",
   };
@@ -29,12 +30,13 @@ export const EmailField: React.FC<Props> = ({
       type="email"
       icon={emailIcon}
       control={control}
-      name={name}
+      name="email"
       placeholder="E-Mail"
       required={required ? "Введите E-Mail" : undefined}
       autocomplete={autocomplete}
       pattern={pattern}
       error={error}
+      unregister={unregister}
     />
   );
 };

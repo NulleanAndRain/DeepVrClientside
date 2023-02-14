@@ -16,6 +16,7 @@ interface Props {
   afterElem?: React.ReactElement;
   validate?: Validate<any, any> | Record<string, Validate<any, any>>;
   autocomplete?: string;
+  unregister?: boolean;
 }
 
 export const FormField: React.FC<Props> = ({
@@ -31,6 +32,7 @@ export const FormField: React.FC<Props> = ({
   afterElem,
   validate,
   autocomplete,
+  unregister = false,
 }) => {
   return (
     <>
@@ -43,6 +45,7 @@ export const FormField: React.FC<Props> = ({
             pattern,
             minLength,
             validate,
+            shouldUnregister: unregister,
           })}
           type={type}
           className="form-field-input"

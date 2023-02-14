@@ -9,12 +9,14 @@ interface Props {
   control: Control<any, any>;
   error?: FieldError;
   autocomplete?: string;
+  unregister?: boolean;
 }
 
 export const PhoneInput: React.FC<Props> = ({
   control,
   error,
   autocomplete,
+  unregister,
 }) => {
   const pattern = {
     /* regex :
@@ -46,6 +48,7 @@ export const PhoneInput: React.FC<Props> = ({
       icon={phoneIcon}
       required="Введите телефон"
       autocomplete={autocomplete}
+      unregister={unregister}
     />
   );
 };

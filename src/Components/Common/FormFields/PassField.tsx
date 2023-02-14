@@ -16,6 +16,7 @@ interface Props {
   validate?: Validate<any, any> | Record<string, Validate<any, any>>;
   requred?: string;
   autocomplete?: string;
+  unregister?: boolean;
 }
 
 export const PassField: React.FC<Props> = ({
@@ -26,6 +27,7 @@ export const PassField: React.FC<Props> = ({
   validate,
   requred = "Введите пароль",
   autocomplete,
+  unregister = false,
 }) => {
   const [typeState, setTypeState] = useState<"password" | "text">("password");
   const ToggleVisibility = () => {
@@ -61,6 +63,7 @@ export const PassField: React.FC<Props> = ({
           : undefined
       }
       autocomplete={autocomplete}
+      unregister={unregister}
     />
   );
 };

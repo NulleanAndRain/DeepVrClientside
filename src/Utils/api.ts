@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios"
-import { IBookingFields, ICity, IGame, IGetGamesResponse, IGetSummaryRequestData, IGetWorktimeResponse, ILoginForm, ILoginResponse, IRegisterForm, IRegisterResponse, IRoom, ISummaryResponse, IValidatePromo, IValidatePromoRequestData } from "./types"
+import { IBookingFields, ICity, IGame, IGetBonusesInfoResponse, IGetGamesResponse, IGetSummaryRequestData, IGetWorktimeResponse, ILoginByCodeResponse, ILoginForm, ILoginResponse, IRegisterForm, IRegisterResponse, IRoom, ISummaryResponse, ITokenDTO, IValidatePromo, IValidatePromoRequestData } from "./types"
 
 export interface ErrorResponse {
     error: number,
@@ -88,16 +88,37 @@ export const Api = {
     // end booking
 
     // account
-    async LogIn(data: ILoginForm) {
+    async login(data: ILoginForm) {
         return axios.post<ILoginResponse>(
             `${globalUrl}/v2/auth/login`,
             data
         );
     },
 
+    async loginSendCode(data: {phone : string}) {
+        return axios.post<ILoginByCodeResponse>(
+            `${globalUrl}/v2/client/send-auth-code`,
+            data,
+        );
+    },
+
     async register(data: IRegisterForm) {
         return axios.post<IRegisterResponse>(
             `${globalUrl}/v2/auth/registration`,
+            data
+        );
+    },
+
+    async getBonusesInfo(data: ITokenDTO) {
+        return axios.post<IGetBonusesInfoResponse>(
+            `${globalUrl}/v2/bonus/get`,
+            data
+        );
+    },
+
+    async getHistory(data: ITokenDTO) {
+        return axios.post<any>(
+            `${globalUrl}/v2/booking/history`, 
             data
         );
     }

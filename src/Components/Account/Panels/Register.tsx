@@ -89,7 +89,6 @@ export const Register: React.FC<Props> = ({ onLoginClick }) => {
           <EmailField
             control={control}
             error={errors.email}
-            name="email"
             autocomplete="email"
             required
           />
@@ -122,7 +121,7 @@ export const Register: React.FC<Props> = ({ onLoginClick }) => {
             Войти.
           </span>
         </div>
-        <LoadWrapper isLoading={isLoading} />
+        <LoadWrapper isLoading={isLoading} height={1} />
       </ColLg>
     </Row>
   );

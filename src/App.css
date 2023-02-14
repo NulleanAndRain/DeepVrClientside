@@ -64,11 +64,13 @@
   touch-action: none;
   padding: 2px;
   background: var(--scrollbar-bg);
-  transition: background 160ms ease-out;
+  transition: background 160ms ease-out, opacity 160ms ease-out;
   height: 100%;
   z-index: 120;
+  opacity: 0.1;
 }
 .ScrollAreaScrollbar:hover {
+  opacity: 1;
   background: var(--scrollbar-bg-bright);
 }
 .ScrollAreaScrollbar[data-orientation='vertical'] {

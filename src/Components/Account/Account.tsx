@@ -1,10 +1,12 @@
 import { DefaultLayout } from "../Layout/DefaultLayout";
-import { Login } from "./Compontents/Login";
-import "./AccountStyles.css";
+import { Login } from "./Panels/Login";
 import { useAppSelector } from "../../Utils/redux/store";
 import { getIsAuthorised } from "../../Utils/redux/authSlice";
 import { useState } from "react";
-import { Register } from "./Compontents/Register";
+import { Register } from "./Panels/Register";
+import { Profile } from "./Panels/Profile";
+
+import "./AccountStyles.css";
 
 export const Account: React.FC = () => {
   const isAuthorised = useAppSelector(getIsAuthorised);
@@ -20,7 +22,7 @@ export const Account: React.FC = () => {
   return (
     <DefaultLayout>
       {isAuthorised ? (
-        <>ъеъ</>
+        <Profile />
       ) : loginForm === "login" ? (
         <Login onRegisterClick={onRegClick} />
       ) : (

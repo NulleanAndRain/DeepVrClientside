@@ -41,7 +41,7 @@ export const SelectCityList: React.FC<Props> = ({ selected, onSelect }) => {
   }, []);
 
   return (
-    <LoadWrapper isLoading={isLoading}>
+    <LoadWrapper isLoading={isLoading} height={1}>
       <div className="city-select-wrapper">
         {!!cities ? (
           cities.map((c) => {

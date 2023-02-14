@@ -56,11 +56,11 @@
   position: relative;
 }
 .form-field-input {
-  background-color: transparent;
+  background-color: transparent !important;
   width: 100%;
   border: none;
   height: 100%;
-  color: #FFF;
+  color: #FFF !important;
   font-family: 'Gilroy-Regular';
   font-style: normal;
   font-weight: 400;
@@ -72,6 +72,24 @@
 }
 .form-field-input:focus {
   outline: none;
+}
+
+/* webkit-autofill override */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  box-sizing: border-box;
+  -webkit-text-fill-color: #FFF;
+  -webkit-box-shadow: 0 0 0px 1000px #1F2032 inset;
+  transition: background-color 5000s ease-in-out 0s;
+  background-color: transparent;
 }
 
 .form-field-icon {
@@ -229,7 +247,6 @@
     --icon-height: 56px;
     display: flex;
     width: 100%;
-    height: calc(var(--icon-height) * 3);
     justify-content: center;
     align-items: center;
 }
@@ -265,4 +282,33 @@
         -webkit-transform: rotate(360deg); 
         transform:rotate(360deg); 
     } 
+}
+
+
+.horisontal-scroll-btn {
+  position: absolute;
+  height: 133px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1F2032;
+  opacity: 0.4;
+  transition: ease-in-out opacity 0.2s;
+  cursor: pointer;
+  top: 0;
+}
+.horisontal-scroll-btn:hover {
+  opacity: 1;
+}
+
+.horisontal-scroll-btn-img {
+    width: 24px;
+    height: 24px;
+}
+.horisontal-scroll-btn-next {
+  right: 0;
+}
+.horisontal-scroll-btn-prev {
+  left: 0;
 }

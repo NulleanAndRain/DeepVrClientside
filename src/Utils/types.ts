@@ -122,12 +122,14 @@ export interface IValidatePromo {
 }
 
 export interface ILoginForm {
-  phone: string;
+  phone?: string;
+  email?: string;
   password: string;
 }
 
 export interface ILoginResponse {
   error: number|string;
+  error_text: string;
   token: string;
   user: IUser;
 }
@@ -172,3 +174,20 @@ export interface IRegisterForm {
 }
 
 export type IRegisterResponse = any;
+
+export interface ILoginByCodeResponse {
+  error: number,
+  error_text: string,
+
+}
+
+export interface ITokenDTO {
+  token: string;
+}
+
+export interface IGetBonusesInfoResponse {
+  quantity_all: number,
+  quantity_real: number,
+  quantity_expired: number,
+  next_expired_date: string,
+}

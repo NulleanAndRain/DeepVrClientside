@@ -250,7 +250,7 @@ export const ConfirmBooking: React.FC = () => {
             </Col>
           </Col>
         </Row>
-        <LoadWrapper isLoading={isPostingForm} />
+        <LoadWrapper isLoading={isPostingForm} height={1} />
       </div>
       <FixedPanel>
         <Col xs={12} sm={10} md={9} lg={8} xl={7} xxl={6}>

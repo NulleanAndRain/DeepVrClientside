@@ -1,20 +1,30 @@
 import { Row } from "antd";
 import { ColLg } from "../../Common/Markup/ColLg";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LoadWrapper } from "../../Common/Markup/LoadWrapper";
 import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
-import { getToken, setToken, setUser } from "../../../Utils/redux/authSlice";
+import {
+  getSelectedCity,
+  getToken,
+  setToken,
+  setUser,
+} from "../../../Utils/redux/authSlice";
 import { Api } from "../../../Utils/api";
 import { BonusCard } from "../Compontents/BonusCrad";
 import { HorizontalScrollArea } from "../../Common/Markup/HorizontalScrollArea";
+import { OrderInfoRow } from "../Compontents/OrderInfoRow";
+import { OrdersAllPopup } from "../Popups/OrdersAllPopup";
+import { SettingsPopup } from "../Popups/SettingsPopup";
 
 import "../AccountStyles.css";
 
 import gearIcon from "../../../Assets/gearIcon.svg";
+import arrowRight from "../../../Assets/arrow-right.svg";
 import logoutIcon from "../../../Assets/logoutIcon.svg";
-import { OrderInfoRow } from "../Compontents/OrderInfoRow";
-import { OrdersAllPopup } from "../Popups/OrdersAllPopup";
-import { SettingsPopup as SettingsPopup } from "../Popups/SettingsPopup";
+import logoBonus1 from "../../../Assets/logo-bonus1-light.svg";
+import logoBonus2 from "../../../Assets/logo-bonus2-light.svg";
+import logoBonus3 from "../../../Assets/logo-bonus3-light.svg";
+import { CitySelectPopup } from "../Popups/CitySelectPopup";
 
 let tempPopups: Array<React.ReactElement> = [];
 
@@ -22,6 +32,8 @@ export const Profile: React.FC = () => {
   const [bonuses, setBonuses] = useState<any>();
   const [history, setHistory] = useState<Array<any>>();
   const [isLoading, setIsLoading] = useState(false);
+
+  const citySelected = useAppSelector(getSelectedCity);
 
   const token = useAppSelector(getToken);
 
@@ -127,12 +139,14 @@ export const Profile: React.FC = () => {
                   cardRef={bonusesRefs["1"]}
                   header="Доступно"
                   value={3400}
+                  image={logoBonus1}
                 />
                 <BonusCard
                   id="2"
                   cardRef={bonusesRefs["2"]}
                   header="Активно"
                   value={1000}
+                  image={logoBonus2}
                 />
                 <BonusCard
                   id="3"
@@ -140,6 +154,7 @@ export const Profile: React.FC = () => {
                   header="Временные"
                   value={2400}
                   description="Бонусы истекаю дд.мм.гг"
+                  image={logoBonus3}
                 />
               </HorizontalScrollArea>
             </div>
@@ -156,18 +171,36 @@ export const Profile: React.FC = () => {
                   Смотреть все
                 </span>
               </div>
-              <OrderInfoRow />
+              {
+                /* map history from props */ <OrderInfoRow
+                  date="от 30 февраля"
+                  description="5 персон | Выбор на месте | VR квест с погружением."
+                  orderId={0}
+                  price={1448}
+                  key="хехе"
+                />
+              }
             </div>
 
             <div className="profile-divide">
-              <div className="profile-divide-header profile-divide-header-btn-full">
-                Выбрать город
+              <div className="profile-divide-btn-full">
+                <span>Выбрать город</span>
+                <span
+                  className="profile-divide-header-option"
+                  onClick={() =>
+                    addPopup(<CitySelectPopup onBackClick={removeLastPopup} />)
+                  }
+                >
+                  {citySelected ? citySelected.name : "Не выбрано"}
+                  <img
+                    src={arrowRight}
+                    alt="Выбрать город"
+                    className="profile-divide-header-img"
+                  />
+                </span>
               </div>
               <div className="divide-line" />
-              <div
-                className="profile-divide-header profile-divide-header-btn-full"
-                onClick={logOut}
-              >
+              <div className="profile-divide-btn-full" onClick={logOut}>
                 Выйти из аккаунта
                 <img
                   src={logoutIcon}

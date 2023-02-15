@@ -297,6 +297,7 @@ select:-webkit-autofill:focus {
   transition: ease-in-out opacity 0.2s;
   cursor: pointer;
   top: 0;
+  z-index: 15;
 }
 .horisontal-scroll-btn:hover {
   opacity: 1;

@@ -3,4 +3,5 @@ export const curencyFormat = Intl.NumberFormat("ru-RU", {
     currency: "RUB",
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
+    currencyDisplay: 'symbol',
   });

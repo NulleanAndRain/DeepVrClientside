@@ -28,6 +28,7 @@ import userIcon from "../../../Assets/user-icon-liliac.svg";
 import gameIcon from "../../../Assets/console.svg";
 import dateIcon from "../../../Assets/calendar.svg";
 import timeIcon from "../../../Assets/time.svg";
+import { curencyFormat } from "../../../Utils/format";
 
 export const ConfirmBooking: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -96,13 +97,6 @@ export const ConfirmBooking: React.FC = () => {
   const onBackClick = () => {
     dispatch(decreaseStep());
   };
-
-  const numberFormat = Intl.NumberFormat("ru-RU", {
-    style: "currency",
-    currency: "RUB",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-  });
 
   useEffect(() => {
     setIsLoading(true);
@@ -208,7 +202,7 @@ export const ConfirmBooking: React.FC = () => {
                   {isLoading ? (
                     <LoadIcon />
                   ) : (
-                    <>{summary && numberFormat.format(summary.price)}</>
+                    <>{summary && curencyFormat.format(summary.price)}</>
                   )}
                 </span>
               </div>
@@ -219,7 +213,7 @@ export const ConfirmBooking: React.FC = () => {
                     {isLoading ? (
                       <LoadIcon />
                     ) : (
-                      <>{numberFormat.format(summary.promo_discount)}</>
+                      <>{curencyFormat.format(summary.promo_discount)}</>
                     )}
                   </span>
                 </div>
@@ -231,7 +225,7 @@ export const ConfirmBooking: React.FC = () => {
                     {isLoading ? (
                       <LoadIcon />
                     ) : (
-                      <>{numberFormat.format(summary.bonus_discount)}</>
+                      <>{curencyFormat.format(summary.bonus_discount)}</>
                     )}
                   </span>
                 </div>
@@ -243,7 +237,7 @@ export const ConfirmBooking: React.FC = () => {
                   {isLoading ? (
                     <LoadIcon />
                   ) : (
-                    <>{summary && numberFormat.format(summary.total)}</>
+                    <>{summary && curencyFormat.format(summary.total)}</>
                   )}
                 </span>
               </div>

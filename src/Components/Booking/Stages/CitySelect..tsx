@@ -12,7 +12,10 @@ import {
   increaseStep,
   setCity,
 } from "../../../Utils/redux/bookingSlice";
-import { getSelectedCity } from "../../../Utils/redux/authSlice";
+import {
+  getSelectedCity,
+  setSelectedCity,
+} from "../../../Utils/redux/authSlice";
 import { LoadWrapper } from "../../Common/Markup/LoadWrapper";
 
 import "../BookingStyles.css";
@@ -55,13 +58,14 @@ export const CitySelect: React.FC = () => {
   const onNextClick = () => {
     if (selected) {
       dispatch(setCity(selected));
+      if (!selectedCityProfile) dispatch(setSelectedCity(selected));
       dispatch(increaseStep());
     }
   };
 
   return (
     <>
-      <div className="booking-viewport ">
+      <div className="booking-viewport">
         <Title fontSize={32}>Адреса</Title>
 
         <LoadWrapper isLoading={isLoading}>

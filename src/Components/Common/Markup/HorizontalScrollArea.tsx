@@ -4,7 +4,7 @@ import {
   Thumb,
   Viewport,
 } from "@radix-ui/react-scroll-area";
-import { useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { IChildren } from "../../../Utils/types";
 
 import "../CommonStyles.css";
@@ -55,24 +55,32 @@ export const HorizontalScrollArea: React.FC<Props> = ({
     };
 
   const [isLeftArrowVisible, setIsLeftArrowVisible] = useState(false);
-  const [isRightArrowVisible, setIsRightArrowVisible] = useState(true);
+  const [isRightArrowVisible, setIsRightArrowVisible] = useState(false);
 
-  const onScroll = () => {
+  const onScroll = useCallback(() => {
     const boundsFirst = firstElemRef.current?.getBoundingClientRect();
     const boundsLast = lastElemRef.current?.getBoundingClientRect();
     const boundsViewport = viewportRef.current?.getBoundingClientRect();
-    if (Math.abs(boundsViewport.left - (boundsFirst?.left ?? 0)) <= 20) {
+
+    if (boundsViewport.left - (boundsFirst?.left ?? 0) <= 20) {
       if (isLeftArrowVisible) setIsLeftArrowVisible(false);
     } else {
       if (!isLeftArrowVisible) setIsLeftArrowVisible(true);
     }
 
-    if (Math.abs(boundsViewport.right - (boundsLast?.right ?? 0)) <= 20) {
+    if (boundsViewport.right - (boundsLast?.right ?? 0) >= -20) {
       if (isRightArrowVisible) setIsRightArrowVisible(false);
     } else {
       if (!isRightArrowVisible) setIsRightArrowVisible(true);
     }
-  };
+  }, [firstElemRef, isLeftArrowVisible, isRightArrowVisible, lastElemRef]);
+
+  useLayoutEffect(() => {
+    const updateSize = onScroll;
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, [onScroll]);
 
   return (
     <ScrollRoot type="auto" className={`ScrollAreaRoot ${wrapperClassName}`}>

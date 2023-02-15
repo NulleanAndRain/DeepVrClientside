@@ -2,6 +2,7 @@
     font-family: 'Open Sans';
     src: url(../../Assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf);
 }
+
 @import url('https://fonts.cdnfonts.com/css/bebas-neue');
 
 .next-btn {
@@ -34,49 +35,52 @@
 }
 
 .form-field {
-  font-family: 'Gilroy-Regular';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  
-  background-color: #1F2032;
-  padding: 13px 16px;
-  width: 100%;
-  height: auto;
-  min-height: 52px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 12px;
-  border-radius: 15px;
-  overflow: hidden;
-  box-sizing: border-box;
-  
-  position: relative;
+    font-family: 'Gilroy-Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+
+    background-color: #1F2032;
+    padding: 13px 16px;
+    width: 100%;
+    height: auto;
+    min-height: 52px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    position: relative;
 }
+
 .form-field-input {
-  background-color: transparent !important;
-  width: 100%;
-  border: none;
-  height: 100%;
-  color: #FFF !important;
-  font-family: 'Gilroy-Regular';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
+    background-color: transparent !important;
+    width: 100%;
+    border: none;
+    height: 100%;
+    color: #FFF !important;
+    font-family: 'Gilroy-Regular';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
 }
+
 .form-field-input::placeholder {
-  color: #ABAFE5;
+    color: #ABAFE5;
 }
+
 .form-field-input:focus {
-  outline: none;
+    outline: none;
 }
 
 /* webkit-autofill override */
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
@@ -84,18 +88,19 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  border: none;
-  box-sizing: border-box;
-  -webkit-text-fill-color: #FFF;
-  -webkit-box-shadow: 0 0 0px 1000px #1F2032 inset;
-  transition: background-color 5000s ease-in-out 0s;
-  background-color: transparent;
+    border: none;
+    box-sizing: border-box;
+    -webkit-text-fill-color: #FFF;
+    -webkit-box-shadow: 0 0 0px 1000px #1F2032 inset;
+    transition: background-color 5000s ease-in-out 0s;
+    background-color: transparent;
 }
 
 .form-field-icon {
-  height: 20px;
-  width: 20px;
+    height: 20px;
+    width: 20px;
 }
+
 .form-error {
     width: 100%;
     font-family: 'Gilroy-Regular';
@@ -118,7 +123,7 @@ select:-webkit-autofill:focus {
     justify-content: flex-start;
     align-items: center;
     gap: 12px;
-    
+
     font-family: 'Gilroy-Regular';
     font-style: normal;
     font-weight: 400;
@@ -127,13 +132,15 @@ select:-webkit-autofill:focus {
     display: flex;
     align-items: center;
     letter-spacing: 0.34px;
-    
+
     color: #ABAFE5;
 }
+
 .form-label a {
     color: #ABAFE5;
     text-decoration-line: underline;
 }
+
 .form-label input {
     position: absolute;
     opacity: 0;
@@ -152,14 +159,17 @@ select:-webkit-autofill:focus {
     justify-content: center;
     align-items: center;
 }
+
 .form-checkbox img {
     display: none;
     user-select: none;
 }
-.form-label input:checked ~ .form-checkbox img {
+
+.form-label input:checked~.form-checkbox img {
     display: block;
 }
-.form-label input:focus ~ .form-checkbox   {
+
+.form-label input:focus~.form-checkbox {
     outline: 1px solid #FFF;
 }
 
@@ -176,9 +186,10 @@ select:-webkit-autofill:focus {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: #191A29; 
+    background-color: #191A29;
 
 }
+
 .game-card-title {
     width: 100%;
     height: 100%;
@@ -242,6 +253,7 @@ select:-webkit-autofill:focus {
     --icon-width: 28px;
     --icon-height: 28px;
 }
+
 .load-icon-container-lg-wrapper {
     --icon-width: 56px;
     --icon-height: 56px;
@@ -250,11 +262,13 @@ select:-webkit-autofill:focus {
     justify-content: center;
     align-items: center;
 }
+
 .load-icon-container {
     width: var(--icon-width);
     height: var(--icon-height);
     position: relative;
 }
+
 .load-icon {
     position: absolute;
     top: 50%;
@@ -264,52 +278,61 @@ select:-webkit-autofill:focus {
     width: var(--icon-width);
     height: var(--icon-height);
     padding: calc(var(--icon-height) / 14) 0 calc(var(--icon-width) / 14) calc(var(--icon-height) / 14);
-    -webkit-animation:spin 2s linear infinite;
-    -moz-animation:spin 2s linear infinite;
-    /* box-sizing: border-box; */
+    -webkit-animation: spin 2s linear infinite;
+    -moz-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
-    /* background-color: #fff;
-    border-radius: 50%; */
 }
-@-moz-keyframes spin { 
-    100% { -moz-transform: rotate(360deg); } 
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
 }
-@-webkit-keyframes spin { 
-    100% { -webkit-transform: rotate(360deg); } 
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
-@keyframes spin { 
-    100% { 
-        -webkit-transform: rotate(360deg); 
-        transform:rotate(360deg); 
-    } 
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 
 .horisontal-scroll-btn {
-  position: absolute;
-  height: 133px;
-  width: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #1F2032;
-  opacity: 0.4;
-  transition: ease-in-out opacity 0.2s;
-  cursor: pointer;
-  top: 0;
-  z-index: 15;
+    position: absolute;
+    height: 133px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1F2032;
+    opacity: 0.6;
+    transition: ease-in-out opacity 0.2s;
+    cursor: pointer;
+    top: 0;
+    z-index: 15;
 }
+
 .horisontal-scroll-btn:hover {
-  opacity: 1;
+    opacity: 1;
 }
 
 .horisontal-scroll-btn-img {
     width: 24px;
     height: 24px;
 }
+
 .horisontal-scroll-btn-next {
-  right: 0;
+    right: 0;
+    background: linear-gradient(-90deg, #1F2032, #1F203266);
 }
+
 .horisontal-scroll-btn-prev {
-  left: 0;
+    left: 0;
+    background: linear-gradient(90deg, #1F2032, #1F203266);
 }

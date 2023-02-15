@@ -85,6 +85,7 @@ export const Register: React.FC<Props> = ({ onLoginClick }) => {
             control={control}
             error={errors.phone}
             autocomplete="username"
+            required
           />
           <EmailField
             control={control}

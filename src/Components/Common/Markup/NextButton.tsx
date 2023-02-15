@@ -14,7 +14,10 @@ export const NextButton: React.FC<Props> = ({
   return (
     <button
       className={`next-btn${isActive ? "" : " next-btn-inactive"}`}
-      onClick={isActive ? onClick : undefined}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick?.();
+      }}
     >
       {children}
     </button>

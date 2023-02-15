@@ -1,7 +1,8 @@
 @font-face {
-    font-family: 'Open Sans';
-    src: url(../../Assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf);
+  font-family: 'Open Sans';
+  src: url(../../Assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf);
 }
+
 @import url('https://fonts.cdnfonts.com/css/bebas-neue');
 
 .login-container {
@@ -34,7 +35,7 @@
 
 .login-form {
   width: 100%;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,11 +54,13 @@
   text-align: center;
   color: #ABAFE5;
 }
+
 .login-description-link {
   color: #ABAFE5;
   text-decoration: underline;
   cursor: pointer;
 }
+
 .login-description-link:hover {
   color: #ABAFE5;
 }
@@ -78,7 +81,7 @@
   background: none;
   border-radius: 15px;
   padding: 10px 15px;
-  
+
   width: 100%;
   height: 100%;
   font-family: 'Gilroy-Regular';
@@ -97,7 +100,7 @@
 
 .login-variant-selected {
   color: #FFF;
-  background-color: #191A29; 
+  background-color: #191A29;
   cursor: default;
 }
 
@@ -109,6 +112,7 @@
   gap: 16px;
   padding: 16px;
 }
+
 @media screen and (max-width: 768px) {
   .profile-wrapper {
     max-width: 100vw;
@@ -119,13 +123,14 @@
   width: 100%;
   position: relative;
   text-align: center;
-  
+
   font-family: 'Bebas Neue';
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
   color: #FFFFFF;
 }
+
 .profile-open-settings-icon {
   position: absolute;
   width: 24px;
@@ -144,6 +149,7 @@
   height: max-content;
   box-sizing: content-box;
 }
+
 .profile-divide-header {
   font-family: 'Gilroy-Regular';
   font-style: normal;
@@ -161,13 +167,14 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .profile-divide-header-option {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   gap: 4px;
-  
+
   font-family: 'Gilroy-Regular';
   font-style: normal;
   font-weight: 400;
@@ -186,6 +193,7 @@
   overflow: hidden;
   box-sizing: content-box;
 }
+
 .bonus-card-wrapper {
   height: 133px;
   width: auto;
@@ -195,12 +203,15 @@
   align-items: center;
   gap: 16px;
 }
-.bonus-card-wrapper:first-child{
+
+.bonus-card-wrapper:first-child {
   margin-left: 16px;
 }
-.bonus-card-wrapper:last-child{
+
+.bonus-card-wrapper:last-child {
   margin-right: 16px;
 }
+
 .bonus-card {
   height: 133px;
   width: 230px;
@@ -210,6 +221,7 @@
   overflow: hidden;
   position: relative;
 }
+
 .bonus-card-bg-img {
   position: absolute;
   right: 0;
@@ -219,6 +231,7 @@
   margin: 0;
   z-index: 1;
 }
+
 .bonus-card-container {
   width: 100%;
   height: 100%;
@@ -231,6 +244,7 @@
   align-items: flex-start;
   position: relative;
 }
+
 .bonus-card-header {
   width: 100%;
   height: auto;
@@ -238,7 +252,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  
+
   font-family: 'Gilroy-Regular';
   font-style: normal;
   font-weight: 400;
@@ -247,11 +261,13 @@
   letter-spacing: -0.41px;
   color: #1F2653;
 }
+
 .bonus-card-header-img {
   width: 18px;
   height: 18px;
   cursor: pointer;
 }
+
 .bonus-card-main {
   height: 50px;
   width: max-content;
@@ -268,6 +284,7 @@
   letter-spacing: 1px;
   color: #1F2653;
 }
+
 .bonus-card-main-description {
   width: max-content;
   font-family: 'Gilroy-Regular';
@@ -280,6 +297,7 @@
   letter-spacing: -0.41px;
   color: #444656;
 }
+
 .bonus-description-modal {
   width: 100%;
   height: auto;
@@ -292,6 +310,7 @@
   letter-spacing: -0.41px;
   color: #ABAFE5;
 }
+
 .bonus-description-modal-header {
   width: 100%;
   color: #FFF;
@@ -337,7 +356,7 @@
   width: auto;
   padding-left: 15px;
   height: 100%;
-  
+
   font-weight: 400;
   font-size: 14px;
   line-height: 140%;
@@ -369,7 +388,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  
+
   font-family: 'Gilroy-Regular';
   font-style: normal;
   font-weight: 400;
@@ -387,11 +406,13 @@
   height: 100%;
   text-align: start;
 }
+
 .profile-order-info-row-header {
   font-weight: 700;
   font-size: 16px;
   color: #FFF;
 }
+
 .profile-order-info-row-date {
   color: #FFF;
   width: max-content;
@@ -405,6 +426,7 @@
 .popup-header {
   margin-bottom: 16px;
 }
+
 .popup-back-btn {
   position: absolute;
   top: 0;
@@ -413,7 +435,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  
+
   font-family: 'Gilroy-Regular';
   font-style: normal;
   font-weight: 400;
@@ -429,7 +451,7 @@
   box-sizing: border-box;
 }
 
-.popup-back-btn-icon { 
+.popup-back-btn-icon {
   width: 24px;
   height: 24px;
   margin-top: -2px;
@@ -439,6 +461,7 @@
   padding: 0 16px;
   margin-top: 42px;
 }
+
 .popup-settings-row {
   font-family: 'Gilroy-Regular';
   font-style: normal;
@@ -456,9 +479,11 @@
   align-items: center;
   cursor: pointer;
 }
+
 .popup-settings-row-line-up {
   border-top: 1px solid #444656;
 }
+
 .popup-settings-row-icon {
   width: 24px;
   height: 24px;
@@ -471,7 +496,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  
+
   font-family: 'Gilroy-Regular';
   font-style: normal;
   font-weight: 700;
@@ -480,6 +505,7 @@
   letter-spacing: -0.41px;
   color: #FFFFFF;
 }
+
 .popup-order-table-header-icon {
   width: 24px;
   height: 24px;
@@ -492,4 +518,11 @@
   gap: 16px;
   align-items: center;
   width: 100%;
+}
+
+.profile-settings-forms-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }

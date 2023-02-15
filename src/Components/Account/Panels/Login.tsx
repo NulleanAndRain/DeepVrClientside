@@ -141,6 +141,7 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
               error={errors.phone}
               autocomplete="username"
               unregister
+              required
             />
           )}
           {loginVariant !== "code" && (

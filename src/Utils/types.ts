@@ -191,3 +191,15 @@ export interface IGetBonusesInfoResponse {
   quantity_expired: number,
   next_expired_date: string,
 }
+
+export interface IEditProfileForm {
+  name: string,
+  phone: string,
+  email: string,
+}
+
+export interface IChangePassForm {
+  password: string,
+  newPassword: string,
+  newPasswordConfirm: string;
+}

@@ -108,7 +108,12 @@ export const CredentialsForm: React.FC = () => {
               placeholder="Введите ваше имя"
             />
 
-            <PhoneInput control={control} error={errors.phone} />
+            <PhoneInput
+              control={control}
+              error={errors.phone}
+              required
+              autocomplete="tel"
+            />
 
             <FormCheckbox
               control={control}

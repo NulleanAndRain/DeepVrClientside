@@ -54,8 +54,15 @@ export const Register: React.FC<Props> = ({ onLoginClick }) => {
         if (Api.checkStatus(res)) {
           if (!res.data.error) {
             // dispatch
+            dispatch(setToken(res.data.token));
+            Api.getUserByToken({ token: res.data.token })
+            .then(res => {
+              if (Api.checkStatus(res)) {
+                dispatch(setUser(res.data));
+              }
+            });
           } else {
-            setError(res.data.error);
+            setError(res.data.error_text);
           }
         }
       })

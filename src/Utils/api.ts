@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios"
-import { IBookingFields, ICity, IGame, IGetBonusesInfoResponse, IGetGamesResponse, IGetSummaryRequestData, IGetWorktimeResponse, ILoginByCodeResponse, ILoginForm, ILoginResponse, IRegisterForm, IRegisterResponse, IRoom, ISummaryResponse, ITokenDTO, IValidatePromo, IValidatePromoRequestData } from "./types"
+import { IBookingFields, ICity, IGame, IGetBonusesInfoResponse, IGetGamesResponse, IGetSummaryRequestData, IGetWorktimeResponse, ILoginByCodeResponse, ILoginForm, ILoginResponse, IRegisterForm, IRegisterResponse, IRoom, ISummaryResponse, ITokenDTO, IUser, IValidatePromo, IValidatePromoRequestData } from "./types"
 
 export interface ErrorResponse {
     error: number,
@@ -37,6 +37,13 @@ export const Api = {
 
     checkStatus(response: AxiosResponse<any>) {
         return response.status >= 200 && response.status < 300;
+    },
+
+    getUserByToken(data: ITokenDTO) {
+        return axios.post<IUser>(
+            `${globalUrl}/v2/auth/loginByRememberedToken`,
+            data
+        );
     },
 
     // home
@@ -110,9 +117,14 @@ export const Api = {
     },
 
     async getBonusesInfo(data: ITokenDTO) {
-        return axios.post<IGetBonusesInfoResponse>(
+        return axios.get<IGetBonusesInfoResponse>(
             `${globalUrl}/v2/bonus/get`,
-            data
+            {
+                headers: {
+                    ...data
+                }
+            }
+            
         );
     },
 

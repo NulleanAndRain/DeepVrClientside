@@ -173,12 +173,16 @@ export interface IRegisterForm {
   email: string,
 }
 
-export type IRegisterResponse = any;
+export interface IRegisterResponse {
+  error: number,
+  error_text: string,
+  token: string,
+};
 
 export interface ILoginByCodeResponse {
   error: number,
   error_text: string,
-
+  token: string;
 }
 
 export interface ITokenDTO {
@@ -190,6 +194,14 @@ export interface IGetBonusesInfoResponse {
   quantity_real: number,
   quantity_expired: number,
   next_expired_date: string,
+  loyalty_category: {
+    amount_discount_max: number, 
+    amount_min: number,
+    cashback: number,
+    entry_condition: number,
+    id: number,
+    title: string
+  }
 }
 
 export interface IEditProfileForm {

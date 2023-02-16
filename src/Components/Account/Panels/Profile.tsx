@@ -25,11 +25,12 @@ import logoBonus1 from "../../../Assets/logo-bonus1-light.svg";
 import logoBonus2 from "../../../Assets/logo-bonus2-light.svg";
 import logoBonus3 from "../../../Assets/logo-bonus3-light.svg";
 import { CitySelectPopup } from "../Popups/CitySelectPopup";
+import { IGetBonusesInfoResponse } from "../../../Utils/types";
 
 let tempPopups: Array<React.ReactElement> = [];
 
 export const Profile: React.FC = () => {
-  const [bonuses, setBonuses] = useState<any>();
+  const [bonuses, setBonuses] = useState<IGetBonusesInfoResponse>();
   const [history, setHistory] = useState<Array<any>>();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -50,9 +51,9 @@ export const Profile: React.FC = () => {
       historyLoaded = false;
     Api.getBonusesInfo({ token })
       .then((res) => {
-        console.log("bonuses: ", res);
         bonusesLoaded = true;
         if (bonusesLoaded && historyLoaded) setIsLoading(false);
+        setBonuses(res.data);
       })
       .catch((err) => console.log("error at getBonusesSummary:", err))
       .finally(() => setIsLoading(false));
@@ -138,22 +139,22 @@ export const Profile: React.FC = () => {
                   id="1"
                   cardRef={bonusesRefs["1"]}
                   header="Доступно"
-                  value={3400}
+                  value={bonuses?.quantity_all ?? 0}
                   image={logoBonus1}
                 />
                 <BonusCard
                   id="2"
                   cardRef={bonusesRefs["2"]}
                   header="Активно"
-                  value={1000}
+                  value={bonuses?.quantity_real ?? 0}
                   image={logoBonus2}
                 />
                 <BonusCard
                   id="3"
                   cardRef={bonusesRefs["3"]}
                   header="Временные"
-                  value={2400}
-                  description="Бонусы истекаю дд.мм.гг"
+                  value={bonuses?.quantity_expired ?? 0}
+                  description={bonuses?.next_expired_date ? `Бонусы истекают ${bonuses?.next_expired_date}` : undefined}
                   image={logoBonus3}
                 />
               </HorizontalScrollArea>
@@ -183,14 +184,14 @@ export const Profile: React.FC = () => {
             </div>
 
             <div className="profile-divide">
-              <div className="profile-divide-btn-full">
+              <div
+                className="profile-divide-btn-full"
+                onClick={() =>
+                  addPopup(<CitySelectPopup onBackClick={removeLastPopup} />)
+                }
+              >
                 <span>Выбрать город</span>
-                <span
-                  className="profile-divide-header-option"
-                  onClick={() =>
-                    addPopup(<CitySelectPopup onBackClick={removeLastPopup} />)
-                  }
-                >
+                <span className="profile-divide-header-option">
                   {citySelected ? citySelected.name : "Не выбрано"}
                   <img
                     src={arrowRight}

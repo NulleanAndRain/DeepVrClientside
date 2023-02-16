@@ -52,7 +52,7 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
               dispatch(setToken(res.data.token));
               dispatch(setUser(res.data.user));
             } else {
-              setReqError((res.data.error as string) ?? "Ошибка авторизации");
+              setReqError((res.data.error_text as string) ?? "Ошибка авторизации");
             }
           }
         })
@@ -69,7 +69,7 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
           if (Api.checkStatus(res)) {
             if (res.data.error) {
               setReqError(res.data.error_text);
-            }
+            } 
           }
         })
         .catch((err) => {

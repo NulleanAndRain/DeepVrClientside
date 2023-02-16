@@ -4,12 +4,13 @@ import { BonusInfoModal } from "./BonusInfoModal";
 import infoIcon from "../../../Assets/infoIcon.svg";
 
 import "../AccountStyles.css";
+import { numberFormat } from "../../../Utils/format";
 
 interface Props {
   id?: string;
   cardRef: React.RefObject<any>;
   header: string;
-  value: string | number;
+  value: number;
   description?: string;
   image: string;
 }
@@ -43,8 +44,10 @@ export const BonusCard: React.FC<Props> = ({
           />
         </div>
         <div className="bonus-card-main">
-          {value}
-          <div className="bonus-card-main-description">{description}</div>
+          {numberFormat.format(value)}
+          {description && (
+            <div className="bonus-card-main-description">{description}</div>
+          )}
         </div>
       </div>
     </div>

@@ -42,21 +42,10 @@ export const OrdersAllPopup: React.FC<Props> = ({ history, onBackClick }) => {
           onClick={toggleSort}
         />
       </div>
-      {
-        historySorted &&
-          historySorted.map((order) => {
-            return <OrderInfoRow order={order} key={order.id} />;
-          })
-
-        /* map history from props */
-        // <OrderInfoRow
-        //   date="от 30 февраля"
-        //   description="5 персон | Выбор на месте | VR квест с погружением."
-        //   orderId={0}
-        //   price={1448}
-        //   key="хехе"
-        // />
-      }
+      {historySorted &&
+        historySorted.map((order) => {
+          return <OrderInfoRow order={order} key={order.id} />;
+        })}
       <OrderInfoRowEmpty />
     </PopupLayout>
   );

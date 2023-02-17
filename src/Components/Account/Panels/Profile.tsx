@@ -60,37 +60,32 @@ export const Profile: React.FC = () => {
       .catch((err) => console.log("error at getBonusesSummary:", err))
       .finally(() => setIsLoadingBonuses(false));
 
-    setIsLoadingHistory(true);
+    user && setIsLoadingHistory(true);
     user &&
-      Api.getHistory(user.id)
-        .then((res) => {
-          console.log("orders history", res);
-          Api.getAllCities().then((citiesRes) => {
-            if (Api.checkStatus(citiesRes)) {
-              const cities = citiesRes.data;
-              res.data.forEach((elem) => {
-                elem.location = cities.find((c) => elem.location_id);
-                const ids = JSON.parse(elem.games_id) as Array<number>;
-                elem.games = [];
-                let count = 0;
-                ids.forEach((gameId) =>
-                  Api.getGameInfo(elem.location?.code ?? "", gameId)
-                    .then((gameRes) => {
-                      if (Api.checkStatus(gameRes))
-                        elem.games?.push(gameRes.data);
-                    })
-                    .catch((err) => {})
-                    .finally(() => {
-                      count++;
-                      if (count === ids.length) {
-                        setIsLoadingHistory(false);
-                        setHistory(res.data);
-                      }
-                    })
-                );
-              });
-            }
-          });
+      Promise.all([Api.getHistory(user.id), Api.getAllCities()])
+        .then(([history, cities]) => {
+          if (Api.checkStatus(history) && Api.checkStatus(cities)) {
+            return Promise.all([
+              history.data,
+              ...history.data.map((order) => {
+                order.location = cities.data.find((c) => order.location_id);
+                const ids = JSON.parse(order.games_id) as Array<number>;
+                return Promise.all([
+                  ...ids.map((gameId) =>
+                    Api.getGameInfo(order.location?.code ?? "", gameId)
+                  ),
+                ]).then((games) => {
+                  order.games = games
+                    .filter((g) => Api.checkStatus(g))
+                    .map((g) => g.data);
+                  return order;
+                });
+              }),
+            ]).then(([history]) => {
+              setHistory(history);
+              setIsLoadingHistory(false);
+            });
+          }
         })
         .catch((err) => console.log("error at getHistory:", err))
         .finally(() => setIsLoadingHistory(false));

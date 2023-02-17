@@ -33,7 +33,7 @@ export const OrderInfoRow: React.FC<Props> = ({ order }) => {
           ?.map((game) => game.title)
           ?.join(" | ")}`}</span>
         <span className="profile-order-info-row-date">
-          {dateFormatDayMonth.format(new Date(order.booking_date))}
+          {`от ${dateFormatDayMonth.format(new Date(order.booking_date))}`}
         </span>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios"
-import { IBookingFields, ICity, IGame, IGetBonusesInfoResponse, IGetGamesResponse, IGetSummaryRequestData, IGetWorktimeResponse, ILoginByCodeResponse, ILoginForm, ILoginResponse, IRegisterForm, IRegisterResponse, IRoom, ISummaryResponse, ITokenDTO, IUser, IValidatePromo, IValidatePromoRequestData } from "./types"
+import { IBookingFields, ICity, IGame, IGetBonusesInfoResponse, IGetGamesResponse, IGetSummaryRequestData, IGetWorktimeResponse, ILoginByCodeResponse, ILoginForm, ILoginResponse, IOrderHistoryItem, IRegisterForm, IRegisterResponse, IRoom, ISummaryResponse, ITokenDTO, IUser, IValidatePromo, IValidatePromoRequestData } from "./types"
 
 export interface ErrorResponse {
     error: number,
@@ -39,10 +39,17 @@ export const Api = {
         return response.status >= 200 && response.status < 300;
     },
 
-    getUserByToken(data: ITokenDTO) {
+    async getUserByToken(data: ITokenDTO) {
         return axios.post<IUser>(
             `${globalUrl}/v2/auth/loginByRememberedToken`,
             data
+        );
+    },
+
+    async getGameInfo(instancePrefix: string, id: number) {
+        const url = globalUrl?.replace('https://', '');
+        return axios.get<IGame>(
+            `https://${instancePrefix}${instancePrefix? '.' : ''}${url}/game/${id}`
         );
     },
 
@@ -128,10 +135,9 @@ export const Api = {
         );
     },
 
-    async getHistory(data: ITokenDTO) {
-        return axios.post<any>(
-            `${globalUrl}/v2/booking/history`, 
-            data
+    async getHistory(userId: number) {
+        return axios.get<Array<IOrderHistoryItem>>(
+            `${globalUrl}/v2/orders/history/${userId}`
         );
     },
 

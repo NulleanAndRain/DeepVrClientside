@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
 import {
   getSelectedCity,
   getToken,
+  getUser,
   setToken,
   setUser,
 } from "../../../Utils/redux/authSlice";
@@ -25,18 +26,23 @@ import logoBonus1 from "../../../Assets/logo-bonus1-light.svg";
 import logoBonus2 from "../../../Assets/logo-bonus2-light.svg";
 import logoBonus3 from "../../../Assets/logo-bonus3-light.svg";
 import { CitySelectPopup } from "../Popups/CitySelectPopup";
-import { IGetBonusesInfoResponse } from "../../../Utils/types";
+import {
+  IGetBonusesInfoResponse,
+  IOrderHistoryItem,
+} from "../../../Utils/types";
 
 let tempPopups: Array<React.ReactElement> = [];
 
 export const Profile: React.FC = () => {
   const [bonuses, setBonuses] = useState<IGetBonusesInfoResponse>();
-  const [history, setHistory] = useState<Array<any>>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [history, setHistory] = useState<Array<IOrderHistoryItem>>();
+  const [isLoadingBonuses, setIsLoadingBonuses] = useState(false);
+  const [isLoadingHistory, setIsLoadingHistory] = useState(false);
 
   const citySelected = useAppSelector(getSelectedCity);
 
   const token = useAppSelector(getToken);
+  const user = useAppSelector(getUser);
 
   const dispatch = useAppDispatch();
 
@@ -45,27 +51,49 @@ export const Profile: React.FC = () => {
   );
 
   useEffect(() => {
-    if (isLoading) return;
-    setIsLoading(true);
-    let bonusesLoaded = false,
-      historyLoaded = false;
+    setIsLoadingBonuses(true);
     Api.getBonusesInfo({ token })
       .then((res) => {
-        bonusesLoaded = true;
-        if (bonusesLoaded && historyLoaded) setIsLoading(false);
+        setIsLoadingBonuses(false);
         setBonuses(res.data);
       })
       .catch((err) => console.log("error at getBonusesSummary:", err))
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsLoadingBonuses(false));
 
-    Api.getHistory({ token })
-      .then((res) => {
-        console.log("history", res);
-        historyLoaded = true;
-        if (bonusesLoaded && historyLoaded) setIsLoading(false);
-      })
-      .catch((err) => console.log("error at getHistory:", err))
-      .finally(() => setIsLoading(false));
+    setIsLoadingHistory(true);
+    user &&
+      Api.getHistory(user.id)
+        .then((res) => {
+          console.log("orders history", res);
+          Api.getAllCities().then((citiesRes) => {
+            if (Api.checkStatus(citiesRes)) {
+              const cities = citiesRes.data;
+              res.data.forEach((elem) => {
+                elem.location = cities.find((c) => elem.location_id);
+                const ids = JSON.parse(elem.games_id) as Array<number>;
+                elem.games = [];
+                let count = 0;
+                ids.forEach((gameId) =>
+                  Api.getGameInfo(elem.location?.code ?? "", gameId)
+                    .then((gameRes) => {
+                      if (Api.checkStatus(gameRes))
+                        elem.games?.push(gameRes.data);
+                    })
+                    .catch((err) => {})
+                    .finally(() => {
+                      count++;
+                      if (count === ids.length) {
+                        setIsLoadingHistory(false);
+                        setHistory(res.data);
+                      }
+                    })
+                );
+              });
+            }
+          });
+        })
+        .catch((err) => console.log("error at getHistory:", err))
+        .finally(() => setIsLoadingHistory(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -123,41 +151,46 @@ export const Profile: React.FC = () => {
                 }
               />
             </div>
-            <LoadWrapper isLoading={isLoading} height={1} />
             <div
               className="profile-divide"
               onResize={() => console.log("resize")}
             >
               <div className="profile-divide-header">Баланс</div>
-              <HorizontalScrollArea
-                firstElemRef={bonusesRefs["1"]}
-                lastElemRef={bonusesRefs["3"]}
-                viewportClassName="bonus-card-wrapper"
-                wrapperClassName="bonus-card-scroll-root"
-              >
-                <BonusCard
-                  id="1"
-                  cardRef={bonusesRefs["1"]}
-                  header="Доступно"
-                  value={bonuses?.quantity_all ?? 0}
-                  image={logoBonus1}
-                />
-                <BonusCard
-                  id="2"
-                  cardRef={bonusesRefs["2"]}
-                  header="Активно"
-                  value={bonuses?.quantity_real ?? 0}
-                  image={logoBonus2}
-                />
-                <BonusCard
-                  id="3"
-                  cardRef={bonusesRefs["3"]}
-                  header="Временные"
-                  value={bonuses?.quantity_expired ?? 0}
-                  description={bonuses?.next_expired_date ? `Бонусы истекают ${bonuses?.next_expired_date}` : undefined}
-                  image={logoBonus3}
-                />
-              </HorizontalScrollArea>
+              <LoadWrapper isLoading={isLoadingBonuses} height={1}>
+                <HorizontalScrollArea
+                  firstElemRef={bonusesRefs["1"]}
+                  lastElemRef={bonusesRefs["3"]}
+                  viewportClassName="bonus-card-wrapper"
+                  wrapperClassName="bonus-card-scroll-root"
+                >
+                  <BonusCard
+                    id="1"
+                    cardRef={bonusesRefs["1"]}
+                    header="Доступно"
+                    value={bonuses?.quantity_all ?? 0}
+                    image={logoBonus1}
+                  />
+                  <BonusCard
+                    id="2"
+                    cardRef={bonusesRefs["2"]}
+                    header="Активно"
+                    value={bonuses?.quantity_real ?? 0}
+                    image={logoBonus2}
+                  />
+                  <BonusCard
+                    id="3"
+                    cardRef={bonusesRefs["3"]}
+                    header="Временные"
+                    value={bonuses?.quantity_expired ?? 0}
+                    description={
+                      bonuses?.next_expired_date
+                        ? `Бонусы истекают ${bonuses?.next_expired_date}`
+                        : undefined
+                    }
+                    image={logoBonus3}
+                  />
+                </HorizontalScrollArea>
+              </LoadWrapper>
             </div>
 
             <div className="profile-divide">
@@ -166,21 +199,23 @@ export const Profile: React.FC = () => {
                 <span
                   className="profile-order-info-more"
                   onClick={() => {
-                    addPopup(<OrdersAllPopup onBackClick={removeLastPopup} />);
+                    addPopup(
+                      <OrdersAllPopup
+                        history={history}
+                        onBackClick={removeLastPopup}
+                      />
+                    );
                   }}
                 >
                   Смотреть все
                 </span>
               </div>
-              {
-                /* map history from props */ <OrderInfoRow
-                  date="от 30 февраля"
-                  description="5 персон | Выбор на месте | VR квест с погружением."
-                  orderId={0}
-                  price={1448}
-                  key="хехе"
-                />
-              }
+              <LoadWrapper isLoading={isLoadingHistory} height={1}>
+                {history &&
+                  history.slice(-3).map((order) => {
+                    return <OrderInfoRow order={order} key={order.id} />;
+                  })}
+              </LoadWrapper>
             </div>
 
             <div className="profile-divide">

@@ -24,6 +24,7 @@ export const SelectCityList: React.FC<Props> = ({ selected, onSelect }) => {
     onSelect(undefined);
     Api.getAllCities()
       .then((res) => {
+        console.log(res);
         if (res.status >= 200 && res.status < 300) {
           setCities(res.data);
           if (!res.data.find((c) => c.id === tempSelected?.id)) {

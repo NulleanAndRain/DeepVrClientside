@@ -1,32 +1,40 @@
-import { curencyFormat } from "../../../Utils/format";
+import { curencyFormat, dateFormatDayMonth } from "../../../Utils/format";
+import { IOrderHistoryItem } from "../../../Utils/types";
 import "../AccountStyles.css";
 
 interface Props {
-  orderId: number;
-  price: number;
-  description: string;
-  date: string;
+  order: IOrderHistoryItem;
 }
 
-export const OrderInfoRow: React.FC<Props> = ({
-  date,
-  description,
-  orderId,
-  price,
-}) => {
+export const OrderInfoRow: React.FC<Props> = ({ order }) => {
+  const countLastDigit = order.guest_quantity % 10;
+
+  const ending =
+    countLastDigit === 1
+      ? "а"
+      : countLastDigit >= 2 && countLastDigit <= 4
+      ? "ы"
+      : "";
+
   return (
     <div className="profile-order-info">
       <div className="profile-order-info-row profile-order-info-row-header">
         <span className="profile-order-info-span">
-          № {orderId.toString().padStart(4, "0")}
+          № {order.id.toString().padStart(4, "0")}
         </span>
         <span className="profile-order-info-span">
-          {curencyFormat.format(price)}
+          {curencyFormat.format(order.price)}
         </span>
       </div>
       <div className="profile-order-info-row">
-        <span className="profile-order-info-span">{description}</span>
-        <span className="profile-order-info-row-date">{date}</span>
+        <span className="profile-order-info-span">{`${
+          order.guest_quantity
+        } персон${ending} | ${order.games
+          ?.map((game) => game.title)
+          ?.join(" | ")}`}</span>
+        <span className="profile-order-info-row-date">
+          {dateFormatDayMonth.format(new Date(order.booking_date))}
+        </span>
       </div>
     </div>
   );

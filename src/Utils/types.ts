@@ -215,3 +215,19 @@ export interface IChangePassForm {
   newPassword: string,
   newPasswordConfirm: string;
 }
+
+export interface IOrderHistoryItem {
+  id: number,
+  user_id: number,
+  booking_date: string,
+  location_id: string,
+  location?: ICity,
+  games_id: string,
+  games?: Array<IGame>
+  price: number,
+  guest_quantity: number,
+  external_id: number,
+  is_manual: number,
+  created_at: string,
+  updated_at: string
+}

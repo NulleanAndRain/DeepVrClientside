@@ -11,3 +11,8 @@ export const numberFormat = Intl.NumberFormat("ru-RU", {
   minimumFractionDigits: 0,
   maximumFractionDigits: 2,
 })
+
+export const dateFormatDayMonth = Intl.DateTimeFormat('ru-RU', {
+  month: 'long',
+  day: 'numeric',
+})

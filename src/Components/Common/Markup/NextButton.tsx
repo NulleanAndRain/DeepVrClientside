@@ -3,7 +3,7 @@ import "../CommonStyles.css";
 interface Props {
   children: React.ReactNode;
   isActive?: boolean;
-  onClick: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const NextButton: React.FC<Props> = ({
@@ -16,7 +16,7 @@ export const NextButton: React.FC<Props> = ({
       className={`next-btn${isActive ? "" : " next-btn-inactive"}`}
       onClick={(e) => {
         e.preventDefault();
-        onClick?.();
+        isActive && onClick?.(e);
       }}
     >
       {children}

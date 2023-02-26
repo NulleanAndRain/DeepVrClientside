@@ -231,3 +231,20 @@ export interface IOrderHistoryItem {
   created_at: string,
   updated_at: string
 }
+
+export interface IGetUserCityResponse {
+  city: string;
+}
+
+export interface IEditProfileReq {
+  token: string,
+  name?: string,
+  email?: string,
+  phone?: string,
+}
+
+export interface IChangePassReq {
+  token: string,
+  password: string,
+  'password-repeat': string,
+}

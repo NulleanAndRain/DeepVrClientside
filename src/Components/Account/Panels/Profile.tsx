@@ -7,6 +7,7 @@ import {
   getSelectedCity,
   getToken,
   getUser,
+  setSelectedCity,
   setToken,
   setUser,
 } from "../../../Utils/redux/authSlice";
@@ -30,6 +31,7 @@ import {
   IGetBonusesInfoResponse,
   IOrderHistoryItem,
 } from "../../../Utils/types";
+import { LoadIcon } from "../../Common/Markup/LoadIcon";
 
 let tempPopups: Array<React.ReactElement> = [];
 
@@ -38,6 +40,7 @@ export const Profile: React.FC = () => {
   const [history, setHistory] = useState<Array<IOrderHistoryItem>>();
   const [isLoadingBonuses, setIsLoadingBonuses] = useState(false);
   const [isLoadingHistory, setIsLoadingHistory] = useState(false);
+  const [isLoadingCity, setIsLoadingCity] = useState(false);
 
   const citySelected = useAppSelector(getSelectedCity);
 
@@ -60,11 +63,23 @@ export const Profile: React.FC = () => {
       .catch((err) => console.log("error at getBonusesSummary:", err))
       .finally(() => setIsLoadingBonuses(false));
 
-    user && setIsLoadingHistory(true);
+    setIsLoadingHistory(true);
+    setIsLoadingCity(true);
     user &&
-      Promise.all([Api.getHistory(user.id), Api.getAllCities()])
-        .then(([history, cities]) => {
+      Promise.all([
+        Api.getHistory(user.id),
+        Api.getAllCities(),
+        Api.getUserCity(token),
+      ])
+        .then(([history, cities, selectedCity]) => {
           if (Api.checkStatus(history) && Api.checkStatus(cities)) {
+            if (Api.checkStatus(selectedCity)) {
+              const c = cities.data.find(
+                (d) => d.name === selectedCity.data?.city
+              );
+              dispatch(setSelectedCity(c));
+              setIsLoadingCity(false);
+            }
             return Promise.all([
               history.data,
               ...history.data.map((order) => {
@@ -83,12 +98,16 @@ export const Profile: React.FC = () => {
               }),
             ]).then(([history]) => {
               setHistory(history);
+              setIsLoadingCity(false);
               setIsLoadingHistory(false);
             });
           }
         })
         .catch((err) => console.log("error at getHistory:", err))
-        .finally(() => setIsLoadingHistory(false));
+        .finally(() => {
+          setIsLoadingCity(false);
+          setIsLoadingHistory(false);
+        });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -222,7 +241,11 @@ export const Profile: React.FC = () => {
               >
                 <span>Выбрать город</span>
                 <span className="profile-divide-header-option">
-                  {citySelected ? citySelected.name : "Не выбрано"}
+                  {isLoadingCity ? (
+                    <LoadIcon />
+                  ) : (
+                    <>{citySelected ? citySelected.name : "Не выбрано"}</>
+                  )}
                   <img
                     src={arrowRight}
                     alt="Выбрать город"

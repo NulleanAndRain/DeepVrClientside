@@ -3,10 +3,11 @@ import { SelectCityList } from "../../Common/Markup/SelectCityList";
 import { useState } from "react";
 import { ICity } from "../../../Utils/types";
 import { NextButton } from "../../Common/Markup/NextButton";
-import { useAppDispatch } from "../../../Utils/redux/store";
-import { setSelectedCity } from "../../../Utils/redux/authSlice";
+import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
+import { getToken, setSelectedCity } from "../../../Utils/redux/authSlice";
 
 import "../AccountStyles.css";
+import { Api } from "../../../Utils/api";
 
 interface Props {
   onBackClick: () => void;
@@ -19,9 +20,15 @@ export const CitySelectPopup: React.FC<Props> = ({
 }) => {
   const [selected, setSelected] = useState<ICity | undefined>(preselected);
   const dispatch = useAppDispatch();
+
+  const token = useAppSelector(getToken);
+
   const onSubmit = () => {
     if (!!selected) {
       dispatch(setSelectedCity(selected));
+      Api.setUserCity({ token, city: selected.name })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
       onBackClick();
     }
   };

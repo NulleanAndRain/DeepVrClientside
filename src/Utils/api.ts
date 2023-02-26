@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios"
-import { IBookingFields, ICity, IGame, IGetBonusesInfoResponse, IGetGamesResponse, IGetSummaryRequestData, IGetWorktimeResponse, ILoginByCodeResponse, ILoginForm, ILoginResponse, IOrderHistoryItem, IRegisterForm, IRegisterResponse, IRoom, ISummaryResponse, ITokenDTO, IUser, IValidatePromo, IValidatePromoRequestData } from "./types"
+import { IBookingFields, IChangePassReq, ICity, IEditProfileReq, IGame, IGetBonusesInfoResponse, IGetGamesResponse, IGetSummaryRequestData, IGetUserCityResponse, IGetWorktimeResponse, ILoginByCodeResponse, ILoginForm, ILoginResponse, IOrderHistoryItem, IRegisterForm, IRegisterResponse, IRoom, ISummaryResponse, ITokenDTO, IUser, IValidatePromo, IValidatePromoRequestData } from "./types"
 
 export interface ErrorResponse {
     error: number,
@@ -147,4 +147,33 @@ export const Api = {
             data
         );
     },
+
+    async getUserCity(token: string) {
+        return axios.get<IGetUserCityResponse>(
+            `${globalUrl}/v2/profile/get-city`,
+            {
+                headers: {
+                    token
+                }
+            }
+        )
+    },
+
+    async setUserCity(data : {token: string, city: string}) {
+        return axios.post<any>(
+            `${globalUrl}/v2/profile/set-city`,
+            data
+        )
+    },
+
+    async editProfile(data: IEditProfileReq) {
+        return axios.post<IUser>(
+            `${globalUrl}/v2/profile/edit-info`,
+            data
+        )
+    },
+
+    async changePass(data: IChangePassReq) {
+        return 'потом';
+    }
 }

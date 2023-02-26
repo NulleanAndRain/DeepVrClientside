@@ -1,6 +1,6 @@
 import { PopupLayout } from "./PopupLayout";
-import { useAppSelector } from "../../../Utils/redux/store";
-import { getUser } from "../../../Utils/redux/authSlice";
+import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
+import { getToken, getUser, setUser } from "../../../Utils/redux/authSlice";
 import { useForm } from "react-hook-form";
 import { FormField } from "../../Common/FormFields/FormField";
 import { IChangePassForm, IEditProfileForm } from "../../../Utils/types";
@@ -15,6 +15,7 @@ import { useState } from "react";
 import { LoadWrapper } from "../../Common/Markup/LoadWrapper";
 import { PassField } from "../../Common/FormFields/PassField";
 import { FormError } from "../../Common/FormFields/FormError";
+import { Api } from "../../../Utils/api";
 
 interface Props {
   onBackClick: () => void;
@@ -43,6 +44,9 @@ export const ProfileSettingsPopup: React.FC<Props> = ({ onBackClick }) => {
     mode: "onTouched",
   });
 
+  const token = useAppSelector(getToken);
+  const dispatch = useAppDispatch();
+
   const values = getValuesEdit();
   const canUpdateProfile =
     isValidEdit &&
@@ -55,6 +59,18 @@ export const ProfileSettingsPopup: React.FC<Props> = ({ onBackClick }) => {
     setErrorEdit(undefined);
     if (canUpdateProfile) {
       // api call
+      Api.editProfile({
+        token,
+        ...getValuesEdit(),
+      })
+        .then((res) => {
+          if (Api.checkStatus(res)) {
+            // if (!res.data.error)
+            console.log(res.data);
+            dispatch(setUser(res.data));
+          }
+        })
+        .catch((err) => console.log(err));
       console.log("updating profile");
       setIsLoadingEditProfile(false);
     }
@@ -105,6 +121,7 @@ export const ProfileSettingsPopup: React.FC<Props> = ({ onBackClick }) => {
             autocomplete="tel"
             required
           />
+
           <FormError errorMsg={errorEdit} />
           <NextButton isActive={canUpdateProfile} onClick={onSubmitEdit}>
             Изменить профиль

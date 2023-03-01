@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios"
-import { IBookingFields, IChangePassReq, ICity, IEditProfileReq, IGame, IGetBonusesInfoResponse, IGetGamesResponse, IGetSummaryRequestData, IGetUserCityResponse, IGetWorktimeResponse, ILoginByCodeResponse, ILoginForm, ILoginResponse, IOrderHistoryItem, IRegisterForm, IRegisterResponse, IRoom, ISummaryResponse, ITokenDTO, IUser, IValidatePromo, IValidatePromoRequestData } from "./types"
+import { IBookingFields, IChangePassForm, ICity, IEditProfileReq, IGame, IGetBonusesInfoResponse, IGetGamesResponse, IGetSummaryRequestData, IGetUserCityResponse, IGetWorktimeResponse, ILoginByCodeResponse, ILoginForm, ILoginResponse, IOrderHistoryItem, IRegisterForm, IRegisterResponse, IRoom, ISummaryResponse, ITokenDTO, IUser, IValidatePromo, IValidatePromoRequestData } from "./types"
 
 export interface ErrorResponse {
     error: number,
@@ -173,7 +173,10 @@ export const Api = {
         )
     },
 
-    async changePass(data: IChangePassReq) {
-        return 'потом';
+    async changePass(data: IChangePassForm) {
+        return axios.post<any>(
+            `${globalUrl}/v2/profile/edit-password`,
+            data
+        );
     }
 }

@@ -213,9 +213,10 @@ export interface IEditProfileForm {
 }
 
 export interface IChangePassForm {
+  token: string,
   password: string,
+  'password-repeat': string,
   newPassword: string,
-  newPasswordConfirm: string;
 }
 
 export interface IOrderHistoryItem {
@@ -243,10 +244,4 @@ export interface IEditProfileReq {
   name?: string,
   email?: string,
   phone?: string,
-}
-
-export interface IChangePassReq {
-  token: string,
-  password: string,
-  'password-repeat': string,
 }

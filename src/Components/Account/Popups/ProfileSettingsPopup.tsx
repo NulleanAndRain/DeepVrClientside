@@ -80,7 +80,14 @@ export const ProfileSettingsPopup: React.FC<Props> = ({ onBackClick }) => {
     setIsLoadingChangePass(true);
     setErrorPass(undefined);
     if (isValidPass) {
-      // api call
+      Api.changePass({ ...getValuesPass(), token })
+        .then((res) => {
+          console.log(res);
+          if (!!res.data.eror) {
+            setErrorPass(res.data.error_message);
+          }
+        })
+        .catch((err) => console.log(err));
       console.log("updating pass");
       setIsLoadingChangePass(false);
     }
@@ -151,9 +158,9 @@ export const ProfileSettingsPopup: React.FC<Props> = ({ onBackClick }) => {
             }}
           />
           <PassField
-            name="newPasswordConfirm"
+            name="password-repeat"
             control={controlPass}
-            error={errorsPass.newPasswordConfirm}
+            error={errorsPass["password-repeat"]}
             autocomplete="password-new"
             placeholder="Подтверждение пароля"
             validate={{

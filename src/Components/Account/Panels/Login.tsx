@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Api } from "../../../Utils/api";
 import { setToken, setUser } from "../../../Utils/redux/authSlice";
@@ -68,6 +68,7 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
       Api.loginSendCode({ phone: getValues().phone ?? "" })
         .then((res) => {
           if (Api.checkStatus(res)) {
+            console.log(res);
             if (res.data.error) {
               setReqError(res.data.error_text);
             }
@@ -86,6 +87,10 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
     setReqError(undefined);
     if (loginVariant !== variant) setLoginVariant(variant);
   };
+
+  useEffect(() => {
+    changeVariant("phone");
+  }, []);
 
   return (
     <Row justify="center">

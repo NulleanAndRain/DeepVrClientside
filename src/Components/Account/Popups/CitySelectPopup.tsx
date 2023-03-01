@@ -26,9 +26,9 @@ export const CitySelectPopup: React.FC<Props> = ({
   const onSubmit = () => {
     if (!!selected) {
       dispatch(setSelectedCity(selected));
-      Api.setUserCity({ token, city: selected.name })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+      Api.setUserCity({ token, city: selected.name }).catch((err) =>
+        console.log(err)
+      );
       onBackClick();
     }
   };

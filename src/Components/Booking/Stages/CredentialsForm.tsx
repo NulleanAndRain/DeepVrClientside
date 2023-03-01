@@ -48,8 +48,8 @@ export const CredentialsForm: React.FC = () => {
     mode: "onTouched",
     defaultValues: {
       ...credentials,
-      name: credentials?.name ?? user?.name,
-      phone: credentials?.phone ?? user?.phone,
+      name: !!credentials?.name ? credentials?.name : user?.name,
+      phone: !!credentials?.phone ? credentials?.phone : user?.phone,
     },
   });
 

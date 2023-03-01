@@ -51,6 +51,8 @@ export const PromoModal: React.FC<Props> = ({
         }
       })
       .catch((err) => console.log(err));
+
+    onChange();
   }, [game, count, user]);
 
   const onChange = () => {
@@ -70,8 +72,15 @@ export const PromoModal: React.FC<Props> = ({
       .then((res) => {
         if (Api.checkStatus(res)) {
           if (res.data) {
-            setIsSuccess(true);
-            setIsValid(true);
+            console.log(res.data);
+            if (!res.data.error) {
+              setIsSuccess(true);
+              setIsValid(true);
+            } else {
+              setIsValid(false);
+              setIsSuccess(false);
+              setError(res.data.error_text);
+            }
           } else {
             setIsValid(false);
           }

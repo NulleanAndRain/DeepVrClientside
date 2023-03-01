@@ -1,7 +1,9 @@
 import { Row } from "antd";
 import { useState } from "react";
+import { Api } from "../../../Utils/api";
 import {
   getSelectedCity,
+  getToken,
   setSelectedCity,
 } from "../../../Utils/redux/authSlice";
 import { useAppDispatch, useAppSelector } from "../../../Utils/redux/store";
@@ -18,9 +20,15 @@ export const CitySelectHome: React.FC = () => {
     selectedCityProfile
   );
   const dispatch = useAppDispatch();
+  const token = useAppSelector(getToken);
 
   const onSelect = (city: ICity | undefined) => {
     setSelected(city);
+
+    if (!!token)
+      Api.setUserCity({ token, city: city?.name ?? "" }).catch((err) =>
+        console.log(err)
+      );
   };
 
   const confirmm = () => {

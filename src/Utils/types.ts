@@ -118,7 +118,9 @@ export interface IValidatePromo {
   },
   price: number,
   discount: number,
-  discount_price: number
+  discount_price: number,
+  error?: number;
+  error_text?: string;
 }
 
 export interface ILoginForm {

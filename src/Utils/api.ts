@@ -111,7 +111,7 @@ export const Api = {
 
     async loginSendCode(data: {phone : string}) {
         return axios.post<ILoginByCodeResponse>(
-            `${globalUrl}/v2/client/send-auth-code`,
+            `${globalUrl}/v2/auth/send-auth-code`,
             data,
         );
     },

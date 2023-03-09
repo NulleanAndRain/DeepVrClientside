@@ -21,6 +21,8 @@ export interface IUser {
     settings: any;
     temp_password: string|null;
     updated_at: string;
+    error?: number;
+    error_text?: string;
 }
 
 export interface ICity {
@@ -126,7 +128,8 @@ export interface IValidatePromo {
 export interface ILoginForm {
   phone?: string;
   email?: string;
-  password: string;
+  password?: string;
+  code?: string
 }
 
 export interface ILoginResponse {

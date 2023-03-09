@@ -11,8 +11,12 @@ import { PassField } from "../../Common/FormFields/PassField";
 import { PhoneInput } from "../../Common/FormFields/PhoneField";
 import { EmailField } from "../../Common/FormFields/EmailField";
 import { LoadWrapper } from "../../Common/Markup/LoadWrapper";
+import { FormField } from "../../Common/FormFields/FormField";
+import { ILoginForm } from "../../../Utils/types";
 
 import "../AccountStyles.css";
+
+import passIcon from "../../../Assets/passIcon.svg";
 
 interface Props {
   onRegisterClick: () => void;
@@ -23,11 +27,7 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
     control,
     getValues,
     formState: { errors, isValid },
-  } = useForm<{
-    phone?: string;
-    password: string;
-    email?: string;
-  }>({
+  } = useForm<ILoginForm>({
     mode: "onTouched",
   });
 
@@ -43,7 +43,7 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
   const onLoginClick = () => {
     setReqError("");
     setIsLoading(true);
-    if (loginVariant !== "code") {
+    if (loginVariant !== "code" || codeState === 'auth') {
       Api.login(getValues())
         .then((res) => {
           console.log(res);
@@ -60,26 +60,32 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
         })
         .catch((err) => {
           console.log(err);
-          if (err.response.status >= 500)
+          if (!!err.data?.error) {
+            setReqError(err.data.error_text);
+          } else if (err.response.status >= 500)
             setReqError("Ошибка сервера, попробуйте позже");
         })
         .finally(() => setIsLoading(false));
     } else {
-      Api.loginSendCode({ phone: getValues().phone ?? "" })
-        .then((res) => {
-          if (Api.checkStatus(res)) {
-            console.log(res);
-            if (res.data.error) {
-              setReqError(res.data.error_text);
+      if (codeState === 'send') {
+        Api.loginSendCode({ phone: getValues().phone ?? "" })
+          .then((res) => {
+            if (Api.checkStatus(res)) {
+              console.log(res);
+              if (res.data.error) {
+                setReqError(res.data.error_text);
+              } else {
+                setCodeState('auth');
+              }
             }
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.response.status >= 500)
-            setReqError("Ошибка сервера, попробуйте позже");
-        })
-        .finally(() => setIsLoading(false));
+          })
+          .catch((err) => {
+            console.log(err);
+            if (err.response.status >= 500)
+              setReqError("Ошибка сервера, попробуйте позже");
+          })
+          .finally(() => setIsLoading(false));
+      }
     }
   };
 
@@ -88,9 +94,12 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
     if (loginVariant !== variant) setLoginVariant(variant);
   };
 
+  const [codeState, setCodeState] = useState<"send" | "auth">("send");
+
   useEffect(() => {
     changeVariant("phone");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setCodeState("send");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -158,6 +167,18 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
               error={errors.password}
               autocomplete="current-password"
               unregister
+            />
+          )}
+          {loginVariant === "code" && codeState === "auth" && (
+            <FormField
+              type="text"
+              name="code"
+              control={control}
+              icon={passIcon}
+              required="Введите код авторизации"
+              unregister
+              error={errors.code}
+              placeholder='Код авторизации'
             />
           )}
           <LoadWrapper isLoading={isLoading} height={1} />

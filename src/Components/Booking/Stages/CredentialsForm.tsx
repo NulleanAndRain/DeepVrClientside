@@ -53,8 +53,8 @@ export const CredentialsForm: React.FC = () => {
     },
   });
 
-  const [isPromoActive, setIsPromoActive] = useState(true);
-  const [areBonusesActive, setAreBonusesActive] = useState(true);
+  const [isPromoActive, setIsPromoActive] = useState(!credentials?.useDiscount);
+  const [areBonusesActive, setAreBonusesActive] = useState(!credentials?.promo);
 
   const values = getValues();
 

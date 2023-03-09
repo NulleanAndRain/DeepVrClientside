@@ -65,9 +65,13 @@ export const ProfileSettingsPopup: React.FC<Props> = ({ onBackClick }) => {
       })
         .then((res) => {
           if (Api.checkStatus(res)) {
-            // if (!res.data.error)
-            console.log(res.data);
-            dispatch(setUser(res.data));
+            if (!res.data.error) {
+              console.log(res.data);
+              dispatch(setUser(res.data));
+              onBackClick();
+            } else {
+              setErrorEdit(res.data.error_text);
+            }
           }
         })
         .catch((err) => console.log(err));
@@ -85,6 +89,8 @@ export const ProfileSettingsPopup: React.FC<Props> = ({ onBackClick }) => {
           console.log(res);
           if (!!res.data.eror) {
             setErrorPass(res.data.error_message);
+          } else {
+            onBackClick();
           }
         })
         .catch((err) => console.log(err));

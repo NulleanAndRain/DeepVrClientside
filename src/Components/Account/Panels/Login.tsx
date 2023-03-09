@@ -90,6 +90,7 @@ export const Login: React.FC<Props> = ({ onRegisterClick }) => {
 
   useEffect(() => {
     changeVariant("phone");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

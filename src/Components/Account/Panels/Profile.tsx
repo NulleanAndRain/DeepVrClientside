@@ -17,6 +17,11 @@ import { HorizontalScrollArea } from "../../Common/Markup/HorizontalScrollArea";
 import { OrderInfoRow } from "../Compontents/OrderInfoRow";
 import { OrdersAllPopup } from "../Popups/OrdersAllPopup";
 import { SettingsPopup } from "../Popups/SettingsPopup";
+import { CitySelectPopup } from "../Popups/CitySelectPopup";
+import {
+  IGetBonusesInfoResponse,
+  IOrderHistoryItem,
+} from "../../../Utils/types";
 
 import "../AccountStyles.css";
 
@@ -26,11 +31,6 @@ import logoutIcon from "../../../Assets/logoutIcon.svg";
 import logoBonus1 from "../../../Assets/logo-bonus1-light.svg";
 import logoBonus2 from "../../../Assets/logo-bonus2-light.svg";
 import logoBonus3 from "../../../Assets/logo-bonus3-light.svg";
-import { CitySelectPopup } from "../Popups/CitySelectPopup";
-import {
-  IGetBonusesInfoResponse,
-  IOrderHistoryItem,
-} from "../../../Utils/types";
 import { LoadIcon } from "../../Common/Markup/LoadIcon";
 
 let tempPopups: Array<React.ReactElement> = [];

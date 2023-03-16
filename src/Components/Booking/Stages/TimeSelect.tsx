@@ -38,7 +38,8 @@ export const TimeSelect: React.FC = () => {
     const date = new Date(dateString);
     Api.getTimesOfDay(date)
       .then((res) => {
-        if (res.status >= 200 && res.status < 300) {
+        if (Api.checkStatus(res)) {
+          console.log(res);
           const dates: Array<Date> = [];
 
           const start = `${date.toISOString().substring(0, 10)} ${
@@ -47,16 +48,18 @@ export const TimeSelect: React.FC = () => {
           const end = `${date.toISOString().substring(0, 10)} ${
             res.data.end_at
           }`;
+          const dateNow = new Date();
           const startDate = new Date(start);
           const endDate = new Date(end);
 
           const tempDate = new Date(startDate);
-          dates.push(new Date(tempDate));
+          if (tempDate > dateNow) dates.push(new Date(tempDate));
 
           let minutesIncrement = Number.parseInt(res.data.interval);
           while (minutesIncrement && tempDate < endDate) {
             tempDate.setMinutes(tempDate.getMinutes() + minutesIncrement);
-            if (tempDate < endDate) dates.push(new Date(tempDate));
+            if (tempDate < endDate && tempDate > dateNow)
+              dates.push(new Date(tempDate));
           }
 
           setTimes(dates);

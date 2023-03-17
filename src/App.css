@@ -105,13 +105,15 @@
 /* antd overrides */
 
 /* .app-header */
-:where(.css-dev-only-do-not-override-1i9hnpv).ant-layout .ant-layout-header {
+:where(.css-dev-only-do-not-override-1i9hnpv).ant-layout .ant-layout-header,
+:where(.css-1i9hnpv).ant-layout .ant-layout-header {
   color: #FFF;
   background-color: transparent;
 }
 
 /* .app-footer  */
-:where(.css-dev-only-do-not-override-1i9hnpv).ant-layout .ant-layout-footer {
+:where(.css-dev-only-do-not-override-1i9hnpv).ant-layout .ant-layout-footer,
+:where(.css-1i9hnpv).ant-layout .ant-layout-footer {
   background-color: var(--bg-main-color);
   color: #FFF;
   position: fixed;
@@ -122,7 +124,8 @@
   border-top: #444656 solid 1px;
 }
 
-:where(.css-dev-only-do-not-override-1i9hnpv).ant-layout .ant-layout-content{
+:where(.css-dev-only-do-not-override-1i9hnpv).ant-layout .ant-layout-content, 
+:where(.css-1i9hnpv).ant-layout .ant-layout-content{
   box-sizing: content-box;
 }
 
@@ -171,7 +174,9 @@
 }
 
 /* modal style override */
-.antd-modal-content, :where(.css-dev-only-do-not-override-1i9hnpv).ant-modal .ant-modal-content {
+.antd-modal-content, 
+:where(.css-dev-only-do-not-override-1i9hnpv).ant-modal .ant-modal-content,
+:where(.css-1i9hnpv).ant-modal .ant-modal-content {
     background-color: #050411;
     color: #fff;
     border-top: 1px solid #444656;
